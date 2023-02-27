@@ -1,0 +1,50 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Poppins, sans-serif;
+    color: #222222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+input,
+textarea,
+button,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    background-color: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+#root,
+.App {
+    min-height: 100vh;
+    position: relative;
+}

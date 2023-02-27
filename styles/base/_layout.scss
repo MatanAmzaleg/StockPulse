@@ -1,0 +1,67 @@
+// .container {
+//     max-width: 1500px;
+//     padding: 10px;
+// }
+
+.main-container {
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+
+    > * {
+        grid-column: 2;
+
+        &.full {
+            grid-column: 1 /-1;
+        }
+    }
+
+    @include for-narrow-layout {
+        grid-template-columns:
+            minmax(20px, 1fr)
+            minmax(auto, $mobile-breakpoint)
+            minmax(20px, 1fr);
+    }
+    @include for-normal-layout {
+        grid-template-columns:
+            minmax(20px, 1fr)
+            minmax(auto, $narrow-breakpoint)
+            minmax(20px, 1fr);
+    }
+    @include for-wide-layout {
+        grid-template-columns:
+            minmax(20px, 1fr)
+            minmax(auto, $normal-breakpoint)
+            minmax(20px, 1fr);
+    }
+}
+
+//LAYOUT FOR HOUSE EDIT PAGE
+
+.main-container-edit {
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+}
+.secondary-container {
+    display: grid;
+    grid-template-columns: auto $details-max-width auto;
+
+    > * {
+        grid-column: 2;
+
+        &.full {
+            grid-column: 1 /-1;
+        }
+    }
+
+    // @media (max-width: 1320px) {
+    //     grid-template-columns: 80px 1fr 80px;
+    // }
+
+    // @media (max-width: 1130px) {
+    //     grid-template-columns: 40px 1fr 40px;
+    // }
+
+    // @media (max-width: 740px) {
+    //     grid-template-columns: 24px 1fr 24px;
+    // }
+}

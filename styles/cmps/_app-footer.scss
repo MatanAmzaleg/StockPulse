@@ -1,0 +1,30 @@
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    border-top: 1px solid #dddddd;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding-block: 10px;
+    font-size: em(18px, 16px);
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .coffeerights {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #222222;
+            font-size: em(14px, 16px);
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+}
