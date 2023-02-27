@@ -1,3 +1,5 @@
+import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
 import Head from 'next/head';
 
 export default function Home() {
@@ -20,7 +22,10 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main>hello</main>
+            <main className="home-container">
+                <Header />
+                <Sidebar />
+            </main>
         </>
     );
 }

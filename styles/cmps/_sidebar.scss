@@ -1,0 +1,23 @@
+.sidebar {
+    background-color: #f8f8f8;
+    grid-area: sidebar;
+    padding: 40px;
+
+    .logo {
+        border-bottom: 1px black solid;
+        padding-bottom: 20px;
+    }
+
+    .sidebar-nav {
+        padding-block: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-bottom: 1px black solid;
+        height: 100%;
+
+        .sidebar-nav-link {
+            box-shadow: inset 1px 1px 0 0 black;
+        }
+    }
+}
