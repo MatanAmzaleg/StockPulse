@@ -1,8 +1,8 @@
-export function connectToAlpacaStream() {
+export default function useWebSockets() {
     const url = 'wss://api.alpaca.markets/stream';
     const socket = new WebSocket(url);
 
-    socket.onopen = () => {
+    socket.addEventListener('open', (event) => {
         const authMessage = {
             action: 'authenticate',
             data: {
@@ -19,7 +19,7 @@ export function connectToAlpacaStream() {
             },
         };
         socket.send(JSON.stringify(listenMessage));
-    };
+    });
 
     socket.onmessage = async ({ data }) => {
         const message = await data.text();
@@ -30,4 +30,5 @@ export function connectToAlpacaStream() {
     socket.onclose = () => {
         console.log('WebSocket disconnected');
     };
+    return {};
 }
