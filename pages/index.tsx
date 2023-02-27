@@ -1,6 +1,11 @@
 import Head from 'next/head';
 
 export default function Home() {
+
+    const key = process.env.ALPACA_KEY
+    console.log(key);
+    
+
     return (
         <>
             <Head>
