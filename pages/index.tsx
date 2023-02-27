@@ -3,9 +3,6 @@ import Sidebar from '@/components/Sidebar';
 import Head from 'next/head';
 
 export default function Home() {
-    const key = process.env.ALPACA_KEY;
-    console.log(key);
-
     return (
         <>
             <Head>
@@ -22,7 +19,6 @@ export default function Home() {
             </Head>
             <main className="home-container">
                 <Header />
-
                 <Sidebar />
             </main>
         </>
