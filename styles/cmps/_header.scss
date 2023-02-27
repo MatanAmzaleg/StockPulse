@@ -1,0 +1,8 @@
+.main-header {
+    grid-area: header;
+    display: flex;
+    padding: 30px 70px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}

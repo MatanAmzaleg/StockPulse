@@ -1,4 +1,8 @@
-.home {
-    background-color: $clr1;
-    color: $clr-text;
+.home-container {
+    min-height: 100vh;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas: 'sidebar header' 'sidebar main';
 }
