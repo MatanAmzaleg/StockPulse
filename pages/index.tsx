@@ -22,6 +22,7 @@ export default function Home() {
             </Head>
             <main className="home-container">
                 <Header />
+
                 <Sidebar />
             </main>
         </>
