@@ -1,0 +1,119 @@
+.main-content-sec {
+  padding-inline: 70px;
+  margin-top: 50px;
+
+  .main-title {
+    font-size: 2rem;
+    font-weight: bolder;
+  }
+  .subtitle {
+    margin-top: 10px;
+    color: rgb(154, 154, 154);
+    font-weight: bold;
+  }
+
+  .big-cards-sec {
+    margin-top: 30px;
+    .big-card {
+      padding: 20px;
+      width: 30%;
+      background-color: #e4e4e4;
+      height: 230px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #dcdcdc;
+      }
+
+      .options-btn {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        border-radius: 50%;
+        padding: 5px;
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        &:hover {
+          background-color: #c0c0c0;
+        }
+      }
+      .upper-sec {
+        height: 50%;
+        .icon-img {
+          border-radius: 50%;
+          border: 1px solid black;
+          height: 70px;
+          width: 70px;
+        }
+
+        .title-sec {
+          margin-inline-start: 15px;
+          .stock-title {
+            font-size: 1.4rem;
+            font-weight: bolder;
+          }
+          .stock-subtitle {
+            color: #858585;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .bottom-sec {
+        height: 50%;
+
+        .graph {
+          background-color: rgb(190, 190, 190);
+          width: 75%;
+          height: 70%;
+        }
+      }
+    }
+  }
+
+  .most-popular-sec {
+    margin-top: 50px;
+
+    .main-title {
+      font-size: 1.7rem;
+    }
+    .little-cards-sec {
+      margin-top: 30px;
+
+      .little-card {
+        padding: 20px;
+        width: 160px;
+        background-color: #e4e4e4;
+        height: 180px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #dcdcdc;
+        }
+
+        >*{
+            margin-block: 5px;
+        }
+
+        .stock-s-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid black;
+        }
+        .title-sec{
+            align-items: center;
+            .stock-subtitle{
+                margin-inline-start: 5px;
+                font-size: 0.8rem;
+                color: #7c7c7c;
+            }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import { connectToAlpacaStream } from '@/websocket';
+import MainContent from '@/components/MainContent';
 import Head from 'next/head';
 import { useEffect } from 'react';
 
@@ -26,6 +27,7 @@ export default function Home() {
             <main className="home-container">
                 <Header />
                 <Sidebar />
+                <MainContent></MainContent>
             </main>
         </>
     );
