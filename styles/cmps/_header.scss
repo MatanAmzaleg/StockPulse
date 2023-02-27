@@ -3,6 +3,29 @@
     display: flex;
     padding: 30px 70px;
     align-items: center;
-    justify-content: space-between;
-    gap: 30px;
+    border-bottom: 1px solid #efefef;
+
+    input {
+        padding: 10px 15px;
+        width: 400px;
+        margin-right: 100px;
+        border: 1px solid #e5e5e5;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: #999999;
+        }
+    }
+
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        img {
+            height: 30px;
+            border-radius: 50%;
+        }
+    }
 }
