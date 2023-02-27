@@ -1,4 +1,6 @@
-import { SlOptionsVertical } from "react-icons/sl";
+import BigStockCard from "./BigStockCard";
+import SmallStockCard from "./SmallStockCard";
+
 
 export default function MainContent() {
   return (
@@ -6,27 +8,14 @@ export default function MainContent() {
       <h1 className="main-title">Stock Market</h1>
       <p className="subtitle">Trending market group</p>
       <section className="big-cards-sec flex space-between">
-        <article className="big-card relative">
-          <div className="options-btn">
-            <SlOptionsVertical className="opt-icon"></SlOptionsVertical>
-          </div>
-          <div className="upper-sec flex align-center">
-            <img className="icon-img" src="" alt="" />
-            <div className="title-sec flex column">
-              <h2 className="stock-title">Tilte</h2>
-              <p className="stock-subtitle">Subtitle</p>
-            </div>
-          </div>
-        </article>
+      <BigStockCard></BigStockCard>
       </section>
 
 
       <section className="most-popular-sec">
         <h1 className="main-title">Most popular week</h1>
         <section className="little-cards-sec flex space-between">
-          <article className="little-card">
-            <img className="stock-s-img" src="" alt="" />
-          </article>
+        <SmallStockCard></SmallStockCard>
         </section>
       </section>
     </section>
