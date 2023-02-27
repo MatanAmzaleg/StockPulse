@@ -1,23 +1,35 @@
 .sidebar {
     background-color: #f8f8f8;
     grid-area: sidebar;
-    padding: 40px;
-
-    .logo {
-        border-bottom: 1px black solid;
-        padding-bottom: 20px;
-    }
 
     .sidebar-nav {
-        padding-block: 20px;
+        padding-block: 40px;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        border-bottom: 1px black solid;
-        height: 100%;
 
         .sidebar-nav-link {
-            box-shadow: inset 1px 1px 0 0 black;
+            padding-inline: 40px;
+            font-size: em(22px, 16px);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.2s;
+
+            &:hover {
+                box-shadow: inset 5px 0 0 0 #121212;
+            }
         }
+    }
+}
+
+.logo-container {
+    background-color: #f8f8f8;
+    grid-area: logo;
+    padding: 40px 40px 0 40px;
+
+    .logo {
+        border-bottom: 1px #858585 solid;
+        height: 100%;
     }
 }
