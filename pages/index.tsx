@@ -1,8 +1,14 @@
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
+import { connectToAlpacaStream } from '@/websocket';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 export default function Home() {
+    useEffect(() => {
+        connectToAlpacaStream();
+    }, []);
+
     return (
         <>
             <Head>
