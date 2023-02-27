@@ -3,10 +3,8 @@ import Sidebar from '@/components/Sidebar';
 import Head from 'next/head';
 
 export default function Home() {
-
-    const key = process.env.ALPACA_KEY
+    const key = process.env.ALPACA_KEY;
     console.log(key);
-    
 
     return (
         <>
