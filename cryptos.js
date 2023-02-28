@@ -1,0 +1,58 @@
+export const cryproArray = [
+  {
+    title: "Bitcoin",
+    price: "",
+    imgUrl: "",
+    symbol: "BTC",
+    socketSymbol: "BTCUSD",
+  },
+  {
+    title: "Ethereum ",
+    price: "",
+    imgUrl: "",
+    symbol: "ETH",
+    socketSymbol: "ETHUSD",
+  },
+  {
+    title: "Tether",
+    price: "",
+    imgUrl: "",
+    symbol: "USDT",
+    socketSymbol: "USDTUSD",
+  },
+  {
+    title: "Solana",
+    price: "",
+    imgUrl: "",
+    symbol: "SOL-USD",
+    socketSymbol: "SOLUSD",
+  },
+  {
+    title: "Dogecoin",
+    price: "",
+    imgUrl: "",
+    symbol: "DOGE-USD",
+    socketSymbol: "DOGEUSD",
+  },
+  {
+    title: "SUSHISWAP ",
+    price: "",
+    imgUrl: "",
+    symbol: "SUSHIUSD",
+    socketSymbol: "SUSHIUSD",
+  },
+  {
+    title: "YEARN.FINANCE",
+    price: "",
+    imgUrl: "",
+    symbol: "YFI-USD",
+    socketSymbol: "YFIUSD",
+  },
+  {
+    title: "UNISWAP",
+    price: "",
+    imgUrl: "",
+    symbol: "UNI-USD",
+    socketSymbol: "UNIUSD",
+  },
+];
