@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "websocket.ts", "websocket.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "websocket.ts"],
   "exclude": ["node_modules"]
 }

@@ -3,11 +3,15 @@ import Sidebar from '@/components/Sidebar';
 import { connectToAlpacaStream } from '@/websocket';
 import MainContent from '@/components/MainContent';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+// import useWebSockets from '@/hooks/useWebSockets';
 
 export default function Home() {
+    // const { crypto } = useWebSockets(['BTCUSD']);
+    const [crypto, setCrypto] = useState(null);
+
     useEffect(() => {
-        connectToAlpacaStream();
+        console.log(connectToAlpacaStream(['BTCUSD']));
     }, []);
 
     return (
@@ -25,10 +29,20 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="home-container">
+                {/* <div className="">{crypto}</div> */}
                 <Header />
                 <Sidebar />
                 <MainContent></MainContent>
             </main>
         </>
     );
+}
+
+export async function getServerSideProps() {
+    return {
+        props: {
+            price: 1,
+            // price: data.last?.price,
+        },
+    };
 }

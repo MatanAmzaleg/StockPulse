@@ -1,33 +1,39 @@
-export function connectToAlpacaStream() {
-    const url = 'wss://api.alpaca.markets/stream';
+export function connectToAlpacaStream(symbols: string[]) {
+    const url = 'wss://stream.data.alpaca.markets/v1beta1/crypto';
     const socket = new WebSocket(url);
+    let crypto: any = null;
 
-    socket.onopen = () => {
-        const authMessage = {
-            action: 'authenticate',
-            data: {
-                key_id: process.env.NEXT_PUBLIC_ALPACA_KEY,
-                secret_key: process.env.NEXT_PUBLIC_ALPACA_SECRET,
-            },
-        };
-        socket.send(JSON.stringify(authMessage));
+    socket.onmessage = (event: MessageEvent) => {
+        const data = JSON.parse(event.data);
 
-        const listenMessage = {
-            action: 'listen',
-            data: {
-                streams: ['T.SPY'],
-            },
-        };
-        socket.send(JSON.stringify(listenMessage));
+        if (data[0].msg === 'connected') {
+            const authMessage = {
+                action: 'auth',
+                key: process.env.NEXT_PUBLIC_ALPACA_KEY,
+                secret: process.env.NEXT_PUBLIC_ALPACA_SECRET,
+            };
+            socket.send(JSON.stringify(authMessage));
+        }
+
+        if (data[0].msg === 'authenticated') {
+            const subscribe = {
+                action: 'subscribe',
+                // trades: ['AAPL'],
+                quotes: [...symbols],
+                // bars: ['ETHUSD'],
+            };
+            socket.send(JSON.stringify(subscribe));
+        }
+        // console.log(data[0]);
+        return data[0];
+        // crypto = data[key];
+        for (let key in data) {
+            const type = data[key].T;
+            if (type === 'q') {
+                // console.log('got a quote');
+            }
+        }
+        // console.log(crypto);
     };
-
-    socket.onmessage = async ({ data }) => {
-        const message = await data.text();
-        const msg = JSON.parse(message);
-        console.log(msg);
-    };
-
-    socket.onclose = () => {
-        console.log('WebSocket disconnected');
-    };
+    // return crypto;
 }
