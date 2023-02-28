@@ -2,40 +2,8 @@ import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import MainContent from '@/components/MainContent';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 
 export default function Home() {
-    const [socket, setSocket] = useState(null);
-    const [crypto, setCrypto] = useState(null);
-
-    useEffect(() => {
-        const url = 'wss://stream.data.alpaca.markets/v1beta1/crypto';
-        const socket = new WebSocket(url);
-    
-        socket.onopen = () => {
-            const authMessage = {
-              action: 'auth',
-              key: process.env.NEXT_PUBLIC_ALPACA_KEY,
-              secret: process.env.NEXT_PUBLIC_ALPACA_SECRET,
-            };
-            socket.send(JSON.stringify(authMessage));
-          };
-        
-          socket.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-        
-            if (data[0].msg === 'authenticated') {
-              const subscribe = {
-                action: 'subscribe',
-                quotes: ['BTCUSD'],
-              };
-              socket.send(JSON.stringify(subscribe));
-            }
-            console.log(data[0]);
-            setCrypto(data[0])
-          };
-            }, []);
-
     return (
         <>
             <Head>
@@ -51,20 +19,10 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="home-container">
-                <div className="">{JSON.stringify(crypto) }</div>
                 <Header />
                 <Sidebar />
-                <MainContent></MainContent>
+                <MainContent />
             </main>
         </>
     );
-}
-
-export async function getServerSideProps() {
-    return {
-        props: {
-            price: 1,
-            // price: data.last?.price,
-        },
-    };
 }
