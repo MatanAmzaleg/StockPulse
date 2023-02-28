@@ -9,3 +9,9 @@ export interface Currency {
     t: string;
     x: string;
 }
+
+export interface Currencies {
+    BTCUSD?: Currency;
+    ETHUSD?: Currency;
+    DOGEUSD?: Currency;
+}

@@ -1,8 +1,14 @@
+import { Currencies, Currency } from '@/typings';
 import { useState, useEffect } from 'react';
 
 export default function useWebSockets(symbols: string[]) {
-    const [btc, setBtc] = useState(null);
-    const [eth, setEth] = useState(null);
+    const [currencies, setCurrencies] = useState<Currencies>({});
+
+    const handleData = (crypto: Currency) => {
+        if (!crypto.S) return;
+        currencies[crypto.S as keyof typeof currencies] = crypto;
+        setCurrencies({ ...currencies });
+    };
 
     useEffect(() => {
         const url = 'wss://stream.data.alpaca.markets/v1beta1/crypto';
@@ -22,18 +28,13 @@ export default function useWebSockets(symbols: string[]) {
             if (data[0].msg === 'authenticated') {
                 const subscribe = {
                     action: 'subscribe',
-                    quotes: ['BTCUSD'],
+                    quotes: symbols,
                 };
                 socket.send(JSON.stringify(subscribe));
             }
-            if (data[0].S === 'BTCUSD') {
-                setBtc({ ...data[0], name: 'Bitcoin' });
-                console.log(data[0]);
-            }
-            if (data[0].S === 'ETHUSD') {
-                setBtc({ ...data[0], name: 'Etherium' });
-                console.log(data[0]);
-            }
+            console.log(data);
+
+            handleData(data[0]);
         };
 
         socket.onclose = () => {
@@ -41,5 +42,5 @@ export default function useWebSockets(symbols: string[]) {
         };
     }, []);
 
-    return { btc };
+    return { currencies };
 }

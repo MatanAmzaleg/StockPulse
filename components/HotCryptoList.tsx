@@ -1,3 +1,4 @@
+import useWebSockets from '@/hooks/useWebSockets';
 import HotCryptoPreview from './HotCryptoPreview';
 
 export default function HotCryptoList({ hotList }: any) {
