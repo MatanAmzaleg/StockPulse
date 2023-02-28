@@ -1,4 +1,5 @@
 import { Currency } from '@/typings';
+import Image from 'next/image';
 import { SlOptionsVertical } from 'react-icons/sl';
 
 interface Props {
@@ -15,25 +16,29 @@ export default function HotCryptoPreview({ crypto }: Props) {
               }).format(price);
     };
 
+    if (!crypto?.S) return <div className="">loading</div>;
+
     return (
-        <article className="hot-crypto-preview relative">
-            <div className="options-btn">
-                <SlOptionsVertical className="opt-icon"></SlOptionsVertical>
-            </div>
+        <article className="hot-crypto-preview">
             <div className="upper-sec flex align-center">
-                <img className="icon-img" src="" alt="" />
+                <Image
+                    src={`/${crypto.S}.svg`}
+                    alt="apple"
+                    className="icon-img"
+                    width={50}
+                    height={50}
+                />
                 <div className="title-sec flex column">
-                    <h2 className="stock-title">{crypto?.S}</h2>
-                    <p className="stock-subtitle">{crypto?.name}</p>
+                    <h2 className="stock-title">{crypto.S}</h2>
+                    <p className="stock-subtitle">{crypto.name || 'crypto'}</p>
                 </div>
+                <SlOptionsVertical className="opt-icon"></SlOptionsVertical>
             </div>
             <div className="bottom-sec flex space-between align-center">
                 <div className="graph"></div>
                 <div className="">
-                    <h2 className="price-title">
-                        {formattedPrice(crypto?.bp)}
-                    </h2>
-                    <h3>{crypto?.as?.toFixed(2)}%</h3>
+                    <h2 className="price-title">{formattedPrice(crypto.bp)}</h2>
+                    <h3>{crypto.as.toFixed(2)}%</h3>
                 </div>
             </div>
         </article>

@@ -20,7 +20,7 @@ export default function Sidebar() {
                         <HiOutlineSquares2X2 />
                         Dashboard
                     </Link>
-                    <Link href="/" className="sidebar-nav-link">
+                    <Link href="/settings" className="sidebar-nav-link">
                         <IoSettingsOutline />
                         Setting
                     </Link>

@@ -1,0 +1,30 @@
+.popular-crypto-preview {
+    padding: 20px;
+    flex: 1;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #dcdcdc;
+    }
+
+    > * {
+        margin-block: 5px;
+    }
+
+    .icon-img {
+        border-radius: 50%;
+        background-color: #e5e6e9;
+        padding: 7px;
+    }
+
+    .title-sec {
+        align-items: center;
+        .stock-subtitle {
+            margin-inline-start: 5px;
+            font-size: 0.8rem;
+            color: #7c7c7c;
+        }
+    }
+}

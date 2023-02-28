@@ -4,10 +4,25 @@ import { useState, useEffect } from 'react';
 export default function useWebSockets(symbols: string[]) {
     const [currencies, setCurrencies] = useState<Currencies>({});
 
-    const handleData = (crypto: Currency) => {
-        if (!crypto.S) return;
+    const updateCurrencies = (crypto: Currency) => {
         currencies[crypto.S as keyof typeof currencies] = crypto;
         setCurrencies({ ...currencies });
+    };
+
+    const handleData = (crypto: Currency) => {
+        if (!crypto.S) return;
+
+        const delay = 1000 * 3; //3ms
+        const prevCurrency = currencies[crypto.S as keyof typeof currencies];
+
+        if (prevCurrency?.t) {
+            const incomingTS = new Date(crypto.t).getTime();
+            const prevTS = new Date(prevCurrency.t).getTime();
+
+            if (incomingTS - prevTS >= delay) updateCurrencies(crypto);
+        } else {
+            updateCurrencies(crypto);
+        }
     };
 
     useEffect(() => {
@@ -32,8 +47,6 @@ export default function useWebSockets(symbols: string[]) {
                 };
                 socket.send(JSON.stringify(subscribe));
             }
-            console.log(data);
-
             handleData(data[0]);
         };
 

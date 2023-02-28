@@ -1,43 +1,49 @@
 .hot-crypto-preview {
-    padding: 20px;
-    width: 30%;
-    background-color: #f8f8f6;
-    height: 230px;
-    border-radius: 5px;
+    padding: 30px 20px;
+    flex: 1;
+    background-color: #f8f8f8;
+    border-radius: 8px;
     transition: background-color 0.3s;
 
     &:hover {
-        background-color: #dcdcdc;
+        background-color: darken($color: #f8f8f8, $amount: 5);
     }
 
-    .options-btn {
-        position: absolute;
-        top: 20px;
-        right: 10px;
-        border-radius: 50%;
-        padding: 5px;
-        width: 30px;
-        height: 30px;
-        display: grid;
-        place-items: center;
-        &:hover {
-            background-color: #c0c0c0;
-        }
-    }
     .upper-sec {
+        margin-bottom: 20px;
+        position: relative;
+
+        .opt-icon {
+            position: absolute !important;
+            top: 0;
+            right: 0;
+            transform: translateX(10px);
+            border-radius: 50%;
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: #c0c0c0;
+            }
+        }
+
         .icon-img {
             border-radius: 50%;
-            border: 1px solid black;
-            height: 70px;
-            width: 70px;
+            background-color: #e5e6e9;
+            padding: 10px;
         }
 
         .title-sec {
             margin-inline-start: 15px;
+
             .stock-title {
                 font-size: 1.4rem;
                 font-weight: bolder;
             }
+
             .stock-subtitle {
                 color: #858585;
                 font-weight: 600;
@@ -47,11 +53,12 @@
 
     .bottom-sec {
         height: 50%;
+        gap: 20px;
 
         .graph {
-            background-color: rgb(190, 190, 190);
+            background-color: rgb(215, 215, 215);
             width: 75%;
-            height: 70%;
+            height: 50px;
         }
     }
 }

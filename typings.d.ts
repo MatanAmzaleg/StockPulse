@@ -14,4 +14,9 @@ export interface Currencies {
     BTCUSD?: Currency;
     ETHUSD?: Currency;
     DOGEUSD?: Currency;
+    USDTUSD?: Currency;
+    YFIUSD?: Currency;
+    SUSHIUSD?: Currency;
+    SOLUSD?: Currency;
+    UNIUSD?: Currency;
 }
