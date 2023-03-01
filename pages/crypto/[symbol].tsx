@@ -1,11 +1,6 @@
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import useWebSockets from '@/hooks/useWebSockets';
-import { Currencies } from '@/typings';
-import HotCryptoPreview from '@/components/HotCryptoPreview';
 import CryptoDetails from '@/components/CryptoDetails';
 
 export default function CryptoSymbol() {

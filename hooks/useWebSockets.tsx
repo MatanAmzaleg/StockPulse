@@ -2,8 +2,6 @@ import { Currencies, Currency } from '@/typings';
 import { useState, useEffect } from 'react';
 
 export default function useWebSockets(symbols: string[]) {
-    console.log(symbols);
-
     const [currencies, setCurrencies] = useState<Currencies>({});
 
     const updateCurrencies = (crypto: Currency) => {
@@ -41,10 +39,7 @@ export default function useWebSockets(symbols: string[]) {
         };
 
         socket.onmessage = (event) => {
-            console.log(event);
-            
             const data = JSON.parse(event.data);
-            console.log(data);
 
             if (data[0].msg === 'authenticated') {
                 const subscribe = {
@@ -60,6 +55,7 @@ export default function useWebSockets(symbols: string[]) {
         socket.onclose = () => {
             console.log('lost connection');
         };
+
         return () => {
             socket.close();
         };

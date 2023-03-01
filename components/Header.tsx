@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 export default function Header() {
     const [date, setDate] = useState<Date>(new Date());

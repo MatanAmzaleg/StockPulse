@@ -1,7 +1,7 @@
-import { Currency } from '@/typings';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SlOptionsVertical } from 'react-icons/sl';
+import { Currency } from '@/typings';
 
 interface Props {
     crypto: Currency;
@@ -16,8 +16,6 @@ export default function HotCryptoPreview({ crypto }: Props) {
                   currency: 'USD',
               }).format(price);
     };
-
-    console.log(crypto);
 
     if (!crypto?.S) return <div className="">loading</div>;
 
