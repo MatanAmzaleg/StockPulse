@@ -1,8 +1,10 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 export default function Header() {
     const [date, setDate] = useState<Date>(new Date());
     const [filter, setFilter] = useState('');
+    const router = useRouter();
 
     useEffect(() => {
         const intervalId = setInterval(() => setDate(new Date()), 1000 * 60);
@@ -17,21 +19,21 @@ export default function Header() {
             day: 'numeric',
         });
 
-    // const handleInput = (event: KeyboardEvent) => {
-    //     if (event.keyCode === 13) {
-    //         setFilter(event?.target?.value);
-    //     }
-    // };
+    const search = (event: FormEvent) => {
+        event.preventDefault();
+        router.push(`/search?crypto=${filter}`);
+    };
 
     return (
         <div className="main-header">
-            <input
-                value={filter}
-                type="text"
-                // onKeyUp={handleInput}
-                onChange={(event) => setFilter(event?.target?.value)}
-                placeholder="Search for stocks market"
-            />
+            <form onSubmit={search}>
+                <input
+                    value={filter}
+                    type="text"
+                    onChange={(event) => setFilter(event?.target?.value)}
+                    placeholder="Search by crypto symbol"
+                />
+            </form>
             <div className="date">{formmatedDate()}</div>
             <div className="user">
                 <img src={`https://robohash.org/${11}?set=set5`} alt={'Gi'} />

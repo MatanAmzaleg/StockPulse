@@ -6,10 +6,24 @@
         font-size: 2rem;
         font-weight: bolder;
     }
+
     .subtitle {
         margin-top: 10px;
         color: rgb(154, 154, 154);
         font-weight: bold;
+    }
+
+    .view-all {
+        align-self: flex-end;
+        width: max-content;
+        font-weight: bold;
+        padding: 7px 14px;
+        border-radius: 3px;
+        transition: 0.2s;
+
+        &:hover {
+            background-color: rgb(230, 230, 230);
+        }
     }
 
     .hot-crypto-list {

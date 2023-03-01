@@ -21,6 +21,7 @@ export default function MainContent() {
         <section className="main-content-sec flex column">
             <h1 className="main-title">Stock Market</h1>
             <p className="subtitle">Trending market group</p>
+            <button className="view-all">View All</button>
             <div className="hot-crypto-list flex">
                 {currenciesList.slice(0, 3).map((currency) => (
                     <HotCryptoPreview

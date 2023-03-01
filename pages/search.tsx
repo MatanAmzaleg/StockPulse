@@ -2,8 +2,16 @@ import Head from 'next/head';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import MainContent from '@/components/MainContent';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-export default function Home() {
+export default function Search() {
+    const router = useRouter();
+
+    useEffect(() => {
+        console.log(router.query.crypto);
+    });
+
     return (
         <>
             <Head>
@@ -21,7 +29,7 @@ export default function Home() {
             <main className="home-container">
                 <Header />
                 <Sidebar />
-                <MainContent />
+                {/* <MainContent /> */}
             </main>
         </>
     );
