@@ -8,16 +8,18 @@ export default function CryptoDetails(props: any) {
     const router = useRouter();
     const { symbol } = router.query;
 
+    const {currency} = props
+    console.log(currency);
+    
+
     const { currencies } = symbol
         ? useWebSockets([symbol as string])
         : { currencies: {} };
 
     return (
-        <div>
-            <HotCryptoPreview
-                crypto={currencies[symbol as keyof typeof currencies]!}
-            />
-        </div>
+       <section className="crypto-details-sec">
+        
+       </section>
     );
 }
 
