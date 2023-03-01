@@ -15,7 +15,7 @@ const currenciesList = [
 
 export default function MainContent() {
     const { currencies } = useWebSockets(currenciesList);
-    const { stocks } = useStockSocket(['AAPL']);
+    // const { stocks } = useStockSocket(['AAPL']);
 
     return (
         <section className="main-content-sec flex column">
