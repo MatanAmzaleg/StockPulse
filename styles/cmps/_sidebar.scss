@@ -6,18 +6,23 @@
         padding-block: 40px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 22px;
 
         .sidebar-nav-link {
-            padding-inline: 40px;
-            font-size: em(22px, 16px);
+            padding: 5px 40px;
+            font-size: em(15px, 16px);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 17px;
             transition: all 0.2s;
+            letter-spacing: 0.7px;
 
             &:hover {
                 box-shadow: inset 5px 0 0 0 #121212;
+            }
+
+            .link-icon {
+                font-size: em(26px, 16px);
             }
         }
     }
@@ -31,5 +36,8 @@
     .logo {
         border-bottom: 1px #858585 solid;
         height: 100%;
+        font-size: larger;
+        font-weight: bold;
+        letter-spacing: 1px;
     }
 }

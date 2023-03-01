@@ -13,20 +13,20 @@ export default function Sidebar() {
             <div className="sidebar">
                 <nav className="sidebar-nav">
                     <Link href="/" className="sidebar-nav-link">
-                        <AiOutlineBarChart />
+                        <BsCurrencyBitcoin className="link-icon" />
+                        Crypto Currency
+                    </Link>
+                    <Link href="/" className="sidebar-nav-link">
+                        <AiOutlineBarChart className="link-icon" />
                         Market
                     </Link>
                     <Link href="/" className="sidebar-nav-link">
-                        <HiOutlineSquares2X2 />
+                        <HiOutlineSquares2X2 className="link-icon" />
                         Dashboard
                     </Link>
-                    <Link href="/settings" className="sidebar-nav-link">
-                        <IoSettingsOutline />
-                        Setting
-                    </Link>
                     <Link href="/" className="sidebar-nav-link">
-                        <BsCurrencyBitcoin />
-                        Crypto Currency
+                        <IoSettingsOutline className="link-icon" />
+                        Setting
                     </Link>
                 </nav>
             </div>
