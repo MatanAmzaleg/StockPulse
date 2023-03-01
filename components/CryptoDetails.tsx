@@ -1,8 +1,10 @@
 import useWebSockets from '@/hooks/useWebSockets';
 import { useRouter } from 'next/router';
 import HotCryptoPreview from './HotCryptoPreview';
+import axios from 'axios'
 
-export default function CryptoDetails() {
+export default function CryptoDetails(props: any) {
+    
     const router = useRouter();
     const { symbol } = router.query;
 
@@ -18,3 +20,5 @@ export default function CryptoDetails() {
         </div>
     );
 }
+
+

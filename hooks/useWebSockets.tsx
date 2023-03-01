@@ -1,6 +1,7 @@
 import { Currencies, Currency } from '@/typings';
 import { useState, useEffect } from 'react';
 
+
 export default function useWebSockets(symbols: string[]) {
     const [currencies, setCurrencies] = useState<Currencies>({});
 
@@ -12,7 +13,7 @@ export default function useWebSockets(symbols: string[]) {
     const handleData = (crypto: Currency) => {
         if (!crypto.S) return;
 
-        const delay = 1000 * 3; //3ms
+        const delay = 1000 * 2; //2ms
         const prevCurrency = currencies[crypto.S as keyof typeof currencies];
 
         if (prevCurrency?.t) {
