@@ -18,7 +18,7 @@ export default function CryptoSymbol({ data }: any) {
       <main className="home-container">
         <Header />
         <Sidebar />
-        <CryptoDetails currency={data} />
+        <CryptoDetails currencyData={data} />
       </main>
     </>
   );

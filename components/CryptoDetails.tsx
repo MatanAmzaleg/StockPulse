@@ -8,17 +8,17 @@ export default function CryptoDetails(props: any) {
     const router = useRouter();
     const { symbol } = router.query;
 
-    const {currency} = props
-    console.log(currency);
+    const {currencyData} = props
     
-
+    
     const { currencies } = symbol
-        ? useWebSockets([symbol as string])
-        : { currencies: {} };
-
+    ? useWebSockets([symbol as string])
+    : { currencies: {} };
+    
+    console.log(currencyData, currencies);
     return (
        <section className="crypto-details-sec">
-        
+
        </section>
     );
 }
