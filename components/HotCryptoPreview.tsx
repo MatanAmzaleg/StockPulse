@@ -17,6 +17,8 @@ export default function HotCryptoPreview({ crypto }: Props) {
               }).format(price);
     };
 
+    console.log(crypto);
+
     if (!crypto?.S) return <div className="">loading</div>;
 
     return (

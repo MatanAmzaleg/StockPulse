@@ -5,28 +5,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
 import { Currencies } from '@/typings';
+import HotCryptoPreview from '@/components/HotCryptoPreview';
+import CryptoDetails from '@/components/CryptoDetails';
 
 export default function CryptoSymbol() {
-    const router = useRouter();
-    const [symbol, setSymbol] = useState<string>('');
-    const [currencies, setCurrencies] = useState<Currencies | null>(null);
-
-    const getCurrencies = async (symbol: string) => {
-        // try to fix it
-        const { currencies } = await useWebSockets([symbol]);
-        return currencies;
-    };
-
-    useEffect(() => {
-        if (router.query?.symbol) {
-            console.log('found a symbol');
-            const symbol = router.query.symbol as string;
-            getCurrencies(symbol).then((currencies) =>
-                setCurrencies(currencies)
-            );
-        }
-    }, []);
-
     return (
         <>
             <Head>
@@ -44,11 +26,7 @@ export default function CryptoSymbol() {
             <main className="home-container">
                 <Header />
                 <Sidebar />
-                {!currencies ? (
-                    <div className="found">{JSON.stringify(currencies)}</div>
-                ) : (
-                    <div className="">loading</div>
-                )}
+                <CryptoDetails />
             </main>
         </>
     );
