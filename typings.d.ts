@@ -10,6 +10,17 @@ export interface Currency {
     x: string;
 }
 
+export interface CurrencyData {
+    c: number;
+    h: number;
+    l: number;
+    n: number;
+    o: number;
+    t: number;
+    v: number;
+    vw: number;
+}
+
 export interface Currencies {
     BTCUSD?: Currency;
     ETHUSD?: Currency;
