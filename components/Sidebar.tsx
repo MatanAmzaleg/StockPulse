@@ -26,7 +26,7 @@ export default function Sidebar() {
                     </Link>
                     <Link href="/" className="sidebar-nav-link">
                         <IoSettingsOutline className="link-icon" />
-                        Setting
+                        Settings
                     </Link>
                 </nav>
             </div>
