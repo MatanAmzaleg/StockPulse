@@ -41,6 +41,8 @@ export default function useWebSockets(symbols: string[]) {
         };
 
         socket.onmessage = (event) => {
+            console.log(event);
+            
             const data = JSON.parse(event.data);
             console.log(data);
 
