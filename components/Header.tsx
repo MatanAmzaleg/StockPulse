@@ -30,7 +30,7 @@ export default function Header() {
                 <input
                     value={filter}
                     type="text"
-                    onChange={(event) => setFilter(event?.target?.value)}
+                    onChange={({ target }) => setFilter(target?.value)}
                     placeholder="Search by crypto symbol"
                 />
             </form>
