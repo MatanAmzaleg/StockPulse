@@ -1,6 +1,5 @@
 .crypto-details {
     padding: 30px;
-    // background-color: #eff1f5;
     background: linear-gradient(180deg, #000000 15%, #eff1f5 0%);
 
     .logo {
@@ -86,18 +85,26 @@
             border-top-left-radius: 0px !important;
 
             .day-actions {
+                display: flex;
+                // gap: 10px;
                 position: absolute;
                 top: 0;
                 left: 0;
                 transform: translateY(-100%);
-                background-color: #fff;
                 border-top-left-radius: 12px;
 
                 button {
+                    background-color: #e9e9ec;
                     padding: 10px 15px;
+                    border-top-right-radius: 12px;
+                    border-top-left-radius: 12px;
+                    font-size: em(14px, 16px);
+                    color: #6a6a6f;
 
-                    &:first-child {
-                        // border-radius: ;
+                    &.active {
+                        background-color: #fff;
+                        z-index: 10;
+                        color: #000000;
                     }
                 }
             }
