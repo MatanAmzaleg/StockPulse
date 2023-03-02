@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 interface Connection {
-  isConnected?: number;
+    isConnected?: number;
 }
 
 const connection: Connection = {};

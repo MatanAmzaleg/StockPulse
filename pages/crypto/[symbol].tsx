@@ -4,17 +4,36 @@ import { getCurrencyDataURL } from '@/utils/requests';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
+import { useState } from 'react';
 
-export default function CryptoDetails({ data }: any) {
+export default function CryptoDetails({ data, yesterdayData }: any) {
     const router = useRouter();
     const { symbol } = router.query;
+    const [day, setDay] = useState('today');
 
     const { currencies } = symbol
         ? useWebSockets([(symbol + 'USD').toUpperCase()])
         : { currencies: {} };
 
-    if (!currencies) return <div className="">loading</div>;
+    const selectDay = (day: string) => {
+        setDay(day);
+        let newOc;
+        if (day === 'today') {
+            newOc = { open: data.o, close: data.c, ts: data.t };
+        } else {
+            newOc = {
+                open: yesterdayData.o,
+                close: yesterdayData.c,
+                ts: yesterdayData.t,
+            };
+        }
+        setOc(newOc);
+    };
 
+    if (!currencies || !data || !yesterdayData)
+        return <div className="">loading</div>;
+
+    const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
 
@@ -51,6 +70,20 @@ export default function CryptoDetails({ data }: any) {
                     </div>
                 </div>
                 <div className="card open-close">
+                    <div className="day-actions">
+                        <button
+                            onClick={() => selectDay('today')}
+                            className={day === 'today' ? 'active' : ''}
+                        >
+                            Today
+                        </button>
+                        <button
+                            onClick={() => selectDay('yesterday')}
+                            className={day === 'yesterday' ? 'active' : ''}
+                        >
+                            Yesterday
+                        </button>
+                    </div>
                     <table>
                         <tr>
                             <th>Pre-Market</th>
@@ -60,10 +93,10 @@ export default function CryptoDetails({ data }: any) {
                         <tr>
                             <td className="table-price">$130.00</td>
                             <td className="table-price">
-                                {formattedPrice(data.c)}
+                                {formattedPrice(oc.close)}
                             </td>
                             <td className="table-price">
-                                {formattedPrice(data.o)}
+                                {formattedPrice(oc.open)}
                             </td>
                         </tr>
                         <tr>
@@ -78,7 +111,7 @@ export default function CryptoDetails({ data }: any) {
                                 <p className="percentage descending ">-0.98</p>
                             </td>
                             <td className="table-date">
-                                {dateTimeFormat(new Date(data.t))}
+                                {dateTimeFormat(new Date(oc.ts))}
                             </td>
                             <td className="table-date">June 16, 4:00pm</td>
                         </tr>
@@ -115,16 +148,26 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
     try {
         const todayFormat = formmatedDate(new Date());
         const yesterdayFormat = formmatedDate(new Date(Date.now() - 864e5));
+        const dayBeforeLastFormat = formmatedDate(
+            new Date(Date.now() - 864e5 * 2)
+        );
 
         const response = await axios.get(
             getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
         );
 
-        console.log(response.data.results[0]);
+        const yesterdayData = await axios.get(
+            getCurrencyDataURL(
+                params.symbol,
+                yesterdayFormat,
+                dayBeforeLastFormat
+            )
+        );
 
         return {
             props: {
                 data: response.data.results[0],
+                yesterdayData: yesterdayData.data.results[0],
             },
         };
     } catch (err) {
