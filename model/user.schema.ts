@@ -3,6 +3,7 @@ import mongoose, { Document, Model } from 'mongoose';
 export interface UserDocument extends Document {
     email: string;
     password: string;
+    coins: number;
 }
 
 const userSchema = new mongoose.Schema<UserDocument>({
@@ -13,6 +14,10 @@ const userSchema = new mongoose.Schema<UserDocument>({
     },
     password: {
         type: String,
+        required: true,
+    },
+    coins: {
+        type: Number,
         required: true,
     },
 });
