@@ -10,12 +10,13 @@ export default function CryptoDetails({ data }: any) {
     const { symbol } = router.query;
 
     const { currencies } = symbol
-        ? useWebSockets([symbol as string])
+        ? useWebSockets([(symbol + 'USD').toUpperCase()])
         : { currencies: {} };
 
     if (!currencies) return <div className="">loading</div>;
 
-    const alpacaCrypto = currencies[symbol as keyof typeof currencies];
+    const alpacaCrypto =
+        currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
 
     if (!alpacaCrypto) return <div className="">loading</div>;
     return (
@@ -118,6 +119,8 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
         const response = await axios.get(
             getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
         );
+
+        console.log(response.data.results[0]);
 
         return {
             props: {
