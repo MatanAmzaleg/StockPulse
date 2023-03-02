@@ -1,30 +1,13 @@
-import { Currency } from '@/typings';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { Currency } from '@/typings';
+import { formattedPrice } from '../utils/format';
 
 interface Props {
     crypto: Currency;
 }
 
 export default function PopulatCryptoPreview({ crypto }: Props) {
-    const formattedPrice = (price: number) => {
-        return price < 10
-            ? '$' + price.toFixed(4)
-            : new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-              }).format(price);
-    };
-
-    // const image = useRef<HTMLImageElement>();
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         console.log(image?.current);
-    //     }, 5000);
-    // }, []);
-
-    if (!crypto?.S) return <div className="">loading</div>;
+    if (!crypto) return <div className="popular-crypto-preview">loading</div>;
 
     return (
         <article className="popular-crypto-preview flex column space-between">

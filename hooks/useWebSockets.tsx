@@ -12,6 +12,7 @@ export default function useWebSockets(symbols: string[]) {
         currencies[crypto.S as keyof typeof currencies] = {
             ...crypto,
             name: name || '',
+            S: crypto.S.slice(0, crypto.S.length - 3).toLowerCase(),
         };
         setCurrencies({ ...currencies });
     };

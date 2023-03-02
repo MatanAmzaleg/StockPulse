@@ -13,9 +13,6 @@ export default function CryptoDetails({ data }: any) {
         ? useWebSockets([symbol as string])
         : { currencies: {} };
 
-    console.log(data, currencies);
-    console.log(dateTimeFormat(new Date(data.t)));
-
     if (!currencies) return <div className="">loading</div>;
 
     const alpacaCrypto = currencies[symbol as keyof typeof currencies];
