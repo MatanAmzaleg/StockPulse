@@ -21,9 +21,15 @@
 
     .title-sec {
         align-items: center;
+        gap: 5px;
+
+        .stock-title {
+            font-size: 1.1em;
+            text-transform: uppercase;
+        }
+
         .stock-subtitle {
-            margin-inline-start: 5px;
-            font-size: 0.8rem;
+            font-size: 0.9em;
             color: #7c7c7c;
         }
     }

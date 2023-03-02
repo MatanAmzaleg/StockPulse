@@ -1,12 +1,19 @@
 import { Currencies, Currency } from '@/typings';
 import { useState, useEffect } from 'react';
+import { cryptoSymbol } from 'crypto-symbol';
 
+const { nameLookup } = cryptoSymbol({});
 
 export default function useWebSockets(symbols: string[]) {
     const [currencies, setCurrencies] = useState<Currencies>({});
 
     const updateCurrencies = (crypto: Currency) => {
-        currencies[crypto.S as keyof typeof currencies] = crypto;
+        const name = nameLookup(crypto.S.slice(0, crypto.S.length - 3));
+        currencies[crypto.S as keyof typeof currencies] = {
+            ...crypto,
+            name: name || '',
+            S: crypto.S.slice(0, crypto.S.length - 3).toLowerCase(),
+        };
         setCurrencies({ ...currencies });
     };
 
@@ -46,6 +53,7 @@ export default function useWebSockets(symbols: string[]) {
                 const subscribe = {
                     action: 'subscribe',
                     quotes: symbols,
+                    trades: ['BTCUSD'],
                 };
                 socket.send(JSON.stringify(subscribe));
             }

@@ -2,22 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { Currency } from '@/typings';
+import { formattedPrice } from '../utils/format';
 
 interface Props {
     crypto: Currency;
 }
 
 export default function HotCryptoPreview({ crypto }: Props) {
-    const formattedPrice = (price: number) => {
-        return price < 10
-            ? '$' + price.toFixed(4)
-            : new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-              }).format(price);
-    };
-
-    if (!crypto?.S) return <div className="">loading</div>;
+    if (!crypto) return <div className="hot-crypto-preview">loading</div>;
 
     return (
         <Link className="hot-crypto-preview" href={`/crypto/${crypto.S}`}>
@@ -33,7 +25,7 @@ export default function HotCryptoPreview({ crypto }: Props) {
                     <div className="title-sec flex column">
                         <h2 className="stock-title">{crypto.S}</h2>
                         <p className="stock-subtitle">
-                            {crypto.name || 'crypto'}
+                            {crypto.name || 'coin'}
                         </p>
                     </div>
                     <SlOptionsVertical className="opt-icon"></SlOptionsVertical>
@@ -44,7 +36,7 @@ export default function HotCryptoPreview({ crypto }: Props) {
                         <h2 className="price-title">
                             {formattedPrice(crypto.bp)}
                         </h2>
-                        <h3>{crypto.as.toFixed(2)}%</h3>
+                        <h3>{crypto.as?.toFixed(2)}%</h3>
                     </div>
                 </div>
             </article>
