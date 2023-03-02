@@ -6,7 +6,7 @@ interface Props {
     crypto: Currency;
 }
 
-export default function HotCryptoPreview({ crypto }: Props) {
+export default function PopulatCryptoPreview({ crypto }: Props) {
     const formattedPrice = (price: number) => {
         return price < 10
             ? '$' + price.toFixed(4)

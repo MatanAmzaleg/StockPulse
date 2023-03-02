@@ -14,7 +14,7 @@ export default function Sidebar() {
                 <nav className="sidebar-nav">
                     <Link href="/" className="sidebar-nav-link">
                         <BsCurrencyBitcoin className="link-icon" />
-                        Crypto Currency
+                        Crypto
                     </Link>
                     <Link href="/" className="sidebar-nav-link">
                         <AiOutlineBarChart className="link-icon" />

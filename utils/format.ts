@@ -3,3 +3,23 @@ export function formmatedDate(date: Date) {
         .toString()
         .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
 }
+
+export function dateTimeFormat(date: Date) {
+    return date
+        .toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+        })
+        .replace('at', ',');
+}
+
+export function formattedPrice(price: number) {
+    return price < 10
+        ? '$' + price.toFixed(4)
+        : new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+          }).format(price);
+}

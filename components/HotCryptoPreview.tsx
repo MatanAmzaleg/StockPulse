@@ -31,9 +31,11 @@ export default function HotCryptoPreview({ crypto }: Props) {
                         height={50}
                     />
                     <div className="title-sec flex column">
-                        <h2 className="stock-title">{crypto.S}</h2>
+                        <h2 className="stock-title">
+                            {crypto.S.slice(0, crypto.S.length - 3)}
+                        </h2>
                         <p className="stock-subtitle">
-                            {crypto.name || 'crypto'}
+                            {crypto.name || 'coin'}
                         </p>
                     </div>
                     <SlOptionsVertical className="opt-icon"></SlOptionsVertical>
@@ -44,7 +46,7 @@ export default function HotCryptoPreview({ crypto }: Props) {
                         <h2 className="price-title">
                             {formattedPrice(crypto.bp)}
                         </h2>
-                        <h3>{crypto.as.toFixed(2)}%</h3>
+                        <h3>{crypto.as?.toFixed(2)}%</h3>
                     </div>
                 </div>
             </article>
