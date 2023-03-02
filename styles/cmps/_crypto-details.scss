@@ -48,6 +48,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+
             p {
                 text-transform: uppercase;
                 font-size: em(15px, 16px);
@@ -81,6 +82,26 @@
 
         .open-close {
             grid-area: close;
+            position: relative;
+            border-top-left-radius: 0px !important;
+
+            .day-actions {
+                position: absolute;
+                top: 0;
+                left: 0;
+                transform: translateY(-100%);
+                background-color: #fff;
+                border-top-left-radius: 12px;
+
+                button {
+                    padding: 10px 15px;
+
+                    &:first-child {
+                        // border-radius: ;
+                    }
+                }
+            }
+
             table {
                 height: 100%;
                 width: 100%;

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
 
-export default function CryptoDetails({ data }: any) {
+export default function CryptoDetails({ data, yesterdayData }: any) {
     const router = useRouter();
     const { symbol } = router.query;
 
@@ -13,7 +13,8 @@ export default function CryptoDetails({ data }: any) {
         ? useWebSockets([(symbol + 'USD').toUpperCase()])
         : { currencies: {} };
 
-    if (!currencies) return <div className="">loading</div>;
+    if (!currencies || !data || !yesterdayData)
+        return <div className="">loading</div>;
 
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
@@ -51,6 +52,10 @@ export default function CryptoDetails({ data }: any) {
                     </div>
                 </div>
                 <div className="card open-close">
+                    <div className="day-actions">
+                        <button>Today</button>
+                        <button>Yesterday</button>
+                    </div>
                     <table>
                         <tr>
                             <th>Pre-Market</th>
@@ -115,16 +120,26 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
     try {
         const todayFormat = formmatedDate(new Date());
         const yesterdayFormat = formmatedDate(new Date(Date.now() - 864e5));
+        const dayBeforeLastFormat = formmatedDate(
+            new Date(Date.now() - 864e5 * 2)
+        );
 
         const response = await axios.get(
             getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
         );
 
-        console.log(response.data.results[0]);
+        const yesterdayData = await axios.get(
+            getCurrencyDataURL(
+                params.symbol,
+                yesterdayFormat,
+                dayBeforeLastFormat
+            )
+        );
 
         return {
             props: {
                 data: response.data.results[0],
+                yesterdayData: yesterdayData.data.results[0],
             },
         };
     } catch (err) {

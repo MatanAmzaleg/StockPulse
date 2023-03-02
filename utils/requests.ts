@@ -9,9 +9,3 @@ export function getCurrencyDataURL(
         process.env.POLYGON_API_KEY
     }`;
 }
-
-export function getPreviousOHLC(symbol: string) {
-    return `https://api.polygon.io/v2/aggs/ticker/${(
-        symbol + 'USD'
-    ).toUpperCase()}/prev`;
-}
