@@ -10,6 +10,8 @@ res: NextApiResponse
 ) {
 try {
 const user: UserDocument = await User.create(req.body);
+console.log("userrrrrrrrrr", user);
+
 res.redirect("/");
 if (!user) {
 return res.json({ code: "User not created" });
