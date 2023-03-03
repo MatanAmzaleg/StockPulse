@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
 import { useState } from 'react';
 
+
 export default function CryptoDetails({ data, yesterdayData }: any) {
     const router = useRouter();
     const { symbol } = router.query;
@@ -31,13 +32,13 @@ export default function CryptoDetails({ data, yesterdayData }: any) {
     };
 
     if (!currencies || !data || !yesterdayData)
-        return <div className="">loading</div>;
+        return   <img className='loader' src="/loader.gif" alt="" />;
 
     const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
 
-    if (!alpacaCrypto) return <div className="">loading</div>;
+    if (!alpacaCrypto) return   <img className='loader' src="/loader.gif" alt="" />;
     return (
         <section className="crypto-details">
             <div className="logo">

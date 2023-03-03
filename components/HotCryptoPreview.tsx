@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function HotCryptoPreview({ crypto }: Props) {
-    if (!crypto) return <div className="hot-crypto-preview">loading</div>;
+    if (!crypto) return   <img className='loader' src="/loader.gif" alt="" />;
 
     return (
         <Link className="hot-crypto-preview" href={`/crypto/${crypto.S}`}>

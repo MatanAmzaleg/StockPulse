@@ -6,8 +6,8 @@ interface Props {
     crypto: Currency;
 }
 
-export default function PopulatCryptoPreview({ crypto }: Props) {
-    if (!crypto) return <div className="popular-crypto-preview">loading</div>;
+export default function PopularCryptoPreview({ crypto }: Props) {
+    if (!crypto) return   <img className='loader' src="/loader.gif" alt="" />;
 
     return (
         <article className="popular-crypto-preview flex column space-between">

@@ -2,6 +2,8 @@ import HotCryptoPreview from '@/components/HotCryptoPreview';
 import PopularCryptoPreview from '@/components/PopularCryptoPreview';
 import useWebSockets from '@/hooks/useWebSockets';
 
+
+
 const currenciesList = [
     'BTCUSD',
     'ETHUSD',
@@ -15,7 +17,7 @@ const currenciesList = [
 export default function Home() {
     const { currencies } = useWebSockets(currenciesList);
 
-    if (!currencies) return <div className="">loading...</div>;
+    if (!currencies) return   <img className='loader' src="/loader.gif" alt="" />;
 
     return (
         <section className="main-content-sec flex column">
