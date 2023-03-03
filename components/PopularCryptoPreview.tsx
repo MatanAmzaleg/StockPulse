@@ -1,29 +1,32 @@
-import Image from 'next/image';
-import { Currency } from '@/typings';
-import { formattedPrice } from '../utils/format';
+import Image from "next/image";
+import { Currency } from "@/typings";
+import { formattedPrice } from "../utils/format";
+import Link from "next/link";
 
 interface Props {
-    crypto: Currency;
+  crypto: Currency;
 }
 
 export default function PopularCryptoPreview({ crypto }: Props) {
-    if (!crypto) return   <img className='loader' src="/loader.gif" alt="" />;
+  if (!crypto) return <img className="loader" src="/loader.gif" alt="" />;
 
-    return (
-        <article className="popular-crypto-preview flex column space-between">
-            <Image
-                // ref={image}
-                src={`/${crypto.S}.svg`}
-                alt={crypto.S}
-                className="icon-img"
-                width={45}
-                height={45}
-            />
-            <div className="title-sec flex ">
-                <h1 className="stock-title">{crypto?.S}</h1>
-                <p className="stock-subtitle">{crypto?.name || 'crypto'}</p>
-            </div>
-            <h1>{formattedPrice(crypto?.bp)}</h1>
-        </article>
-    );
+  return (
+
+      <Link className="popular-crypto-preview flex column space-between" href={`/crypto/${crypto.S}`}>
+        <Image
+          // ref={image}
+          src={`/${crypto.S}.svg`}
+          alt={crypto.S}
+          className="icon-img"
+          width={45}
+          height={45}
+        />
+        <div className="title-sec flex ">
+          <h1 className="stock-title">{crypto?.S}</h1>
+          <p className="stock-subtitle">{crypto?.name || "crypto"}</p>
+        </div>
+        <h1>{formattedPrice(crypto?.bp)}</h1>
+      </Link>
+
+  );
 }
