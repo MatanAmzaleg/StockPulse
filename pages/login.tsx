@@ -34,7 +34,7 @@ export default function Login() {
                     <input type="submit" value={type}></input>
                     {type === 'login' ? (
                         <Link href="/login?register=true">
-                            Dont have an account yet?
+                            Don't have an account yet?
                         </Link>
                     ) : (
                         <Link href="/login">Alredy have an account?</Link>
