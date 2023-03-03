@@ -34,8 +34,8 @@ export default function Sidebar() {
                     </Link>
                 </nav>
                 <div className="user-container">
+                    <p>Welcome back,</p>
                     <p>John Doe</p>
-                    <span>jka.jau@uasj.com</span>
                 </div>
             </div>
         </>
