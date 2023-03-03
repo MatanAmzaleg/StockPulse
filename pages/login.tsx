@@ -9,12 +9,11 @@ export default function Login() {
 
     useEffect(() => {
         register === 'true' ? setType('register') : setType('login');
-        // setType(`${register === 'true' ? 'register' : 'login'}`)
     }, [router.query]);
 
     return (
         <section className="login-sec">
-            <div className="image">Hello</div>
+            <div className="image"></div>
             <div className="login-container">
                 <form
                     className="login-form"
@@ -35,7 +34,7 @@ export default function Login() {
                     <input type="submit" value={type}></input>
                     {type === 'login' ? (
                         <Link href="/login?register=true">
-                            Dont have an account yet?
+                            Don't have an account yet?
                         </Link>
                     ) : (
                         <Link href="/login">Alredy have an account?</Link>

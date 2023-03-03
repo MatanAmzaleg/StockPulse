@@ -8,7 +8,7 @@ export default function Sidebar() {
     return (
         <>
             <div className="logo-container">
-                <div className="logo">stock pulse</div>
+                <h2 className="logo">stock pulse</h2>
             </div>
             <div className="sidebar">
                 <nav className="sidebar-nav">
@@ -34,10 +34,6 @@ export default function Sidebar() {
                     </Link>
                 </nav>
                 <div className="user-container">
-                    <img
-                        src={`https://robohash.org/${11}?set=set5`}
-                        alt={'Gi'}
-                    />
                     <p>John Doe</p>
                     <span>jka.jau@uasj.com</span>
                 </div>

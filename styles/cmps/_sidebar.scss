@@ -30,29 +30,10 @@
     }
 
     .user-container {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-template-rows: 1fr 1fr;
-        column-gap: 10px;
-        align-items: center;
-
-        img {
-            grid-row: 1/-1;
-            grid-column: 1;
-            height: 50px;
-            border-radius: 50%;
-        }
-
+        padding-inline: 40px;
         p {
-            grid-column: 2;
-            grid-row: 1;
             font-size: 1.1em;
             font-weight: bold;
-        }
-        span {
-            grid-column: 2;
-            grid-row: 2;
-            // align-self: end;
         }
     }
 }
@@ -66,7 +47,5 @@
         border-bottom: 1px #858585 solid;
         height: 100%;
         font-size: larger;
-        font-weight: bold;
-        letter-spacing: 1px;
     }
 }
