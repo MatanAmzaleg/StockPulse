@@ -9,12 +9,11 @@ export default function Login() {
 
     useEffect(() => {
         register === 'true' ? setType('register') : setType('login');
-        // setType(`${register === 'true' ? 'register' : 'login'}`)
     }, [router.query]);
 
     return (
         <section className="login-sec">
-            <div className="image">Hello</div>
+            <div className="image"></div>
             <div className="login-container">
                 <form
                     className="login-form"
