@@ -1,20 +1,47 @@
-export default function Login (){
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
+export default function Login() {
+    const [type, setType] = useState('');
+    const router = useRouter();
+    const { register } = router.query;
+
+    useEffect(() => {
+        register === 'true' ? setType('register') : setType('login');
+        // setType(`${register === 'true' ? 'register' : 'login'}`)
+    }, [router.query]);
+
     return (
         <section className="login-sec">
-
-        <h1>Login</h1>
-        <form action="/api/login" method="post">
-          <label>
-            EMail Address
-          </label>
-          <input type='email' name='email' placeholder='Type your email'></input>
-          <label>
-            Pasword
-          </label>
-          <input type='password' name='password' placeholder='Type your password'></input>
-          <input type='submit' value='Login'></input>
-  
-        </form>
+            <div className="image">Hello</div>
+            <div className="login-container">
+                <form
+                    className="login-form"
+                    action={`/api/${type}`}
+                    method="post"
+                >
+                    <h1>{type}</h1>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                    ></input>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                    ></input>
+                    <input type="submit" value={type}></input>
+                    {type === 'login' ? (
+                        <Link href="/login?register=true">
+                            Dont have an account yet?
+                        </Link>
+                    ) : (
+                        <Link href="/login">Alredy have an account?</Link>
+                    )}
+                </form>
+            </div>
         </section>
-    )
+    );
 }

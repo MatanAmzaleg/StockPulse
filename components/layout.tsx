@@ -18,7 +18,7 @@ export default function Layout({ children }: any) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="home-container">
-                <Header />
+                {/* <Header /> */}
                 <Sidebar />
                 <main>{children}</main>
             </main>

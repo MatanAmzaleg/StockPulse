@@ -34,7 +34,7 @@ export default function Home() {
             </div>
 
             <section className="most-popular-sec">
-                <h1 className="main-title">Most popular week</h1>
+                <h1 className="main-title">Popular this week</h1>
                 <section className="little-cards-sec flex">
                     {currenciesList.slice(3).map((currency) => (
                         <PopularCryptoPreview

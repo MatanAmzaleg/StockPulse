@@ -1,0 +1,25 @@
+.login-sec {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+
+    .image {
+        background: linear-gradient(180deg, #bb54df, #7400f7);
+    }
+
+    .login-container {
+        display: grid;
+        place-content: center;
+        background-color: #eff1f5;
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+        }
+    }
+}

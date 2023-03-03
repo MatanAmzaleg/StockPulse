@@ -1,6 +1,6 @@
 .crypto-details {
     padding: 30px;
-    background: linear-gradient(180deg, #000000 15%, #eff1f5 0%);
+    background: linear-gradient(180deg, #000000 25%, #eff1f5 0%);
 
     .logo {
         display: flex;
@@ -83,6 +83,8 @@
             grid-area: close;
             position: relative;
             border-top-left-radius: 0px !important;
+            height: calc(100% - 37px);
+            align-self: self-end;
 
             .day-actions {
                 display: flex;

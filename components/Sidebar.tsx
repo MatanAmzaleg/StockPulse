@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { IoSettingsOutline } from 'react-icons/io5';
-import { AiOutlineBarChart } from 'react-icons/ai';
+import { AiOutlineBarChart, AiOutlineUser } from 'react-icons/ai';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 import { BsCurrencyBitcoin } from 'react-icons/bs';
 
@@ -24,11 +24,23 @@ export default function Sidebar() {
                         <HiOutlineSquares2X2 className="link-icon" />
                         Dashboard
                     </Link>
+                    <Link href="/profile" className="sidebar-nav-link">
+                        <AiOutlineUser className="link-icon" />
+                        Profile
+                    </Link>
                     <Link href="/" className="sidebar-nav-link">
                         <IoSettingsOutline className="link-icon" />
                         Settings
                     </Link>
                 </nav>
+                <div className="user-container">
+                    <img
+                        src={`https://robohash.org/${11}?set=set5`}
+                        alt={'Gi'}
+                    />
+                    <p>John Doe</p>
+                    <span>jka.jau@uasj.com</span>
+                </div>
             </div>
         </>
     );

@@ -1,6 +1,8 @@
 .sidebar {
     background-color: #f8f8f8;
     grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
 
     .sidebar-nav {
         padding-block: 40px;
@@ -24,6 +26,33 @@
             .link-icon {
                 font-size: em(26px, 16px);
             }
+        }
+    }
+
+    .user-container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr 1fr;
+        column-gap: 10px;
+        align-items: center;
+
+        img {
+            grid-row: 1/-1;
+            grid-column: 1;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        p {
+            grid-column: 2;
+            grid-row: 1;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        span {
+            grid-column: 2;
+            grid-row: 2;
+            // align-self: end;
         }
     }
 }
