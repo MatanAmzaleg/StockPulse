@@ -20,7 +20,7 @@ export default async function handler(
         console.log('userrrrrrrrrr', user);
 
         // Set cookie with username and coins
-        setCookie('loggedInUser', {userName: user.email, coins: user.coins, fullName:user.fullName}, { req, res, maxAge: 60 * 6 * 24 });
+        setCookie('loggedInUser', {userName: user.email, coins: user.coins, fullName:user.fullName}, { req, res, maxAge: 1000 * 60 * 4 });
 
         res.redirect('/');
         if (!user) {
