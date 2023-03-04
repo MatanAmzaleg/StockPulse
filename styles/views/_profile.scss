@@ -29,7 +29,7 @@
 
     .profile-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr 1.4fr;
         gap: 30px;
 
@@ -47,7 +47,7 @@
 
         .crypto-portfolio{
             .portfolio-worth{
-                font-size: 26px;
+                font-size: 30px;
             }
         }
 
