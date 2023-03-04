@@ -1,5 +1,6 @@
 .transaction-preview {
     display: grid;
+<<<<<<< HEAD
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
 
@@ -15,4 +16,15 @@
 .approved {
     background-color: rgb(243, 243, 243);
     border: 2px solid rgb(186, 226, 186);
+=======
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: space-between;
+    gap: 80px;
+    border-bottom: 1px solid #ececec;
+    padding-block: 10px;
+
+    &.title {
+        font-weight: bold;
+    }
+>>>>>>> 68ac61d39e644c8dc9841bacd4dc9ce304274ecf
 }
