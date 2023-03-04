@@ -11,7 +11,6 @@ const roboto = Roboto({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-    console.log(getCookie('loggedInUser'));
     const router = useRouter();
 
     const dontNeedLayout = () => {

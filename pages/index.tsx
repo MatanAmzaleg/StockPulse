@@ -1,9 +1,6 @@
 import HotCryptoPreview from '@/components/HotCryptoPreview';
 import PopularCryptoPreview from '@/components/PopularCryptoPreview';
 import useWebSockets from '@/hooks/useWebSockets';
-import { getCookie } from 'cookies-next';
-
-
 
 const currenciesList = [
     'BTCUSD',
@@ -16,12 +13,9 @@ const currenciesList = [
 ];
 
 export default function Home() {
-
-    console.log(getCookie('loggedInUser'));
-    
     const { currencies } = useWebSockets(currenciesList);
 
-    if (!currencies) return   <img className='loader' src="/loader.gif" alt="" />;
+    if (!currencies) return <img className="loader" src="/loader.gif" alt="" />;
 
     return (
         <section className="main-content-sec flex column">

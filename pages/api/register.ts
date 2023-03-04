@@ -12,7 +12,7 @@ export default async function handler(
     try {
         req.body.coins = 5000;
         // req.body.transactions = []
-        req.body.currencies = []
+        req.body.currencies = [];
         console.log('bodyyyyyyyy', req.body);
 
         const user: UserDocument = await User.create(req.body);
@@ -20,12 +20,14 @@ export default async function handler(
         console.log('userrrrrrrrrr', user);
 
         // Set cookie with username and coins
-        setCookie('loggedInUser', {userName: user.email, coins: user.coins, fullName:user.fullName}, { req, res, maxAge: 1000 * 60 * 4 });
+        setCookie('loggedInUser', user._id, {
+            req,
+            res,
+            maxAge: 1000 * 60 * 4,
+        });
 
         res.redirect('/');
-        if (!user) {
-            return res.json({ code: 'User not created' });
-        }
+        if (!user) return res.json({ code: 'User not created' });
     } catch (error) {
         console.log(error);
 
