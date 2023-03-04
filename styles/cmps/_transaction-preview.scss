@@ -1,4 +1,12 @@
 .transaction-preview {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: space-between;
+    gap: 80px;
+    border-bottom: 1px solid #ececec;
+    padding-block: 10px;
+
+    &.title {
+        font-weight: bold;
+    }
 }

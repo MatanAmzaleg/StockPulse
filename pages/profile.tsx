@@ -44,6 +44,13 @@ export default function profile() {
                     <h1>Transacrion History</h1>
                     <div className="transaction-list">
                         {/* <TransactionPreview transaction={user.transactions}/> */}
+                        <article className="transaction-preview title">
+                            <p>Symbol</p>
+                            <p>Date</p>
+                            <p>Price</p>
+                            <p>Quantity</p>
+                            <p>Status</p>
+                        </article>
                         {transactions.map((t) => (
                             <TransactionPreview transaction={t} />
                         ))}
