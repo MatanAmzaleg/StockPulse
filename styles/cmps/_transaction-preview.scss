@@ -2,17 +2,15 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
+    padding-block: 10px;
+    border-bottom: 1px solid rgb(213, 213, 213);
 
-    margin-block: 5px;
-    border-radius: 5px;
-    padding: 3px;
-
-    // background-color: rgb(240, 241, 220);
-    border: 2px solid rgb(218, 217, 157);
+    .heading {
+        font-weight: bold;
+    }
 }
 
-
-.approved {
-    // background-color: rgb(243, 243, 243);
-    border: 2px solid rgb(186, 226, 186);
-}
+// .approved {
+//     // background-color: rgb(243, 243, 243);
+//     border: 2px solid rgb(186, 226, 186);
+// }
