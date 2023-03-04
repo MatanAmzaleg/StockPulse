@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Currency } from '@/typings';
 import { formattedPrice } from '../utils/format';
 import Link from 'next/link';
-import PopularSkeleton from './PopularSkeleton';
+import PopularSkeleton from './skeleton/PopularSkeleton';
 
 interface Props {
     crypto: Currency;

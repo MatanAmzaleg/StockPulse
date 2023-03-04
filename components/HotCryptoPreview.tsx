@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { Currency } from '@/typings';
 import { formattedPrice } from '../utils/format';
-import HotSkeleton from './HotSkeleton';
+import HotSkeleton from './skeleton/HotSkeleton';
 
 interface Props {
     crypto: Currency;
