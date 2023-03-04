@@ -1,0 +1,40 @@
+.profile-section {
+    background-color: #0a1020;
+    min-height: 100vh;
+    padding-inline: 50px;
+
+    .profile-header {
+        padding-block: 50px;
+        display: flex;
+        justify-content: space-between;
+
+        .profile-user,
+        .user-balance {
+            :first-child {
+                margin-bottom: 10px;
+            }
+            p {
+                color: #a6a8b3;
+            }
+            h1 {
+                font-size: 2em;
+                color: white;
+            }
+        }
+
+        .user-balance {
+            text-align: end;
+        }
+    }
+
+    .profile-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1.4fr;
+        gap: 30px;
+
+        .transaction-container {
+            grid-column: 1/-1;
+        }
+    }
+}

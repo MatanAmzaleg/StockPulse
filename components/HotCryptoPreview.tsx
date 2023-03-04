@@ -3,13 +3,14 @@ import Link from 'next/link';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { Currency } from '@/typings';
 import { formattedPrice } from '../utils/format';
+import HotSkeleton from './skeleton/HotSkeleton';
 
 interface Props {
     crypto: Currency;
 }
 
 export default function HotCryptoPreview({ crypto }: Props) {
-    if (!crypto) return   <img className='loader' src="/loader.gif" alt="" />;
+    if (!crypto) return <HotSkeleton />;
 
     return (
         <Link className="hot-crypto-preview" href={`/crypto/${crypto.S}`}>

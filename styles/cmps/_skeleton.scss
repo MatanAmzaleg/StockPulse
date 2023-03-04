@@ -1,0 +1,13 @@
+.skeleton {
+    background-color: #e5e6e9;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #e5e6e9;
+    }
+    100% {
+        background-color: darken($color: #e5e6e9, $amount: 5);
+    }
+}

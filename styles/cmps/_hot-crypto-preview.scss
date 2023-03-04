@@ -34,6 +34,11 @@
             border-radius: 50%;
             background-color: #e5e6e9;
             padding: 10px;
+
+            &.skeleton {
+                width: 50px;
+                height: 50px;
+            }
         }
 
         .title-sec {
@@ -43,11 +48,22 @@
                 font-size: 1.4rem;
                 font-weight: bolder;
                 text-transform: uppercase;
+
+                &.skeleton {
+                    height: 1.4rem;
+                    width: 60px;
+                    margin-bottom: 5px;
+                }
             }
 
             .stock-subtitle {
                 color: #858585;
                 font-weight: 600;
+
+                &.skeleton {
+                    height: 1rem;
+                    width: 130%;
+                }
             }
         }
     }
@@ -57,9 +73,24 @@
         gap: 20px;
 
         .graph {
-            background-color: rgb(215, 215, 215);
+            background-color: #e5e6e9;
             width: 75%;
             height: 50px;
+        }
+
+        .price-title {
+            &.skeleton {
+                height: 1em;
+                width: 70px;
+                margin-bottom: 5px;
+            }
+        }
+
+        .percent {
+            &.skeleton {
+                height: 1em;
+                width: 35px;
+            }
         }
     }
 }

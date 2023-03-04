@@ -14,11 +14,13 @@
 // VIEWS
 @import './views/home';
 @import './views/login';
+@import './views/profile';
 @import './views/main-content';
 @import './views/crypto-details';
 
 // CMPS
 @import './cmps/header';
+@import './cmps/skeleton';
 @import './cmps/sidebar';
 @import './cmps/hot-crypto-preview';
 @import './cmps/popular-crypto-preview';

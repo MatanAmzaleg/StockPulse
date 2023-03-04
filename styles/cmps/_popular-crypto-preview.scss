@@ -17,6 +17,12 @@
         border-radius: 50%;
         background-color: #e5e6e9;
         padding: 7px;
+
+        &.skeleton {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 15px;
+        }
     }
 
     .title-sec {
@@ -26,11 +32,26 @@
         .stock-title {
             font-size: 1.1em;
             text-transform: uppercase;
+
+            &.skeleton {
+                width: 40%;
+                height: 1.1em;
+            }
         }
 
         .stock-subtitle {
             font-size: 0.9em;
             color: #7c7c7c;
+
+            &.skeleton {
+                width: 40%;
+                height: 0.9em;
+            }
         }
+    }
+
+    .price-title.skeleton {
+        width: 50%;
+        height: 0.9em;
     }
 }
