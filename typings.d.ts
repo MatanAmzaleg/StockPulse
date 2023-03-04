@@ -34,6 +34,7 @@ export interface Currencies {
     UNIUSD?: Currency;
 }
 export interface Transaction {
+    action: string;
     symbol: string;
     date: number;
     status: string;

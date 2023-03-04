@@ -1,12 +1,18 @@
 .transaction-preview {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    justify-content: space-between;
-    gap: 80px;
-    border-bottom: 1px solid #ececec;
-    padding-block: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
 
-    &.title {
-        font-weight: bold;
-    }
+    margin-block: 5px;
+    border-radius: 5px;
+    padding: 3px;
+
+    // background-color: rgb(240, 241, 220);
+    border: 2px solid rgb(218, 217, 157);
+}
+
+
+.approved {
+    // background-color: rgb(243, 243, 243);
+    border: 2px solid rgb(186, 226, 186);
 }
