@@ -29,12 +29,53 @@
 
     .profile-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1.4fr;
         gap: 30px;
 
         .transaction-container {
             grid-column: 1/-1;
+
+            .headings{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                padding-inline: 3px;
+                margin-top: 9px;
+                font-weight: bolder;
+            }
+        }
+
+        .crypto-portfolio{
+            .portfolio-worth{
+                font-size: 26px;
+            }
+        }
+
+        .my-cryptos{
+            max-height: 235px;
+            .cryptos{
+                margin-top: 15px;
+                overflow-y: scroll;
+                &::-webkit-scrollbar-track
+                {
+                    -webkit-box-shadow: inset 0 0 6px rgba(107, 107, 107, 0.3);
+                    border-radius: 20px;
+                    background-color: #F5F5F5;
+                }
+                
+                &::-webkit-scrollbar
+                {
+                    width: 5px;
+                    background-color: #F5F5F5;
+                }
+                
+                &::-webkit-scrollbar-thumb
+                {
+                    border-radius: 20px;
+                    -webkit-box-shadow: inset 0 0 6px rgba(83, 83, 83, 0.3);
+                    background-color: #d4d4d4;
+                }
+            }
         }
     }
 }
