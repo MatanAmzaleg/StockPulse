@@ -1,6 +1,29 @@
 import TransactionPreview from '@/components/TransactionPreview';
 
 export default function profile() {
+    const transactions = [
+        {
+            symbol: 'btc',
+            date: 126319289,
+            status: 'paid',
+            quantity: 1723,
+            buyPrice: 72,
+        },
+        {
+            symbol: 'btc',
+            date: 126319289,
+            status: 'paid',
+            quantity: 1723,
+            buyPrice: 72,
+        },
+        {
+            symbol: 'btc',
+            date: 126319289,
+            status: 'paid',
+            quantity: 1723,
+            buyPrice: 72,
+        },
+    ];
     return (
         <section className="profile-section">
             <header className="profile-header">
@@ -21,6 +44,9 @@ export default function profile() {
                     <h1>Transacrion History</h1>
                     <div className="transaction-list">
                         {/* <TransactionPreview transaction={user.transactions}/> */}
+                        {transactions.map((t) => (
+                            <TransactionPreview transaction={t} />
+                        ))}
                     </div>
                 </div>
             </div>

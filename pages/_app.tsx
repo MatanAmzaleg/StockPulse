@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const router = useRouter();
 
     const dontNeedLayout = () => {
-        return router.pathname === '/login' || router.pathname === '/profile';
+        return router.pathname === '/login';
     };
 
     return (
