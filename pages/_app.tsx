@@ -3,6 +3,7 @@ import '@/styles/main.scss';
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
 import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
 
 const roboto = Roboto({
     weight: '400',
@@ -10,6 +11,7 @@ const roboto = Roboto({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+    console.log(getCookie('loggedInUser'));
     const router = useRouter();
 
     const dontNeedLayout = () => {
