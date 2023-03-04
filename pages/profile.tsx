@@ -7,21 +7,21 @@ export default function profile() {
             date: 126319289,
             status: 'paid',
             quantity: 1723,
-            buyPrice: 72,
+            price: 72,
         },
         {
             symbol: 'btc',
             date: 126319289,
             status: 'paid',
             quantity: 1723,
-            buyPrice: 72,
+            price: 72,
         },
         {
             symbol: 'btc',
             date: 126319289,
             status: 'paid',
             quantity: 1723,
-            buyPrice: 72,
+            price: 72,
         },
     ];
     return (
