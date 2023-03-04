@@ -1,3 +1,5 @@
+import { Timestamp } from "mongodb";
+
 export interface Currency {
     name: string;
     T: string;
@@ -30,4 +32,11 @@ export interface Currencies {
     SUSHIUSD?: Currency;
     SOLUSD?: Currency;
     UNIUSD?: Currency;
+}
+export interface Transaction {
+    symbol: String;
+    date: Number;
+    status: String;
+    quantity: Number;
+    buyPrice: Number;
 }

@@ -10,6 +10,8 @@ export default function Login() {
     useEffect(() => {
         register === 'true' ? setType('register') : setType('login');
     }, [router.query]);
+    console.log(type);
+    
 
     return (
         <section className="login-sec">
@@ -26,6 +28,14 @@ export default function Login() {
                         name="email"
                         placeholder="Email"
                     ></input>
+                    {type === "register" ? 
+                    <input
+                        type="fullName"
+                        name="fullName"
+                        placeholder="full name"
+                    ></input>
+                    : null
+                }
                     <input
                         type="password"
                         name="password"
