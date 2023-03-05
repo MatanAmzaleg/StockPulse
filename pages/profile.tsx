@@ -1,5 +1,6 @@
 import CryptoCard from '@/components/CryptoCard';
 import TransactionPreview from '@/components/TransactionPreview';
+import useAuth from '@/hooks/useAuth';
 
 export default function profile() {
     const transactions = [
@@ -28,6 +29,10 @@ export default function profile() {
             price: 300,
         },
     ];
+
+    const { user } = useAuth();
+    console.log(user);
+
     return (
         <section className="profile-section">
             <header className="profile-header">

@@ -3,8 +3,10 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { AiOutlineBarChart, AiOutlineUser } from 'react-icons/ai';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 import { BsCurrencyBitcoin } from 'react-icons/bs';
+import useAuth from '@/hooks/useAuth';
 
 export default function Sidebar() {
+    const { logout } = useAuth();
     return (
         <>
             <div className="logo-container">
@@ -36,6 +38,7 @@ export default function Sidebar() {
                 <div className="user-container">
                     <p>Welcome back,</p>
                     <p>John Doe</p>
+                    <button onClick={logout}>Logout</button>
                 </div>
             </div>
         </>

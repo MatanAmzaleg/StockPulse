@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
+import { AuthProvider } from '@/hooks/useAuth';
 
 const roboto = Roboto({
     weight: '400',
@@ -25,14 +26,15 @@ export default function App({ Component, pageProps }: AppProps) {
                     letter-spacing: 0.3px;
                 }
             `}</style>
-
-            {dontNeedLayout() ? (
-                <Component {...pageProps} />
-            ) : (
-                <Layout>
+            <AuthProvider>
+                {dontNeedLayout() ? (
                     <Component {...pageProps} />
-                </Layout>
-            )}
+                ) : (
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                )}
+            </AuthProvider>
         </>
     );
 }

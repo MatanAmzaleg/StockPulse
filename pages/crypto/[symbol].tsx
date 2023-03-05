@@ -6,8 +6,7 @@ import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
 import { useState } from 'react';
 
-
-export default function CryptoDetails({ data, yesterdayData }: any) {
+export default function CryptoDetails({ data, yesterdayData, error }: any) {
     const router = useRouter();
     const { symbol } = router.query;
     const [day, setDay] = useState('today');
@@ -18,27 +17,27 @@ export default function CryptoDetails({ data, yesterdayData }: any) {
 
     const selectDay = (day: string) => {
         setDay(day);
-        let newOc;
-        if (day === 'today') {
-            newOc = { open: data.o, close: data.c, ts: data.t };
-        } else {
-            newOc = {
-                open: yesterdayData.o,
-                close: yesterdayData.c,
-                ts: yesterdayData.t,
-            };
-        }
-        setOc(newOc);
+        setOc({
+            open: day === 'today' ? data.o : yesterdayData.o,
+            close: day === 'today' ? data.c : yesterdayData.c,
+            ts: day === 'today' ? data.t : yesterdayData.t,
+        });
     };
 
+    // const calc
+    if (error) return <div className="">{JSON.stringify(error)}</div>;
+
     if (!currencies || !data || !yesterdayData)
-        return   <img className='loader' src="/loader.gif" alt="" />;
+        return <img className="loader" src="/loader.gif" alt="" />;
 
     const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
 
-    if (!alpacaCrypto) return   <img className='loader' src="/loader.gif" alt="" />;
+    if (!alpacaCrypto)
+        return <img className="loader" src="/loader.gif" alt="" />;
+
+    // const [prevCrypto, setPrevCrypto] = useState(alpacaCrypto);
     return (
         <section className="crypto-details">
             <div className="logo">
@@ -173,5 +172,10 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
         };
     } catch (err) {
         console.log('failed to fetch crypto details', err);
+        return {
+            props: {
+                error: err,
+            },
+        };
     }
 };
