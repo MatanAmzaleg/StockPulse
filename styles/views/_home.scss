@@ -4,6 +4,6 @@
     display: grid;
     grid-template-columns: 300px 1fr;
     grid-template-rows: 100px 1fr;
-    grid-template-areas: 'logo header' 'sidebar main';
+    grid-template-areas: 'logo main' 'sidebar main';
     color: #121212;
 }

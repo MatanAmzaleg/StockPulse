@@ -1,17 +1,19 @@
-import axios from "axios";
-import { dateTimeFormat, formattedPrice, formmatedDate } from "@/utils/format";
-import { getCurrencyDataURL } from "@/utils/requests";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import useWebSockets from "@/hooks/useWebSockets";
+
+
+import axios from 'axios';
+import { dateTimeFormat, formattedPrice, formmatedDate } from '@/utils/format';
 import { useEffect, useRef, useState } from "react";
+import { getCurrencyDataURL } from '@/utils/requests';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import useWebSockets from '@/hooks/useWebSockets';
 import { createChart, CrosshairMode } from "lightweight-charts";
 
-export default function CryptoDetails({ data, yesterdayData }: any) {
-  const graphRef = useRef(null);
-  const router = useRouter();
-  const { symbol } = router.query;
-  const [day, setDay] = useState("today");
+export default function CryptoDetails({ data, yesterdayData, error }: any) {
+    const router = useRouter();
+    const graphRef = useRef(null);
+    const { symbol } = router.query;
+    const [day, setDay] = useState('today');
 
   const { currencies } = symbol
     ? useWebSockets([(symbol + "USD").toUpperCase()])
@@ -124,7 +126,6 @@ export default function CryptoDetails({ data, yesterdayData }: any) {
 
   if (!currencies || !data || !yesterdayData)
     return <img className="loader" src="/loader.gif" alt="" />;
-
   const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
   const alpacaCrypto =
     currencies[(symbol + "USD").toUpperCase() as keyof typeof currencies];
@@ -187,6 +188,7 @@ export default function CryptoDetails({ data, yesterdayData }: any) {
             </tr>
             <tr>
               <td className="percentage-container">
+
                 <Image
                   src={`/descending.svg`}
                   alt="descending"
@@ -242,13 +244,18 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
       getCurrencyDataURL(params.symbol, yesterdayFormat, dayBeforeLastFormat)
     );
 
-    return {
-      props: {
-        data: response.data.results[0],
-        yesterdayData: yesterdayData.data.results[0],
-      },
-    };
-  } catch (err) {
-    console.log("failed to fetch crypto details", err);
-  }
+        return {
+            props: {
+                data: response.data.results[0],
+                yesterdayData: yesterdayData.data.results[0],
+            },
+        };
+    } catch (err) {
+        console.log('failed to fetch crypto details', err);
+        return {
+            props: {
+                error: err,
+            },
+        };
+    }
 };

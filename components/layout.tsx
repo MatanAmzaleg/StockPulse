@@ -20,7 +20,7 @@ export default function Layout({ children }: any) {
             <main className="home-container">
                 {/* <Header /> */}
                 <Sidebar />
-                <main>{children}</main>
+                {children}
             </main>
         </>
     );
