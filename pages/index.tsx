@@ -14,6 +14,8 @@ const currenciesList = [
 
 export default function Home() {
     const { currencies } = useWebSockets(currenciesList);
+    console.log(currencies);
+    
 
     if (!currencies) return <img className="loader" src="/loader.gif" alt="" />;
 
@@ -23,8 +25,9 @@ export default function Home() {
             <p className="subtitle">Trending market group</p>
             <button className="view-all">View All</button>
             <div className="hot-crypto-list flex">
-                {currenciesList.slice(0, 3).map((currency) => (
+                {currenciesList.slice(0, 3).map((currency, idx) => (
                     <HotCryptoPreview
+                    currencyKey={currenciesList[idx]}
                         key={currency}
                         crypto={
                             currencies[currency as keyof typeof currencies]!
