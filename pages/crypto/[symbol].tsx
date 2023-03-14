@@ -1,7 +1,7 @@
 
 
 import axios from 'axios';
-import { dateTimeFormat, formattedPrice, formmatedDate } from '@/utils/format';
+import { dateTimeFormat, formattedPrice, formmatedDate, calculateChange } from '@/utils/format';
 import { useEffect, useRef, useState } from "react";
 import { getCurrencyDataURL } from '@/utils/requests';
 import Image from 'next/image';
@@ -10,15 +10,15 @@ import useWebSockets from '@/hooks/useWebSockets';
 import { createChart, CrosshairMode } from "lightweight-charts";
 
 export default function CryptoDetails({ data, yesterdayData, error }: any) {
-    const router = useRouter();
-    const graphRef = useRef(null);
-    const { symbol } = router.query;
-    const [day, setDay] = useState('today');
-
+  const router = useRouter();
+  const graphRef = useRef(null);
+  const { symbol } = router.query;
+  const [day, setDay] = useState('today');
+  
   const { currencies } = symbol
-    ? useWebSockets([(symbol + "USD").toUpperCase()])
-    : { currencies: {} };
-
+  ? useWebSockets([(symbol + "USD").toUpperCase()])
+  : { currencies: {} };
+  
   const selectDay = (day: string) => {
     setDay(day);
     let newOc;
@@ -33,7 +33,7 @@ export default function CryptoDetails({ data, yesterdayData, error }: any) {
     }
     setOc(newOc);
   };
-
+  
   useEffect(() => {
     if (graphRef.current) {
       const chart = createChart(graphRef.current!, {
@@ -123,13 +123,15 @@ export default function CryptoDetails({ data, yesterdayData, error }: any) {
       ]);
     }
   }, [graphRef.current]);
-
+  
   if (!currencies || !data || !yesterdayData)
-    return <img className="loader" src="/loader.gif" alt="" />;
+  return <img className="loader" src="/loader.gif" alt="" />;
   const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
   const alpacaCrypto =
-    currencies[(symbol + "USD").toUpperCase() as keyof typeof currencies];
-
+  currencies[(symbol + "USD").toUpperCase() as keyof typeof currencies];
+  console.log(symbol, alpacaCrypto, data);
+  
+  
   if (!alpacaCrypto) return <img className="loader" src="/loader.gif" alt="" />;
   return (
     <section className="crypto-details">
@@ -141,7 +143,7 @@ export default function CryptoDetails({ data, yesterdayData, error }: any) {
           width={50}
           height={50}
         />
-        <h2>Bitcoin</h2>
+        <h2>{alpacaCrypto?.S.toUpperCase()}</h2>
       </div>
       <div className="main-grid">
         <div className="card small-detaills">
@@ -156,7 +158,7 @@ export default function CryptoDetails({ data, yesterdayData, error }: any) {
                 width={20}
                 height={20}
               ></Image>
-              <p className="percentage rising ">+0.51 (+0.39%)</p>
+              <p className={Number(calculateChange(data.o, alpacaCrypto?.ap)) < 0 ? 'descending' : 'scending'}>{calculateChange(data.o, alpacaCrypto?.ap).toString().padStart(2)}</p>
             </div>
           </div>
         </div>

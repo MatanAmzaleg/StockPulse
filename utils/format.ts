@@ -23,3 +23,10 @@ export function formattedPrice(price: number) {
               currency: 'USD',
           }).format(price);
 }
+
+
+export function calculateChange(openingPrice : number, currentPrice : number) {
+    const change = currentPrice ! / openingPrice !
+    const percentageChange = (1 - change) * 100
+    return percentageChange.toFixed(2) + '%'
+  }

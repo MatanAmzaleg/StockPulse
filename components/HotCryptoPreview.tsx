@@ -2,27 +2,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { SlOptionsVertical } from "react-icons/sl";
 import { Currency } from "@/typings";
-import { formattedPrice } from "../utils/format";
+import { formattedPrice, formmatedDate, dateTimeFormat, calculateChange } from "../utils/format";
 import HotSkeleton from "./skeleton/HotSkeleton";
 import { createChart, CrosshairMode } from "lightweight-charts";
 import { useEffect, useRef } from "react";
 import axios from "axios";
+import { getCurrencyDataURL } from "@/utils/requests";
+
 
 interface Props {
   crypto: Currency;
   currencyKey: String;
 }
 
-export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
+export default function HotCryptoPreview({ crypto, currencyKey}: Props ) {
   const graphRef = useRef(null);
 
   useEffect(() => {
-    const start = new Date(Date.now() - 3600 * 24 * 1000).toISOString();
-    console.log(start);
+    // const start =  formmatedDate();
+    // console.log(start);
 
-    axios.get(`https://data.alpaca.markets/v1beta2/${currencyKey}/bars`, {
+    axios.get(`https://data.sandbox.alpaca.markets/v1beta2/crypto/bars`, {
         params: {
-          exchanges: "CBSE",
+            symbols: "BTCUSD,EYHUSD",
           timeframe: "1Min",
           start: "2023-03-04T18:37:16.506Z",
         },
@@ -30,12 +32,10 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
           'APCA-API-KEY-ID': process.env.NEXT_PUBLIC_ALPACA_KEY,
           'APCA-API-SECRET-KEY': process.env.NEXT_PUBLIC_ALPACA_SECRET,
         },
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
+      }).then((response) => {
+        console.log(response);
+      }) .catch((error) => {
+        console.error("failed to fetch data", error);
       });
 
     if (graphRef.current) {
@@ -127,8 +127,11 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
     }
   }, [graphRef.current]);
 
-  if (!crypto) return <HotSkeleton />;
+  console.log(crypto);
+  
 
+  if (!crypto) return <HotSkeleton />;
+  
   return (
     <Link className="hot-crypto-preview" href={`/crypto/${crypto.S}`}>
       <article>
@@ -150,10 +153,41 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
           <div className="graph" ref={graphRef}></div>
           <div className="">
             <h2 className="price-title">{formattedPrice(crypto.bp)}</h2>
-            <h3>{crypto.as?.toFixed(2)}%</h3>
+            {/* <h3>{calculateChange(, crypto.ap)}</h3> */}
           </div>
         </div>
       </article>
     </Link>
   );
 }
+
+
+export const getServerSideProps = async ({ params }: { params: any }) => {
+  try {
+    const todayFormat = formmatedDate(new Date());
+    const yesterdayFormat = formmatedDate(new Date(Date.now() - 864e5));
+    const dayBeforeLastFormat = formmatedDate(new Date(Date.now() - 864e5 * 2));
+
+    const response = await axios.get(
+      getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
+    );
+
+    const yesterdayData = await axios.get(
+      getCurrencyDataURL(params.symbol, yesterdayFormat, dayBeforeLastFormat)
+    );
+
+        return {
+            props: {
+                data: response.data.results[0],
+                yesterdayData: yesterdayData.data.results[0],
+            },
+        };
+    } catch (err) {
+        console.log('failed to fetch crypto details', err);
+        return {
+            props: {
+                error: err,
+            },
+        };
+    }
+};
