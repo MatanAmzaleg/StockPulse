@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
 import { createChart, CrosshairMode } from 'lightweight-charts';
+import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 
 export default function CryptoDetails({
     data,
@@ -22,6 +23,9 @@ export default function CryptoDetails({
     const graphRef = useRef(null);
     const { symbol } = router.query;
     const [day, setDay] = useState('today');
+    const [inputValue, setInputValue] = useState<number>(0);
+
+
 
     const { currencies } = symbol
         ? useWebSockets([(symbol + 'USD').toUpperCase()])
@@ -49,6 +53,24 @@ export default function CryptoDetails({
         }
     }, [graphRef.current]);
 
+    const handleTransaction = async(method : string, number : number) => {
+      try{    
+        const res = await fetch(`/api/user/getcoins?username=${getCookie('loggedInUser')}`)
+        const userCoins = await res.json();
+        console.log(userCoins);
+        
+        console.log("ok");
+        const buyPrice = alpacaCrypto?.ap
+        const amount = number
+        
+        console.log(number);
+      }catch(err){
+        console.log("failed to set transaction", err);
+      }
+      
+      
+    }
+
     if (!currencies || !data || !yesterdayData) {
         console.log('here now', currencies, data, yesterdayData);
         return <img className="loader" src="/loader.gif" alt="" />;
@@ -57,7 +79,7 @@ export default function CryptoDetails({
     const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
-    console.log(symbol, alpacaCrypto, data);
+    console.log("symbol",symbol,"alpacaCrypto", alpacaCrypto, "data", data);
 
     if (!alpacaCrypto) {
         console.log('here');
@@ -176,9 +198,14 @@ export default function CryptoDetails({
                         <p>{data.n.toFixed(2)}</p>
                     </div>
                 </div>
-                <div className="card actions">
-                    <button className="buy">Buy</button>
-                    <button className="sell">Sell</button>
+                <div className="card actions flex column">
+                  <div className="input-container">
+                  <input type="number" className='transaction-input'  onChange={(e) => setInputValue(parseFloat(e.target.value) )}/>
+                  </div>
+                  <div className="flex">
+                    <button className="buy" onClick={() => handleTransaction('buy', inputValue)}>Buy</button>
+                    <button className="sell" onClick={() => handleTransaction('sell', inputValue)}>Sell</button>
+                  </div>
                 </div>
             </div>
         </section>
@@ -214,85 +241,6 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
                 data: response.data.results[0],
                 yesterdayData: yesterdayData.data.results[0],
                 chartData: res.data.Data.Data,
-                // chartData: [
-                //     {
-                //         time: '2018-10-19',
-                //         open: 54.62,
-                //         high: 55.5,
-                //         low: 54.52,
-                //         close: 54.9,
-                //     },
-                //     {
-                //         time: '2018-10-22',
-                //         open: 55.08,
-                //         high: 55.27,
-                //         low: 54.61,
-                //         close: 54.98,
-                //     },
-                //     {
-                //         time: '2018-10-23',
-                //         open: 56.09,
-                //         high: 57.47,
-                //         low: 56.09,
-                //         close: 57.21,
-                //     },
-                //     {
-                //         time: '2018-10-24',
-                //         open: 57.0,
-                //         high: 58.44,
-                //         low: 56.41,
-                //         close: 57.42,
-                //     },
-                //     {
-                //         time: '2018-10-25',
-                //         open: 57.46,
-                //         high: 57.63,
-                //         low: 56.17,
-                //         close: 56.43,
-                //     },
-                //     {
-                //         time: '2018-10-26',
-                //         open: 56.26,
-                //         high: 56.62,
-                //         low: 55.19,
-                //         close: 55.51,
-                //     },
-                //     {
-                //         time: '2018-10-29',
-                //         open: 55.81,
-                //         high: 57.15,
-                //         low: 55.72,
-                //         close: 56.48,
-                //     },
-                //     {
-                //         time: '2018-10-30',
-                //         open: 56.92,
-                //         high: 58.8,
-                //         low: 56.92,
-                //         close: 58.18,
-                //     },
-                //     {
-                //         time: '2018-10-31',
-                //         open: 58.32,
-                //         high: 58.32,
-                //         low: 56.76,
-                //         close: 57.09,
-                //     },
-                //     {
-                //         time: '2018-11-01',
-                //         open: 56.98,
-                //         high: 57.28,
-                //         low: 55.55,
-                //         close: 56.05,
-                //     },
-                //     {
-                //         time: '2018-11-02',
-                //         open: 56.34,
-                //         high: 57.08,
-                //         low: 55.92,
-                //         close: 56.63,
-                //     },
-                // ],
             },
         };
     } catch (err) {

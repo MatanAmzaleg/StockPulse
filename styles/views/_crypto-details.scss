@@ -1,189 +1,217 @@
 .crypto-details {
-    padding: 30px;
-    background: linear-gradient(180deg, #000000 25%, #eff1f5 0%);
-    grid-area: main;
+  padding: 30px;
+  background: linear-gradient(180deg, #000000 25%, #eff1f5 0%);
+  grid-area: main;
 
-    .logo {
+  .logo {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    align-items: center;
+    gap: 15px;
+
+    .icon-img {
+      background-color: gray;
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: white;
+      font-size: em(40px, 16px);
+    }
+  }
+
+  .main-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 0.6fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-areas:
+      "short close close"
+      "graph graph details"
+      "graph graph actions";
+
+    .rising {
+      color: #00ac45;
+    }
+    .descending {
+      color: #ac0000;
+    }
+
+    .small-detaills {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      p {
+        text-transform: uppercase;
+        font-size: em(15px, 16px);
+      }
+
+      .price {
+        font-size: em(42px, 16px);
+      }
+    }
+
+    .percentage-container {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      height: 100%;
+
+      .arrow-img {
+        padding: 5px;
+        background-color: gray;
+        border-radius: 50%;
+
+        &.rising {
+          background-color: #d9f3e3;
+        }
+
+        &.descending {
+          background-color: #f3d9d9;
+        }
+      }
+    }
+
+    .open-close {
+      grid-area: close;
+      position: relative;
+      border-top-left-radius: 0px !important;
+      height: calc(100% - 37px);
+      align-self: self-end;
+
+      .day-actions {
         display: flex;
-        flex-direction: row;
-        margin-bottom: 20px;
-        align-items: center;
-        gap: 15px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-100%);
+        border-top-left-radius: 12px;
 
-        .icon-img {
-            background-color: gray;
-            padding: 10px;
-            border-radius: 12px;
+        button {
+          background-color: #e9e9ec;
+          padding: 10px 15px;
+          border-top-right-radius: 12px;
+          border-top-left-radius: 12px;
+          font-size: em(14px, 16px);
+          color: #6a6a6f;
+
+          &.active {
+            background-color: #fff;
+            z-index: 10;
+            color: #000000;
+          }
+        }
+      }
+
+      table {
+        height: 100%;
+        width: 100%;
+        text-align: left;
+        font-size: em(15px, 16px);
+        gap: 10px;
+        border-spacing: 10px 0;
+        border-collapse: separate;
+
+        th {
+          color: #6a6a6f;
         }
 
-        h2 {
-            color: white;
-            font-size: em(40px, 16px);
+        .table-price {
+          font-size: em(25px, 15px);
+          font-weight: bold;
         }
+
+        .table-date {
+          color: #6a6a6f;
+        }
+      }
     }
-
-    .main-grid {
+    .details {
+      font-size: em(15px, 16px);
+      h4 {
+        font-size: 1.75em;
+        margin-bottom: em(45px, 35px);
+      }
+      .details-grid {
         display: grid;
-        gap: 20px;
-        grid-template-columns: 1fr 0.6fr 1fr;
-        grid-template-rows: 1fr 2fr 1fr;
-        grid-template-areas:
-            'short close close'
-            'graph graph details'
-            'graph graph actions';
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 10px;
 
-        .rising {
-            color: #00ac45;
-        }
-        .descending {
-            color: #ac0000;
+        p {
+          grid-column: 2;
+          color: #1a1a1a;
+          text-align: end;
+          font-weight: 600;
         }
 
-        .small-detaills {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-
-            p {
-                text-transform: uppercase;
-                font-size: em(15px, 16px);
-            }
-
-            .price {
-                font-size: em(42px, 16px);
-            }
+        span {
+          color: #6a6a6f;
+          grid-column: 1;
         }
-
-        .percentage-container {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-            height: 100%;
-
-            .arrow-img {
-                padding: 5px;
-                background-color: gray;
-                border-radius: 50%;
-
-                &.rising {
-                    background-color: #d9f3e3;
-                }
-
-                &.descending {
-                    background-color: #f3d9d9;
-                }
-            }
-        }
-
-        .open-close {
-            grid-area: close;
-            position: relative;
-            border-top-left-radius: 0px !important;
-            height: calc(100% - 37px);
-            align-self: self-end;
-
-            .day-actions {
-                display: flex;
-                // gap: 10px;
-                position: absolute;
-                top: 0;
-                left: 0;
-                transform: translateY(-100%);
-                border-top-left-radius: 12px;
-
-                button {
-                    background-color: #e9e9ec;
-                    padding: 10px 15px;
-                    border-top-right-radius: 12px;
-                    border-top-left-radius: 12px;
-                    font-size: em(14px, 16px);
-                    color: #6a6a6f;
-
-                    &.active {
-                        background-color: #fff;
-                        z-index: 10;
-                        color: #000000;
-                    }
-                }
-            }
-
-            table {
-                height: 100%;
-                width: 100%;
-                text-align: left;
-                font-size: em(15px, 16px);
-                gap: 10px;
-                border-spacing: 10px 0;
-                border-collapse: separate;
-
-                th {
-                    color: #6a6a6f;
-                }
-
-                .table-price {
-                    font-size: em(25px, 15px);
-                    font-weight: bold;
-                }
-
-                .table-date {
-                    color: #6a6a6f;
-                }
-            }
-        }
-        .details {
-            font-size: em(15px, 16px);
-            h4 {
-                font-size: 1.75em;
-                margin-bottom: em(45px, 35px);
-            }
-            .details-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 20px 10px;
-
-                p {
-                    grid-column: 2;
-                    color: #1a1a1a;
-                    text-align: end;
-                    font-weight: 600;
-                }
-
-                span {
-                    color: #6a6a6f;
-                    grid-column: 1;
-                }
-            }
-        }
-
-        .graph {
-            grid-area: graph;
-        }
-
-        .actions {
-            // grid-area: actions;
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            align-items: end;
-
-            button {
-                border-radius: 10px;
-                padding: 20px 30px;
-                flex: 1;
-                font-weight: bold;
-                height: 50%;
-                display: grid;
-                place-content: center;
-            }
-            .buy {
-                background-color: #7422dd;
-                color: #e7defa;
-            }
-
-            .sell {
-                background-color: #e7defa;
-                color: #7422dd;
-            }
-        }
+      }
     }
+
+    .graph {
+      grid-area: graph;
+    }
+
+    .actions {
+      gap: 10px;
+
+      .transaction-input {
+        height: 40px;
+        border: none;
+        border-bottom: 2px solid purple;
+        outline: none;
+        background-color: rgb(240, 240, 240);
+        border-radius: 5px;
+        font-size: 20px;
+        padding-inline-start: 10px;
+        width: 97%;
+
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+      }
+
+      .input-container{
+        margin-inline: auto;
+        display: flex;
+        width: 100%;
+        align-items: center;
+      }
+
+      .input-container::after{
+
+        content: "$";
+        font-size: 20px
+      }
+
+
+
+      button {
+        border-radius: 10px;
+        padding: 20px 30px;
+        flex: 1;
+        font-weight: bold;
+        height: 50%;
+        display: grid;
+        place-content: center;
+      }
+      .buy {
+        background-color: #7422dd;
+        color: #e7defa;
+      }
+
+      .sell {
+        background-color: #e7defa;
+        color: #7422dd;
+      }
+    }
+  }
 }
