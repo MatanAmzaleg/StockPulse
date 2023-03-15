@@ -1,12 +1,19 @@
-.crypto-card-sec{
-    margin-bottom: 5px;
-    border: 1px solid rgb(235, 235, 235);
-    border-radius: 10px;
-    padding-inline: 5px;
-    padding-block: 5px;
-    margin-inline-end: 5px;
-    img{
+.crypto-card-sec {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    // border: 1px solid rgb(235, 235, 235);
+    // border-radius: 10px;
+    height: 100%;
+    padding-block: 10px;
+    border-bottom: 1px solid rgb(213, 213, 213);
+
+    img {
         width: 30px;
         height: 30px;
+    }
+
+    .bold {
+        text-transform: capitalize;
     }
 }

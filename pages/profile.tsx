@@ -7,6 +7,7 @@ export default function profile() {
         {
             action: 'buy',
             symbol: 'btc',
+            symbolName: 'Bitcoin',
             date: 126319289,
             status: 'approved',
             quantity: 1723,
@@ -15,6 +16,7 @@ export default function profile() {
         {
             action: 'sell',
             symbol: 'btc',
+            symbolName: 'Bitcoin',
             date: 126319289,
             status: 'approved',
             quantity: 1723,
@@ -23,11 +25,40 @@ export default function profile() {
         {
             action: 'buy',
             symbol: 'btc',
+            symbolName: 'Bitcoin',
             date: 126319289,
-            status: 'waiting to confirm',
+            status: 'pending',
             quantity: 1723,
             price: 300,
         },
+    ];
+
+    const currencies = [
+        {
+            symbol: 'btc',
+            symbolName: 'bitcoin',
+            amount: 1.23,
+        },
+        {
+            symbol: 'eth',
+            symbolName: 'ethereium',
+            amount: 123,
+        },
+        {
+            symbol: 'sushi',
+            symbolName: 'Sushi',
+            amount: 5322,
+        },
+        // {
+        //     symbol: 'sushi',
+        //     symbolName: 'Sushi',
+        //     amount: 5322,
+        // },
+        // {
+        //     symbol: 'sushi',
+        //     symbolName: 'Sushi',
+        //     amount: 5322,
+        // },
     ];
 
     const { user } = useAuth();
@@ -38,10 +69,10 @@ export default function profile() {
             <header className="profile-header">
                 <div className="profile-user">
                     <p className="greet">Good Morning</p>
-                    <h1>Welcom Back, Smith</h1>
+                    <h1>Welcom Back, {user?.fullName}</h1>
                 </div>
                 <div className="user-balance">
-                    <h1>1000$ PulseCoins</h1>
+                    <h1>{user?.coins}$ PulseCoins</h1>
                     <p>Current balance</p>
                 </div>
             </header>
@@ -50,24 +81,23 @@ export default function profile() {
                     <h1 className="bolder"> My Crypto portfolio:</h1>
                     <h1 className="portfolio-worth">1342.15$</h1>
                     <h2>
-                        Change: <span className="scending"> 14.75% | 150$</span>{' '}
+                        Change: <span className="scending">14.75% | 150$</span>{' '}
                     </h2>
                 </div>
                 <div className="card my-cryptos flex column space-between">
                     <h1>My Cryptos:</h1>
                     <div className="cryptos flex column">
-                        <CryptoCard></CryptoCard>
-                        <CryptoCard></CryptoCard>
-                        <CryptoCard></CryptoCard>
-                        <CryptoCard></CryptoCard>
+                        {currencies.map((currency) => (
+                            <CryptoCard currency={currency} />
+                        ))}
                     </div>
                 </div>
                 <div className="card transaction-container">
                     <h1>Transacrion History</h1>
                     <div className="transaction-list">
                         <div className="transaction-preview">
-                            <p className="heading">Action</p>
                             <p className="heading">Currency</p>
+                            <p className="heading">Action</p>
                             <p className="heading">Date</p>
                             <p className="heading">Price</p>
                             <p className="heading">Quantity</p>

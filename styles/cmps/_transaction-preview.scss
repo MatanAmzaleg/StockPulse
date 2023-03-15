@@ -3,10 +3,19 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     padding-block: 10px;
-    border-bottom: 1px solid rgb(213, 213, 213);
+
+    &:not(:first-child) {
+        border-bottom: 1px solid rgb(213, 213, 213);
+        padding-block: 20px;
+    }
+
+    > * {
+        text-transform: capitalize;
+    }
 
     .heading {
-        font-weight: bold;
+        // font-weight: bold;
+        color: #bcbcbc;
     }
 }
 

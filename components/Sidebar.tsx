@@ -6,7 +6,8 @@ import { BsCurrencyBitcoin } from 'react-icons/bs';
 import useAuth from '@/hooks/useAuth';
 
 export default function Sidebar() {
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
+
     return (
         <>
             <div className="logo-container">
@@ -37,7 +38,7 @@ export default function Sidebar() {
                 </nav>
                 <div className="user-container">
                     <p>Welcome back,</p>
-                    <p>John Doe</p>
+                    <p className="username">{user?.fullName}</p>
                     <button onClick={logout}>Logout</button>
                 </div>
             </div>

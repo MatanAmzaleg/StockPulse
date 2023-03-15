@@ -110,9 +110,9 @@ export const AuthProvider = ({ children }: Props) => {
 
         if (user) setCookie('loggedInUser', user.email);
         else {
-            deleteCookie('loggedInUser');
-            console.log('hello');
-            router.push('/login');
+            // deleteCookie('loggedInUser');
+            // console.log('hello');
+            // router.push('/login');
         }
     }, [user]);
 
