@@ -11,6 +11,7 @@ interface IAuth {
     logout: () => void;
     loading: boolean;
 }
+
 interface Props {
     children: React.ReactNode;
 }
@@ -25,7 +26,7 @@ const AuthContext = createContext<IAuth>({
 
 export const AuthProvider = ({ children }: Props) => {
     const [user, setUser] = useState<UserDocument | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
 
     async function login(email: string, password: string) {
@@ -78,34 +79,34 @@ export const AuthProvider = ({ children }: Props) => {
         }
     }
 
+    const checkCookie = async () => {
+        const userFromCookie = getCookie('loggedInUser');
+
+        if (userFromCookie) {
+            const res = await axios.get(`/api/user/${userFromCookie}`, {
+                headers: { header1: 'Access-Control-Allow-Origin' },
+            });
+            const user = await res.data;
+            setUser(user);
+            console.log(userFromCookie, user);
+
+            setLoading(false);
+        } else {
+            setUser(null);
+            setLoading(true);
+            router.push('/login');
+        }
+    };
+
     useEffect(() => {
-        console.log('first');
-
-        (async () => {
-            console.log('second');
-            const userFromCookie = getCookie('loggedInUser');
-
-            if (userFromCookie) {
-                const res = await axios.get(`/api/user/${userFromCookie}`);
-                console.log(res);
-                setUser(res.data);
-                console.log('user', user);
-
-                setLoading(false);
-            } else {
-                setUser(null);
-                setLoading(true);
-                console.log('hello');
-                router.push('/login');
-            }
-        })();
+        checkCookie();
     }, []);
 
     useEffect(() => {
         // Store the user in a cookie when the user state changes
         console.log('third');
 
-        console.log(user);
+        // console.log(user);
 
         if (user) setCookie('loggedInUser', user.email);
         else {

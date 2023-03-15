@@ -16,6 +16,8 @@ export default async function handler(
     try {
         const user: UserDocument | null = await User.findOne({ email });
         if (!user) sendError(res, 'Cannot find user');
+        console.log(user);
+
         res.json(user);
     } catch (error) {
         sendError(res, 'Unable to find user', 500);
