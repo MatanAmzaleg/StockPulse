@@ -1,6 +1,7 @@
 import CryptoCard from '@/components/CryptoCard';
 import TransactionPreview from '@/components/TransactionPreview';
 import useAuth from '@/hooks/useAuth';
+import useWebSockets from '@/hooks/useWebSockets';
 
 export default function profile() {
     const transactions = [
@@ -33,7 +34,7 @@ export default function profile() {
         },
     ];
 
-    const currencies = [
+    const userCurrencies = [
         {
             symbol: 'btc',
             symbolName: 'bitcoin',
@@ -62,7 +63,11 @@ export default function profile() {
     ];
 
     const { user } = useAuth();
-    console.log(user);
+    const { currencies } = useWebSockets(
+        userCurrencies.map((currency) =>
+            (currency.symbol + 'usd').toLocaleUpperCase()
+        )
+    );
 
     return (
         <section className="profile-section">
@@ -87,8 +92,17 @@ export default function profile() {
                 <div className="card my-cryptos flex column space-between">
                     <h1>My Cryptos:</h1>
                     <div className="cryptos flex column">
-                        {currencies.map((currency) => (
-                            <CryptoCard currency={currency} />
+                        {userCurrencies.map((currency) => (
+                            <CryptoCard
+                                price={
+                                    currencies[
+                                        (
+                                            currency.symbol + 'USD'
+                                        ).toLocaleUpperCase() as keyof typeof currencies
+                                    ]?.bp
+                                }
+                                currency={currency}
+                            />
                         ))}
                     </div>
                 </div>
