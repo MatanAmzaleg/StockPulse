@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
     coins: number;
     currencies: [];
     transactions: [];
+    watchlist: [];
 }
 
 const userSchema = new mongoose.Schema<UserDocument>({
@@ -33,6 +34,10 @@ const userSchema = new mongoose.Schema<UserDocument>({
         required: false,
     },
     transactions: {
+        type: [],
+        required: false,
+    },
+    watchlist: {
         type: [],
         required: false,
     },

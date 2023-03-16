@@ -13,20 +13,35 @@
         margin-bottom: 20px;
         position: relative;
 
-        .opt-icon {
-            position: absolute !important;
-            top: 0;
-            right: 0;
-            transform: translateX(10px);
-            border-radius: 50%;
-            padding: 5px;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+        button {
+            .opt-icon {
+                position: absolute !important;
+                top: 0;
+                right: 0;
+                transform: translateX(10px);
+                border-radius: 50%;
+                padding: 5px;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                transition: background-color 0.2s;
 
-            &:hover {
-                background-color: #c0c0c0;
+                &:hover {
+                    background-color: #c0c0c0;
+                }
+            }
+            .actions {
+                // width: max-content;
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 10px;
+                background-color: #fff;
+                border-radius: 10px;
+                transform: translate(40%, -110%);
+                // box-shadow: 1px 3px 14px 0 rgb(187, 187, 187);
+                box-shadow: 0 6px 6px 0 rgba(22, 45, 61, 0.06),
+                    0 0 18px 0 rgba(22, 45, 61, 0.12);
             }
         }
 

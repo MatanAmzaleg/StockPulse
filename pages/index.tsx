@@ -1,5 +1,6 @@
 import HotCryptoPreview from '@/components/HotCryptoPreview';
 import PopularCryptoPreview from '@/components/PopularCryptoPreview';
+import useAuth from '@/hooks/useAuth';
 import useWebSockets from '@/hooks/useWebSockets';
 
 const currenciesList = [
@@ -14,8 +15,13 @@ const currenciesList = [
 
 export default function Home() {
     const { currencies } = useWebSockets(currenciesList);
-    console.log(currencies);
-    
+
+    // const addToWatchList = (event: MouseEvent) => {
+    //     event.preventDefault();
+    //     console.log('adding to watchlist');
+    //     // if (!user) return;
+    //     // userService.addToWatchList(user?.email,)
+    // };
 
     if (!currencies) return <img className="loader" src="/loader.gif" alt="" />;
 
@@ -27,7 +33,7 @@ export default function Home() {
             <div className="hot-crypto-list flex">
                 {currenciesList.slice(0, 3).map((currency, idx) => (
                     <HotCryptoPreview
-                    currencyKey={currenciesList[idx]}
+                        currencyKey={currenciesList[idx]}
                         key={currency}
                         crypto={
                             currencies[currency as keyof typeof currencies]!

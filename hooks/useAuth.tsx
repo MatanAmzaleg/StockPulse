@@ -9,6 +9,7 @@ interface IAuth {
     login: (email: string, password: string) => void;
     register: (email: string, password: string, fullName: string) => void;
     logout: () => void;
+    addToWatchList: (symbol: string) => void;
     loading: boolean;
 }
 
@@ -21,6 +22,7 @@ const AuthContext = createContext<IAuth>({
     login: async () => {},
     register: async () => {},
     logout: async () => {},
+    addToWatchList: async () => {},
     loading: true,
 });
 
@@ -69,9 +71,8 @@ export const AuthProvider = ({ children }: Props) => {
             const { data } = await axios.post('/api/auth/logout');
             console.log(data.message);
             setUser(null);
-            console.log('hello');
 
-            router.push('/login');
+            // router.push('/login');
         } catch ({ message }) {
             alert(message);
         } finally {
@@ -79,45 +80,54 @@ export const AuthProvider = ({ children }: Props) => {
         }
     }
 
-    const checkCookie = async () => {
-        const userFromCookie = getCookie('loggedInUser');
-
-        if (userFromCookie) {
-            const res = await axios.get(`/api/user/${userFromCookie}`, {
-                headers: { header1: 'Access-Control-Allow-Origin' },
-            });
-            const user = await res.data;
-            setUser(user);
-            console.log(userFromCookie, user);
-
+    async function addToWatchList(symbol: string) {
+        setLoading(true);
+        const newUser = { ...user, watchlist: [...user!.watchlist, symbol] };
+        try {
+            await axios.post(`/api/user/${user?.email}`, newUser);
+        } catch (error) {
+            console.log(error);
+        } finally {
             setLoading(false);
-        } else {
-            setUser(null);
-            setLoading(true);
-            router.push('/login');
         }
-    };
+    }
 
-    useEffect(() => {
-        checkCookie();
-    }, []);
+    // const checkCookie = async () => {
+    //     const userFromCookie = getCookie('loggedInUser');
 
-    useEffect(() => {
-        // Store the user in a cookie when the user state changes
-        console.log('third');
+    //     if (userFromCookie) {
+    //         const res = await axios.get(`/api/user/${userFromCookie}`, {
+    //             headers: { header1: 'Access-Control-Allow-Origin' },
+    //         });
+    //         const user = await res.data;
+    //         setUser(user);
+    //         console.log(userFromCookie, user);
 
-        // console.log(user);
+    //         setLoading(false);
+    //     } else {
+    //         setUser(null);
+    //         setLoading(true);
+    //         // router.push('/login');
+    //     }
+    // };
 
-        if (user) setCookie('loggedInUser', user.email);
-        else {
-            // deleteCookie('loggedInUser');
-            // console.log('hello');
-            // router.push('/login');
-        }
-    }, [user]);
+    // useEffect(() => {
+    //     checkCookie();
+    // }, []);
+
+    // useEffect(() => {
+    //     console.log('third');
+
+    //     if (user) setCookie('loggedInUser', user.email);
+    //     else {
+    //         // deleteCookie('loggedInUser');
+    //         // console.log('hello');
+    //         // router.push('/login');
+    //     }
+    // }, [user]);
 
     const memoedValue = useMemo(
-        () => ({ user, register, login, loading, logout }),
+        () => ({ user, register, login, loading, logout, addToWatchList }),
         [user, loading]
     );
 

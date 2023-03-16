@@ -25,6 +25,7 @@ export default async function handler(
             email,
             password,
         });
+
         if (!user) sendError(res, 'Cannot find user');
 
         setCookie('loggedInUser', user!.email, {
