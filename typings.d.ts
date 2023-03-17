@@ -35,10 +35,16 @@ export interface Currencies {
 }
 export interface Transaction {
     action: string;
-    symbol: string;
-    symbolName: string;
+    currency: string;
     date: number;
     status: string;
-    quantity: number;
-    price: number;
+    amount: number;
 }
+
+
+export interface Crypto {
+    currency: string,
+    quantity: number,
+    amount: number,
+    action: string
+  };

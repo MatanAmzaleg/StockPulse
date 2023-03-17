@@ -1,13 +1,13 @@
 import mongoose, { Document, Model } from 'mongoose';
-import { Currency, Transaction } from '@/typings';
+import { Currency, Transaction, Crypto } from '@/typings';
 
 export interface UserDocument extends Document {
     email: string;
     fullName: string;
     password: string;
     coins: number;
-    currencies: [];
-    transactions: [];
+    currencies: Crypto[];
+    transactions: object[];
     watchlist: [];
 }
 
@@ -30,11 +30,11 @@ const userSchema = new mongoose.Schema<UserDocument>({
         required: false,
     },
     currencies: {
-        type: [],
+        type: [Object],
         required: false,
     },
     transactions: {
-        type: [],
+        type: [Object],
         required: false,
     },
     watchlist: {
