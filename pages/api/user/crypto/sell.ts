@@ -39,7 +39,7 @@ export default async function handler(
       }
       console.log(user);
       
-    }
+    } 
 
     await user.save();
     res.status(200).json({ message: "Transaction added successfully" }); // Return a success response
