@@ -20,28 +20,33 @@ export default async function handler(
     if (!user) {
       return sendError(res, "User not found", 404);
     }
-    const currencyIdx = user.currencies.findIndex(
-      (c) => c.currency === crypto.currency
-    );
-    
-    if (currencyIdx < 0) return
-    else {
-        console.log("found");
-        
-      if (user.currencies[currencyIdx].amount === crypto.amount){
-          delete user.currencies[currencyIdx];
-        console.log("deleting");
-        
-      }
-      else {
-        user.currencies[currencyIdx].amount -= crypto.amount;
-        user.currencies[currencyIdx].quantity -= crypto.quantity;
-      }
-      console.log(user);
-      
-    } 
 
+    if(!user.currencies[crypto.currency]) return
+
+    else {
+      console.log("found");
+
+
+      if (user.currencies[crypto.currency] === crypto.amount) {
+        delete user.currencies[crypto.currency]
+        console.log("deleting");
+      } else {
+        console.log(
+          "amount: ",
+          user.currencies[crypto.currency]
+        );
+        user.currencies[crypto.currency] -= crypto.amount;
+
+        console.log(
+          "amount: ",
+          user.currencies[crypto.currency],
+        );
+      }
+    }
+    // await User.updateOne({ email }, { $set: { user } });
     await user.save();
+    console.log(user);
+
     res.status(200).json({ message: "Transaction added successfully" }); // Return a success response
   } catch (error) {
     return sendError(res, (error as Error).message);

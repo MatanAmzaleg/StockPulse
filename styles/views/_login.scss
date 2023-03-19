@@ -4,7 +4,16 @@
     min-height: 100vh;
 
     .image {
-        background: linear-gradient(180deg, #bb54df, #7400f7);
+        background: linear-gradient(180deg, #3b4b80, #94b3cc);
+
+        .main-title{
+            font-size: 50px;
+            font-weight: bolder;
+        }
+
+        .logo{
+            width: 200px;
+        }
     }
 
     .login-container {

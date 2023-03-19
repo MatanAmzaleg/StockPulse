@@ -33,7 +33,12 @@ export default function Login() {
 
     return (
         <section className="login-sec">
-            <div className="image"></div>
+            <div className="image grid-center">
+                <div className="flex column align-center">
+                <img src="/market.png" className='logo' alt="" />
+                <h1 className='main-title'>StockPulse</h1>
+                </div>
+            </div>
             <div className="login-container">
                 <form
                     ref={formRef}

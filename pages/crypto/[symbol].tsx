@@ -69,8 +69,7 @@ export default function CryptoDetails({
       const crypto = {
         currency: alpacaCrypto?.S,
         quantity: (amount / buyPrice!).toFixed(4),
-        amount,
-        action
+        amount
       };
 
       console.log("ok");
@@ -88,13 +87,13 @@ export default function CryptoDetails({
           break;
         case "sell":
           
-          await axios.post(`/api/user/crypto/sell`, {
-            email: userEmail,
-            crypto,
-          });
           await axios.post(`/api/user/transactions/add`, {
             transaction,
             email: userEmail,
+          });
+          await axios.post(`/api/user/crypto/sell`, {
+            email: userEmail,
+            crypto,
           });
           break;
       }

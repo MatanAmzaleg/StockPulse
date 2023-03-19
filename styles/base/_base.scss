@@ -70,3 +70,8 @@ a {
 .descending {
     color: rgb(194, 100, 100);
 }
+
+.grid-center{
+    display: grid;
+    place-items: center;
+}
