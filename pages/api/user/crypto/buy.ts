@@ -10,7 +10,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { email, crypto } = req.body;
-    console.log(email, crypto);
+    console.log("buying cryptoooooooooo", email, crypto);
 
     try {
         const user: UserDocument | null = await User.findOne({
@@ -24,6 +24,9 @@ export default async function handler(
         } else {
             user.currencies[crypto.currency] += crypto.amount;
         }
+
+        console.log("buy user:::::::::::::::", user);
+        
 
         await user.save(); // Save the updated user object
         res.status(200).json({ message: ' successfully buyed crypto' }); // Return a success response

@@ -76,13 +76,14 @@ export default function CryptoDetails({
             };
             const crypto = {
                 currency: alpacaCrypto?.S,
-                quantity: +(inputValue / alpacaCrypto?.ap!).toFixed(4),
                 amount: inputValue,
             };
             console.log('ok');
 
             await axios.post(`/api/transaction/add`, { transaction });
 
+            console.log(action);
+            
             await axios.post(`/api/user/crypto/${action}`, {
                 email: userEmail,
                 crypto,
@@ -103,6 +104,14 @@ export default function CryptoDetails({
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
     console.log('symbol', symbol, 'alpacaCrypto', alpacaCrypto, 'data', data);
+
+    const [prevPrice, setPrevPrice] = useState([alpacaCrypto?.bp])
+
+    useEffect(() => {
+      if(prevPrice.length > 1) prevPrice.push(alpacaCrypto?.bp)
+      console.log(prevPrice);
+      
+    }, [alpacaCrypto?.bp])
 
     if (!alpacaCrypto) {
         console.log('here');

@@ -25,7 +25,7 @@ export function formattedPrice(price: number) {
 }
 
 
-export function calculateChange(openingPrice : number, currentPrice : number) {
+export function calculateChange(openingPrice : number, currentPrice : number)  {
     const change = currentPrice ! / openingPrice !
     const percentageChange = (1 - change) * 100
     return percentageChange.toFixed(2) + '%'
