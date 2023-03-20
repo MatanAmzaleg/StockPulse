@@ -18,17 +18,18 @@ export default async function handler(
         });
         if (!user) return sendError(res, 404, 'User not found');
 
-        if (!user.currencies[crypto.currency]) {
-            user.currencies[crypto.currency] = crypto.amount;
-            return;
-        } else {
-            user.currencies[crypto.currency] += crypto.amount;
-        }
-
-        console.log("buy user:::::::::::::::", user);
-        
-
-        await user.save(); // Save the updated user object
+        const currencyIdx = user.currencies.findIndex(
+            (c) => c.currency === crypto.currency
+          );
+          if (currencyIdx < 0) {
+            user.currencies.push(crypto);
+          } else {
+            user.currencies[currencyIdx].amount += crypto.amount;
+          }
+    
+          console.log(user);
+    
+          await user.save(); // Save the updated user object
         res.status(200).json({ message: ' successfully buyed crypto' }); // Return a success response
     } catch (error) {
         return sendError(res, 400, (error as Error).message);

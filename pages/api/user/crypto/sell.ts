@@ -20,21 +20,25 @@ export default async function handler(
         });
         if (!user) return sendError(res, 404, 'User not found');
 
-        if (!user.currencies[crypto.currency]) return;
-        else {
-            console.log('found');
+        const currencyIdx = user.currencies.findIndex(
+          (c) => c.currency === crypto.currency
+        );
+    
+        if (currencyIdx < 0) return
 
-            if (user.currencies[crypto.currency] === crypto.amount) {
-                delete user.currencies[crypto.currency];
-                console.log('deleting');
-            } else {
-                console.log('amount: ', user.currencies[crypto.currency]);
-                user.currencies[crypto.currency] -= crypto.amount;
+       else {
+        console.log("found");
 
-                console.log('amount: ', user.currencies[crypto.currency]);
-            }
+      if (user.currencies[currencyIdx].amount === crypto.amount){
+          delete user.currencies[currencyIdx];
+
         }
-        // await User.updateOne({ email }, { $set: { user } });
+        else {
+          user.currencies[currencyIdx].amount -= crypto.amount;
+        }
+        console.log(user);
+  
+      } 
         await user.save();
         console.log(user);
 

@@ -47,7 +47,6 @@ export interface Transaction {
 
 export interface Crypto {
     currency: string;
-    quantity: number;
     amount: number;
 }
 

@@ -27,7 +27,8 @@ export default async function handler(
             // password: hashedPassword,
             password,
             coins: 5000,
-            currencies: {},
+            currencies: [],
+            transactions:[],
         };
 
         const user: UserDocument = await User.create(userCred);

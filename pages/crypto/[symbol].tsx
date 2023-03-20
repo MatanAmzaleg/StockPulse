@@ -75,13 +75,14 @@ export default function CryptoDetails({
             };
             const crypto = {
                 currency: alpacaCrypto?.S,
-                amount: inputValue,
+                amount: +(inputValue / alpacaCrypto?.ap!).toFixed(4),
             };
             console.log('ok');
 
             await axios.post(`/api/user/transfer`, {
                 email: user.email,
                 transaction,
+                crypto
             });
 
             console.log(action);
