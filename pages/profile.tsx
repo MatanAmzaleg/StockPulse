@@ -2,34 +2,38 @@ import CryptoCard from '@/components/CryptoCard';
 import TransactionPreview from '@/components/TransactionPreview';
 import useAuth from '@/hooks/useAuth';
 import useWebSockets from '@/hooks/useWebSockets';
+import { useRouter } from 'next/router';
 
 export default function profile() {
     const transactions = [
         {
+            email: 'Guy@gmail.com',
             action: 'buy',
             symbol: 'btc',
             symbolName: 'Bitcoin',
             date: 126319289,
             status: 'approved',
-            quantity: 1723,
+            amount: 1723,
             price: 300,
         },
         {
+            email: 'Guy@gmail.com',
             action: 'sell',
             symbol: 'btc',
             symbolName: 'Bitcoin',
-            date: 126319289,
+            date: 126334289,
             status: 'approved',
-            quantity: 1723,
+            amount: 1723,
             price: 300,
         },
         {
+            email: 'Guy@gmail.com',
             action: 'buy',
             symbol: 'btc',
             symbolName: 'Bitcoin',
-            date: 126319289,
+            date: 1241219289,
             status: 'pending',
-            quantity: 1723,
+            amount: 1723,
             price: 300,
         },
     ];
@@ -61,8 +65,11 @@ export default function profile() {
         //     amount: 5322,
         // },
     ];
-
+    const router = useRouter();
     const { user } = useAuth();
+
+    // if (!user) return <div className="">go to login</div>;
+
     const { currencies } = useWebSockets(
         userCurrencies.map((currency) =>
             (currency.symbol + 'usd').toLocaleUpperCase()
@@ -101,6 +108,7 @@ export default function profile() {
                                         ).toLocaleUpperCase() as keyof typeof currencies
                                     ]?.bp
                                 }
+                                key={currency.symbol}
                                 currency={currency}
                             />
                         ))}
@@ -117,9 +125,11 @@ export default function profile() {
                             <p className="heading">Quantity</p>
                             <p className="heading">Status</p>
                         </div>
-                        {/* <TransactionPreview transaction={user.transactions}/> */}
+                        {/* {user?.transactions.map((t) => (
+                            <TransactionPreview key={t.date} transaction={t} />
+                        ))} */}
                         {transactions.map((t) => (
-                            <TransactionPreview transaction={t} />
+                            <TransactionPreview key={t.date} transaction={t} />
                         ))}
                     </div>
                 </div>

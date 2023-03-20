@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import connect from '../../../services/back/db.service';
 import User, { UserDocument } from '../../../model/user.schema';
 import { setCookie } from 'cookies-next';
+import { sendError } from 'next/dist/server/api-utils';
 
 connect();
 
@@ -9,11 +10,11 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    if (req.method !== 'POST') sendError(res, 'Method not allowed', 405);
+    if (req.method !== 'POST') sendError(res, 405, 'Method not allowed');
     const { email, password } = req.body;
 
     if (!email || !password)
-        sendError(res, 'Please provide an email and password');
+        sendError(res, 400, 'Please provide an email and password');
 
     try {
         // const isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -26,7 +27,7 @@ export default async function handler(
             password,
         });
 
-        if (!user) sendError(res, 'Cannot find user');
+        if (!user) sendError(res, 400, 'Cannot find user');
 
         setCookie('loggedInUser', user!.email, {
             req,
@@ -37,10 +38,6 @@ export default async function handler(
 
         res.json(user);
     } catch (error) {
-        sendError(res, 'Unable to log in', 500);
+        sendError(res, 500, 'Unable to log in');
     }
-}
-
-function sendError(res: NextApiResponse, error: string, status: number = 400) {
-    return res.status(status).json({ error });
 }
