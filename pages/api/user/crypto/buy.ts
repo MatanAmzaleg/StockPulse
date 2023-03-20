@@ -16,9 +16,8 @@ export default async function handler(
         const user: UserDocument | null = await User.findOne({
             email,
         });
-        if (!user) {
-            return sendError(res, 404, 'User not found');
-        }
+        if (!user) return sendError(res, 404, 'User not found');
+
         if (!user.currencies[crypto.currency]) {
             user.currencies[crypto.currency] = crypto.amount;
             return;
