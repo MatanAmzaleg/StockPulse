@@ -36,7 +36,6 @@ export interface Currencies {
 
 export interface Transaction {
     id?: string;
-    email: string;
     action: string;
     symbol: string;
     symbolName: string;

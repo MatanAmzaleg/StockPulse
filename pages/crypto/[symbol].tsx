@@ -72,7 +72,6 @@ export default function CryptoDetails({
                 status: 'approved',
                 symbol: alpacaCrypto?.S,
                 symbolName: alpacaCrypto?.S,
-                email: user.email,
             };
             const crypto = {
                 currency: alpacaCrypto?.S,
@@ -80,10 +79,13 @@ export default function CryptoDetails({
             };
             console.log('ok');
 
-            await axios.post(`/api/transaction/add`, { transaction });
+            await axios.post(`/api/user/transfer`, {
+                email: user.email,
+                transaction,
+            });
 
             console.log(action);
-            
+
             await axios.post(`/api/user/crypto/${action}`, {
                 email: userEmail,
                 crypto,
@@ -105,13 +107,12 @@ export default function CryptoDetails({
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
     console.log('symbol', symbol, 'alpacaCrypto', alpacaCrypto, 'data', data);
 
-    const [prevPrice, setPrevPrice] = useState([alpacaCrypto?.bp])
+    const [prevPrice, setPrevPrice] = useState([alpacaCrypto?.bp]);
 
     useEffect(() => {
-      if(prevPrice.length > 1) prevPrice.push(alpacaCrypto?.bp)
-      console.log(prevPrice);
-      
-    }, [alpacaCrypto?.bp])
+        if (prevPrice.length > 1) prevPrice.push(alpacaCrypto?.bp);
+        console.log(prevPrice);
+    }, [alpacaCrypto?.bp]);
 
     if (!alpacaCrypto) {
         console.log('here');

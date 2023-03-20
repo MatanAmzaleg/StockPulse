@@ -1,5 +1,5 @@
 import mongoose, { Document, Model } from 'mongoose';
-import { CurrencyObjectMap } from '@/typings';
+import { CurrencyObjectMap, Transaction } from '@/typings';
 
 export interface UserDocument extends Document {
     email: string;
@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
     coins: number;
     currencies: CurrencyObjectMap;
     watchlist: [];
+    transactions: object[];
 }
 
 const userSchema = new mongoose.Schema<UserDocument>({
@@ -34,6 +35,10 @@ const userSchema = new mongoose.Schema<UserDocument>({
     },
     watchlist: {
         type: [],
+        required: false,
+    },
+    transactions: {
+        type: [Object],
         required: false,
     },
 });
