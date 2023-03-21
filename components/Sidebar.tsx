@@ -4,9 +4,14 @@ import { AiOutlineBarChart, AiOutlineUser } from 'react-icons/ai';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 import { BsCurrencyBitcoin } from 'react-icons/bs';
 import useAuth from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
 
 export default function Sidebar() {
     const { logout, user } = useAuth();
+    const router = useRouter();
+    const login = () => {
+        router.push('/login');
+    };
 
     return (
         <>
@@ -36,11 +41,17 @@ export default function Sidebar() {
                         Settings
                     </Link>
                 </nav>
-                <div className="user-container">
-                    <p>Welcome back,</p>
-                    <p className="username">{user?.fullName}</p>
-                    <button onClick={logout}>Logout</button>
-                </div>
+                {user ? (
+                    <div className="user-container">
+                        <p>Welcome back,</p>
+                        <p className="username">{user?.fullName}</p>
+                        <button onClick={logout}>Logout</button>
+                    </div>
+                ) : (
+                    <div className="user-container">
+                        <button onClick={login}>Login</button>
+                    </div>
+                )}
             </div>
         </>
     );

@@ -14,6 +14,11 @@ import { createChart, CrosshairMode } from 'lightweight-charts';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import useAuth from '@/hooks/useAuth';
 
+const candleStickOption = {
+    ascendingColor: '#7326d2',
+    descendingColor: '#c9c4d1',
+};
+
 export default function CryptoDetails({
     data,
     yesterdayData,
@@ -38,15 +43,25 @@ export default function CryptoDetails({
     };
 
     useEffect(() => {
-        if (graphRef.current) {
-            const chart = createChart(graphRef.current!, {
-                crosshair: {
-                    mode: CrosshairMode.Normal,
-                },
-            });
-            const lineSeries = chart.addCandlestickSeries();
-            lineSeries.setData(chartData);
-        }
+        if (!graphRef.current) return;
+        const { ascendingColor, descendingColor } = candleStickOption;
+
+        const chart = createChart(graphRef.current!, {
+            crosshair: {
+                mode: CrosshairMode.Normal,
+            },
+        });
+        const lineSeries = chart.addCandlestickSeries({
+            upColor: ascendingColor,
+            borderUpColor: ascendingColor,
+            wickUpColor: ascendingColor,
+            downColor: descendingColor,
+            borderDownColor: descendingColor,
+            wickDownColor: descendingColor,
+            // borderRadius: 5,
+        });
+        lineSeries.setData(chartData);
+        chart.timeScale().fitContent();
     }, [graphRef.current]);
 
     const handleTransaction = async (action: string) => {
@@ -82,7 +97,7 @@ export default function CryptoDetails({
             await axios.post(`/api/user/transfer`, {
                 email: user.email,
                 transaction,
-                crypto
+                crypto,
             });
 
             console.log(action);
@@ -120,6 +135,8 @@ export default function CryptoDetails({
         return <img className="loader" src="/loader.gif" alt="" />;
     }
 
+    const { percentage, orderType } = calculateChange(data.o, alpacaCrypto?.ap);
+
     return (
         <section className="crypto-details">
             <div className="logo">
@@ -141,28 +158,13 @@ export default function CryptoDetails({
                     <div className="">
                         <div className="percentage-container">
                             <Image
-                                src={`/rising.svg`}
-                                alt="rising"
-                                className="arrow-img rising"
+                                src={`/${orderType}.svg`}
+                                alt={orderType}
+                                className={`arrow-img ${orderType}`}
                                 width={20}
                                 height={20}
                             ></Image>
-                            <p
-                                className={
-                                    Number(
-                                        calculateChange(
-                                            data.o,
-                                            alpacaCrypto?.ap
-                                        )
-                                    ) < 0
-                                        ? 'descending'
-                                        : 'scending'
-                                }
-                            >
-                                {calculateChange(data.o, alpacaCrypto?.ap)
-                                    .toString()
-                                    .padStart(2)}
-                            </p>
+                            <p className={orderType}>{percentage}</p>
                         </div>
                     </div>
                 </div>

@@ -24,9 +24,12 @@ export function formattedPrice(price: number) {
           }).format(price);
 }
 
-
-export function calculateChange(openingPrice : number, currentPrice : number)  {
-    const change = currentPrice ! / openingPrice !
-    const percentageChange = (1 - change) * 100
-    return percentageChange.toFixed(2) + '%'
-  }
+export function calculateChange(openingPrice: number, currentPrice: number) {
+    const change = currentPrice / openingPrice;
+    const percentageChange = (1 - change) * 100;
+    const orderType = percentageChange > 0 ? 'ascending' : 'descending';
+    return {
+        percentage: Math.abs(percentageChange).toFixed(2) + '%',
+        orderType,
+    };
+}

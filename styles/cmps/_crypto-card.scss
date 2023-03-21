@@ -2,9 +2,14 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    // height: 100%;
     padding-block: 10px;
-    border-bottom: 1px solid rgb(213, 213, 213);
+    &:not(:last-child) {
+        border-bottom: 1px solid rgb(213, 213, 213);
+    }
+
+    div {
+        gap: 10px;
+    }
 
     img {
         width: 30px;

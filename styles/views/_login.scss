@@ -4,14 +4,15 @@
     min-height: 100vh;
 
     .image {
-        background: linear-gradient(180deg, #3b4b80, #94b3cc);
+        // background: linear-gradient(180deg, #3b4b80, #94b3cc);
+        background: linear-gradient(180deg, #7422dd, #e7defa);
 
-        .main-title{
+        .main-title {
             font-size: 50px;
             font-weight: bolder;
         }
 
-        .logo{
+        .logo {
             width: 200px;
         }
     }
@@ -26,10 +27,36 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 20px;
             padding: 30px;
             background-color: white;
             border-radius: 12px;
+            text-transform: capitalize;
+
+            h1 {
+                font-size: 1.2em;
+            }
+
+            input {
+                padding: 5px 10px;
+                border-radius: 5px;
+                background-color: #eff1f5;
+                border: 1px solid rgb(194, 194, 194);
+
+                &:focus {
+                    outline: 1px solid #7422dd;
+                }
+
+                &[type='submit'] {
+                    background-color: #7422dd;
+                    color: #e7defa;
+                    text-transform: capitalize;
+                }
+            }
+
+            a {
+                text-decoration: underline;
+            }
         }
     }
 }
