@@ -94,20 +94,21 @@ export const AuthProvider = ({ children }: Props) => {
 
     // const checkCookie = async () => {
     //     const userFromCookie = getCookie('loggedInUser');
-
-    //     if (userFromCookie) {
-    //         const res = await axios.get(`/api/user/${userFromCookie}`, {
-    //             headers: { header1: 'Access-Control-Allow-Origin' },
-    //         });
-    //         const user = await res.data;
-    //         setUser(user);
-    //         console.log(userFromCookie, user);
-
-    //         setLoading(false);
-    //     } else {
-    //         setUser(null);
-    //         setLoading(true);
-    //         // router.push('/login');
+    //     try {
+    //         if (userFromCookie) {
+    //             const res = await axios.get(`/api/user/${userFromCookie}`, {
+    //                 headers: { header1: 'Access-Control-Allow-Origin' },
+    //             });
+    //             const user = await res.data;
+    //             setUser(user);
+    //             // setLoading(false);
+    //         } else {
+    //             setUser(null);
+    //             // setLoading(true);
+    //             // router.push('/login');
+    //         }
+    //     } catch (error) {
+    //         console.log('error', error);
     //     }
     // };
 
