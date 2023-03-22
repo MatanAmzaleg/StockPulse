@@ -82,7 +82,7 @@ export default function CryptoDetails({
             const transaction = {
                 date: Date.now(),
                 price: inputValue,
-                amount: +(inputValue / alpacaCrypto?.ap!).toFixed(4),
+                amount: +(inputValue / alpacaCrypto?.ap!).toFixed(8),
                 action,
                 status: 'approved',
                 symbol: alpacaCrypto?.S,
@@ -90,7 +90,7 @@ export default function CryptoDetails({
             };
             const crypto = {
                 currency: alpacaCrypto?.S,
-                amount: +(inputValue / alpacaCrypto?.ap!).toFixed(4),
+                amount: +(inputValue / alpacaCrypto?.ap!).toFixed(8),
             };
             console.log('ok');
 
@@ -101,11 +101,6 @@ export default function CryptoDetails({
             });
 
             console.log(action);
-
-            await axios.post(`/api/user/crypto/${action}`, {
-                email: userEmail,
-                crypto,
-            });
 
             console.log(inputValue);
         } catch (err) {
