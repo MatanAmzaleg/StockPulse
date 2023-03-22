@@ -50,6 +50,7 @@ export default function CryptoDetails({
             crosshair: {
                 mode: CrosshairMode.Normal,
             },
+            // width: '100%',
         });
         const lineSeries = chart.addCandlestickSeries({
             upColor: ascendingColor,

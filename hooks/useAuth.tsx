@@ -26,6 +26,8 @@ const AuthContext = createContext<IAuth>({
     loading: true,
 });
 
+const USER_COOKIE = 'loggedInUser';
+
 export const AuthProvider = ({ children }: Props) => {
     const [user, setUser] = useState<UserDocument | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -70,6 +72,7 @@ export const AuthProvider = ({ children }: Props) => {
         try {
             const { data } = await axios.post('/api/auth/logout');
             console.log(data.message);
+            deleteCookie(USER_COOKIE);
             setUser(null);
 
             // router.push('/login');
@@ -92,40 +95,39 @@ export const AuthProvider = ({ children }: Props) => {
         }
     }
 
-    // const checkCookie = async () => {
-    //     const userFromCookie = getCookie('loggedInUser');
-    //     try {
-    //         if (userFromCookie) {
-    //             const res = await axios.get(`/api/user/${userFromCookie}`, {
-    //                 headers: { header1: 'Access-Control-Allow-Origin' },
-    //             });
-    //             const user = await res.data;
-    //             setUser(user);
-    //             // setLoading(false);
-    //         } else {
-    //             setUser(null);
-    //             // setLoading(true);
-    //             // router.push('/login');
-    //         }
-    //     } catch (error) {
-    //         console.log('error', error);
-    //     }
-    // };
+    const checkCookie = async () => {
+        const userFromCookie = getCookie(USER_COOKIE);
+        try {
+            if (userFromCookie) {
+                const res = await axios.get(`/api/user/${userFromCookie}`, {
+                    headers: { header1: 'Access-Control-Allow-Origin' },
+                });
+                const user = await res.data;
+                setUser(user);
+                // setLoading(false);
+            } else {
+                setUser(null);
+                // setLoading(true);
+                // router.push('/login');
+            }
+        } catch (error) {
+            console.log('error', error);
+        }
+    };
 
-    // useEffect(() => {
-    //     checkCookie();
-    // }, []);
+    useEffect(() => {
+        checkCookie();
+    }, []);
 
-    // useEffect(() => {
-    //     console.log('third');
-
-    //     if (user) setCookie('loggedInUser', user.email);
-    //     else {
-    //         // deleteCookie('loggedInUser');
-    //         // console.log('hello');
-    //         // router.push('/login');
-    //     }
-    // }, [user]);
+    useEffect(() => {
+        if (user) {
+            setCookie(USER_COOKIE, user.email);
+        } else {
+            // deleteCookie(USER_COOKIE);
+            // console.log('hello');
+            // router.push('/login');
+        }
+    }, [user]);
 
     const memoedValue = useMemo(
         () => ({ user, register, login, loading, logout, addToWatchList }),
