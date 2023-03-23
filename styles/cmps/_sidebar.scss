@@ -1,8 +1,9 @@
 .sidebar-section{
     height: 100vh;
-    display: none;
 background-color: #f8f8f8;
 position: relative;
+transition: transform 0.3s;
+min-width: 300px;
 
 
 .hamburger-btn{
@@ -13,7 +14,6 @@ position: relative;
 
 }
 .sidebar-full{
-
 
 
     .sidebar {
@@ -84,10 +84,7 @@ position: relative;
 
 
 @media (min-width: 1022px){
-    .sidebar-section{
-
-        display: block;
-    }
+    
 }
 
 
