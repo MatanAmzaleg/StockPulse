@@ -1,0 +1,50 @@
+.landing-container {
+    min-height: 100vh;
+    // background-color: #1d2e51;
+    background-color: #161932;
+    color: white;
+    padding: 50px 70px;
+
+    button {
+        padding: 10px 30px;
+        border: 1px solid white;
+    }
+
+    .landing-header {
+        padding-bottom: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    main {
+        display: flex;
+        gap: 20px;
+
+        > * {
+            flex: 1;
+        }
+
+        img {
+            // width: 100%;
+            width: 40px;
+            // height: 100%;
+            // aspect-ratio: 1/1;
+        }
+
+        .content {
+            padding-top: 50px;
+            h1 {
+                font-size: 5.8em;
+                max-width: 9ch;
+                margin-bottom: 30px;
+            }
+
+            h6 {
+                font-weight: 500;
+                color: #515177;
+                margin-bottom: 30px;
+            }
+        }
+    }
+}

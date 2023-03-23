@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.column{
+.column {
     flex-direction: column;
 }
 
@@ -14,18 +14,22 @@
     align-items: center;
 }
 
-.space-between{
+.space-between {
     justify-content: space-between;
 }
 
-.relative{
+.relative {
     position: relative;
 }
 
-.bold{
+.gap {
+    gap: 1px;
+}
+
+.bold {
     font-weight: bold;
 }
 
-.bolder{
+.bolder {
     font-weight: bolder;
 }

@@ -6,7 +6,7 @@ import {
     calculateChange,
 } from '@/utils/format';
 import { useEffect, useRef, useState } from 'react';
-import { getCurrencyDataURL } from '@/utils/requests';
+import { getCryptoCompareUrl, getCurrencyDataURL } from '@/utils/requests';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
@@ -26,7 +26,7 @@ export default function CryptoDetails({
     error,
 }: any) {
     const router = useRouter();
-    const graphRef = useRef(null);
+    const graphRef = useRef<HTMLDivElement>(null);
     const { symbol } = router.query;
     const [day, setDay] = useState('today');
     const [inputValue, setInputValue] = useState<number>(0);
@@ -50,7 +50,8 @@ export default function CryptoDetails({
             crosshair: {
                 mode: CrosshairMode.Normal,
             },
-            // width: '100%',
+            width: graphRef.current.offsetWidth - 72,
+            height: graphRef.current.offsetHeight - 28,
         });
         const lineSeries = chart.addCandlestickSeries({
             upColor: ascendingColor,
@@ -72,13 +73,11 @@ export default function CryptoDetails({
             return alert('need more cash to preform action');
 
         try {
-            const userEmail = getCookie('loggedInUser');
-            const res = await axios.get(
-                `/api/user/getcoins?username=${userEmail}`
-            );
-            const userCoins = await res.data;
-
-            console.log(userCoins);
+            // const userEmail = getCookie('loggedInUser');
+            // const res = await axios.get(
+            //     `/api/user/getcoins?username=${userEmail}`
+            // );
+            // const userCoins = await res.data;
 
             const transaction = {
                 date: Date.now(),
@@ -89,47 +88,39 @@ export default function CryptoDetails({
                 symbol: alpacaCrypto?.S,
                 symbolName: alpacaCrypto?.S,
             };
+
             const crypto = {
                 currency: alpacaCrypto?.S,
                 amount: +(inputValue / alpacaCrypto?.ap!).toFixed(8),
             };
-            console.log('ok');
 
             await axios.post(`/api/user/transfer`, {
                 email: user.email,
                 transaction,
                 crypto,
             });
-
-            console.log(action);
-
-            console.log(inputValue);
         } catch (err) {
             console.log('failed to set transaction', err);
         }
     };
 
-    if (!currencies || !data || !yesterdayData) {
-        console.log('here now', currencies, data, yesterdayData);
+    if (!currencies || !data || !yesterdayData)
         return <img className="loader" src="/loader.gif" alt="" />;
-    }
 
     const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
-    console.log('symbol', symbol, 'alpacaCrypto', alpacaCrypto, 'data', data);
+    // console.log('symbol', symbol, 'alpacaCrypto', alpacaCrypto, 'data', data);
 
     const [prevPrice, setPrevPrice] = useState([alpacaCrypto?.bp]);
 
     useEffect(() => {
         if (prevPrice.length > 1) prevPrice.push(alpacaCrypto?.bp);
-        console.log(prevPrice);
+        // console.log(prevPrice);
     }, [alpacaCrypto?.bp]);
 
-    if (!alpacaCrypto) {
-        console.log('here');
+    if (!alpacaCrypto)
         return <img className="loader" src="/loader.gif" alt="" />;
-    }
 
     const { percentage, orderType } = calculateChange(data.o, alpacaCrypto?.ap);
 
@@ -261,6 +252,7 @@ export default function CryptoDetails({
 }
 
 export const getServerSideProps = async ({ params }: { params: any }) => {
+    const { symbol } = params;
     try {
         const todayFormat = formmatedDate(new Date());
         const yesterdayFormat = formmatedDate(new Date(Date.now() - 864e5));
@@ -268,34 +260,30 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
             new Date(Date.now() - 864e5 * 2)
         );
 
-        const response = await axios.get(
-            getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
-        );
+        const requests = [
+            getCurrencyDataURL(symbol, todayFormat, yesterdayFormat),
+            getCurrencyDataURL(symbol, yesterdayFormat, dayBeforeLastFormat),
+            getCryptoCompareUrl(symbol),
+        ];
 
-        const yesterdayData = await axios.get(
-            getCurrencyDataURL(
-                params.symbol,
-                yesterdayFormat,
-                dayBeforeLastFormat
+        const [data, yesterdayData, chartData] = await Promise.all(
+            requests.map((request) =>
+                axios.get(request).then((res) => res.data)
             )
         );
 
-        const res = await axios.get(
-            `https://min-api.cryptocompare.com/data/v2/histohour?fsym=${params.symbol.toUpperCase()}&tsym=USD&limit=24&toTs=-1&api_key=d9d34cf88d1fc50c8d8d16f867eef794a92f7f01f1fd85856a788a52a1c78aba`
-        );
-
         return {
             props: {
-                data: response.data.results[0],
-                yesterdayData: yesterdayData.data.results[0],
-                chartData: res.data.Data.Data,
+                data: data.results[0],
+                yesterdayData: yesterdayData.results[0],
+                chartData: chartData.Data.Data,
             },
         };
-    } catch (err) {
-        console.log('failed to fetch crypto details', err);
+    } catch (error) {
+        console.log('failed to fetch crypto details', error);
         return {
             props: {
-                error: err,
+                error,
             },
         };
     }

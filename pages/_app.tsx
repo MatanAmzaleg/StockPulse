@@ -14,9 +14,8 @@ const roboto = Roboto({
 export default function App({ Component, pageProps }: AppProps) {
     const router = useRouter();
 
-    const dontNeedLayout = () => {
-        return router.pathname === '/login';
-    };
+    const dontNeedLayout = () =>
+        router.pathname === '/login' || router.pathname === '/landing';
 
     return (
         <>
