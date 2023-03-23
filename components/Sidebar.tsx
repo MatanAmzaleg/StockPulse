@@ -5,6 +5,7 @@ import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import { BsCurrencyBitcoin } from "react-icons/bs";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Sidebar() {
   const { logout, user } = useAuth();
@@ -12,9 +13,13 @@ export default function Sidebar() {
   const login = () => {
     router.push("/login");
   };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
-    <section className="sidebar-full">
+    <section className={isSidebarOpen ? 'sidebar-section' : 'sidebar-section closed'}>
+      <button className='hamburger-btn' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>hamburger</button>
+      <div className="sidebar-full">
+
       <div className="logo-container">
         <h2 className="logo">stock pulse</h2>
       </div>
@@ -53,6 +58,7 @@ export default function Sidebar() {
           </div>
         )}
       </div>
+        </div>
     </section>
   );
 }

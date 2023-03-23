@@ -32,7 +32,7 @@ export default function Home() {
 
     return (
         <section className="main-content-sec flex column relative">
-            <button className='hamburger-btn' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>hamburger</button>
+            {/* <button className='hamburger-btn' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>hamburger</button> */}
             <h1 className="main-title">Stock Market</h1>
             <p className="subtitle">Trending market group</p>
             <button className="view-all">View All</button>

@@ -1,7 +1,21 @@
-.sidebar-full{
-height: 100vh;
-display: none;
+.sidebar-section{
+    height: 100vh;
+    display: none;
 background-color: #f8f8f8;
+position: relative;
+
+
+.hamburger-btn{
+    position: absolute;
+    right: 0;
+    transform: translateX(130%);
+    margin: 15px;
+
+}
+.sidebar-full{
+
+
+
     .sidebar {
         background-color: #f8f8f8;
         grid-area: sidebar;
@@ -66,11 +80,17 @@ background-color: #f8f8f8;
 }
 
 }
+}
 
 
 @media (min-width: 1022px){
-    .sidebar-full{
+    .sidebar-section{
 
         display: block;
     }
+}
+
+
+.closed{
+    transform: translateX(-100%);
 }
