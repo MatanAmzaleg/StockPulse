@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 
 export default function Login() {
-    const { login, register } = useAuth();
-    const [type, setType] = useState('');
     const router = useRouter();
     const { register: isRegister } = router.query;
+    const { login, register } = useAuth();
+    const [type, setType] = useState('');
     const formRef = useRef(null);
 
     useEffect(() => {
@@ -35,8 +35,8 @@ export default function Login() {
         <section className="login-sec">
             <div className="image grid-center">
                 <div className="flex column align-center">
-                <img src="/market.png" className='logo' alt="" />
-                <h1 className='main-title'>StockPulse</h1>
+                    <img src="/market.png" className="logo" alt="" />
+                    <h1 className="main-title">StockPulse</h1>
                 </div>
             </div>
             <div className="login-container">
@@ -48,19 +48,21 @@ export default function Login() {
                     onSubmit={submit}
                 >
                     <h1>{type}</h1>
-                    <input type="email" name="email" placeholder="Email" />
-                    {type === 'register' ? (
+                    <div className="flex column gap">
+                        <input type="email" name="email" placeholder="Email" />
+                        {type === 'register' ? (
+                            <input
+                                type="fullName"
+                                name="fullName"
+                                placeholder="full name"
+                            />
+                        ) : null}
                         <input
-                            type="fullName"
-                            name="fullName"
-                            placeholder="full name"
+                            type="password"
+                            name="password"
+                            placeholder="Password"
                         />
-                    ) : null}
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                    />
+                    </div>
                     <input type="submit" value={type} />
                     {type === 'login' ? (
                         <Link href="/login?register=true">

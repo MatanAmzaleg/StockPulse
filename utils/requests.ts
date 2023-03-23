@@ -9,3 +9,9 @@ export function getCurrencyDataURL(
         process.env.POLYGON_API_KEY
     }`;
 }
+
+export function getCryptoCompareUrl(symbol: string) {
+    return `https://min-api.cryptocompare.com/data/v2/histohour?fsym=${symbol.toUpperCase()}&tsym=USD&limit=24&toTs=-1&api_key=${
+        process.env.NEXT_PUBLIC_CRYPTO_COMPARE_KEY
+    }`;
+}

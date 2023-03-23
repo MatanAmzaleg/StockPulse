@@ -74,8 +74,6 @@ export const AuthProvider = ({ children }: Props) => {
             console.log(data.message);
             deleteCookie(USER_COOKIE);
             setUser(null);
-
-            // router.push('/login');
         } catch ({ message }) {
             alert(message);
         } finally {
