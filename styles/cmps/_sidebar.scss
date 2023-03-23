@@ -28,7 +28,23 @@ min-width: 300px;
             flex-direction: column;
             gap: 22px;
             
-          
+            .sidebar-nav-link {
+                padding: 5px 40px;
+                font-size: em(15px, 16px);
+                display: flex;
+                align-items: center;
+                gap: 17px;
+                transition: all 0.2s;
+                // letter-spacing: 0.7px;
+                
+                &:hover {
+                    box-shadow: inset 5px 0 0 0 #121212;
+                }
+
+            .link-icon {
+                font-size: em(26px, 16px);
+            }
+        }
     }
     
     .user-container {
