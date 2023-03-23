@@ -2,6 +2,15 @@
     padding-inline: 50px;
     margin-top: 50px;
     grid-area: main;
+    width: 100%;
+
+    .hamburger-btn{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 15px;
+        transform: translateY(-250%);
+    }
 
     .main-title {
         font-size: 2rem;

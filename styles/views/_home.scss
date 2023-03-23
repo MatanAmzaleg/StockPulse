@@ -1,9 +1,17 @@
 .home-container {
     min-height: 100vh;
     background-color: white;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: 100px 1fr;
+    display: flex;
+margin: auto;
     grid-template-areas: 'logo main' 'sidebar main';
     color: #121212;
+}
+
+
+@media (min-width: 1022px) {
+    .home-container{
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: 100px 1fr;
+    }
 }

@@ -2,6 +2,7 @@ import HotCryptoPreview from '@/components/HotCryptoPreview';
 import PopularCryptoPreview from '@/components/PopularCryptoPreview';
 import useAuth from '@/hooks/useAuth';
 import useWebSockets from '@/hooks/useWebSockets';
+import {useState, useEffect} from 'react'
 
 const currenciesList = [
     'BTCUSD',
@@ -16,6 +17,10 @@ const currenciesList = [
 export default function Home() {
     const { currencies } = useWebSockets(currenciesList);
 
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+
+
     // const addToWatchList = (event: MouseEvent) => {
     //     event.preventDefault();
     //     console.log('adding to watchlist');
@@ -26,7 +31,8 @@ export default function Home() {
     if (!currencies) return <img className="loader" src="/loader.gif" alt="" />;
 
     return (
-        <section className="main-content-sec flex column">
+        <section className="main-content-sec flex column relative">
+            <button className='hamburger-btn' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>hamburger</button>
             <h1 className="main-title">Stock Market</h1>
             <p className="subtitle">Trending market group</p>
             <button className="view-all">View All</button>
