@@ -2,8 +2,10 @@
     height: 100vh;
 background-color: #f8f8f8;
 position: relative;
-transition: transform 0.3s;
-min-width: 300px;
+transition: width 0.3s;
+width: 0px;
+visibility: visible;
+
 
 
 .hamburger-btn{
@@ -11,11 +13,12 @@ min-width: 300px;
     right: 0;
     transform: translateX(130%);
     margin: 15px;
+    visibility: visible;
 
 }
 .sidebar-full{
 
-
+    visibility: hidden;
     .sidebar {
         background-color: #f8f8f8;
         grid-area: sidebar;
@@ -84,10 +87,22 @@ min-width: 300px;
 
 
 @media (min-width: 1022px){
+    .sidebar-section{
+        width: 0px !important;
+
+        .hamburger-btn{
+            display: none;
+        }
+
+    }
     
 }
 
 
 .closed{
-    transform: translateX(-100%);
+    width: 300px;
+
+    .sidebar-full{
+        visibility: visible;
+    }
 }
