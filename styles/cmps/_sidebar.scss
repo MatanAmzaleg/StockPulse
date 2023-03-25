@@ -19,7 +19,68 @@ visibility: visible;
 .sidebar-full{
 
     visibility: hidden;
+    .sidebar {
+        background-color: #f8f8f8;
+        grid-area: sidebar;
+        display: flex;
+        flex-direction: column;
+        
+        .sidebar-nav {
+            padding-block: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            
+            .sidebar-nav-link {
+                padding: 5px 40px;
+                font-size: em(15px, 16px);
+                display: flex;
+                align-items: center;
+                gap: 17px;
+                transition: all 0.2s;
+                // letter-spacing: 0.7px;
+                
+                &:hover {
+                    box-shadow: inset 5px 0 0 0 #121212;
+                }
 
+            .link-icon {
+                font-size: em(26px, 16px);
+            }
+        }
+    }
+    
+    .user-container {
+        padding-inline: 40px;
+        p {
+            font-size: 1.1em;
+            font-weight: bold;
+            
+            &.username {
+                text-transform: capitalize;
+            }
+        }
+        
+        button {
+            border-radius: 10px;
+            background-color: #7422dd;
+            color: #e7defa;
+            padding: 10px;
+        }
+    }
+}
+
+.logo-container {
+    background-color: #f8f8f8;
+    grid-area: logo;
+    padding: 40px 40px 0 40px;
+
+    .logo {
+        border-bottom: 1px #858585 solid;
+        height: 100%;
+        font-size: larger;
+    }
+}
 
 }
 }
