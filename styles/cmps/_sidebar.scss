@@ -86,23 +86,3 @@ visibility: visible;
 }
 
 
-@media (min-width: 1022px){
-    .sidebar-section{
-        width: 0px !important;
-
-        .hamburger-btn{
-            display: none;
-        }
-
-    }
-    
-}
-
-
-.closed{
-    width: 300px;
-
-    .sidebar-full{
-        visibility: visible;
-    }
-}
