@@ -1,55 +1,55 @@
 .sidebar-section {
-    // min-height: 100vh;
     height: 100%;
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
     position: relative;
-    transition: width 0.3s;
     width: 300px;
     visibility: visible;
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
+
     // .hamburger-btn {
     //     position: absolute;
     //     right: 0;
     //     transform: translateX(130%);
     //     margin: 15px;
+    //     visibility: visible;
     // }
-    .hamburger-btn {
-        position: absolute;
-        right: 0;
-        transform: translateX(130%);
-        margin: 15px;
-        visibility: visible;
-    }
-    .user-container {
-        padding-inline: 40px;
-        position: fixed;
-        bottom: 20px;
-        p {
-            font-size: 1.1em;
-            font-weight: bold;
-            &.username {
-                text-transform: capitalize;
-            }
+
+    .logo-container {
+        background-color: #f8f8f8;
+        grid-area: logo;
+        padding: 40px 40px 0 40px;
+        color: #7422dd;
+
+        @media (max-width: 768px) {
+            display: none;
         }
-        button {
-            border-radius: 10px;
-            background-color: #7422DD;
-            color: #E7DEFA;
-            padding: 10px;
+
+        .logo {
+            border-bottom: 1px #7422dd solid;
+            height: 100%;
+            font-size: larger;
+            padding-bottom: 10px;
         }
     }
+
     .sidebar {
-        background-color: #F8F8F8;
+        background-color: #f8f8f8;
         grid-area: sidebar;
         display: flex;
         flex-direction: column;
+
         .sidebar-nav {
             padding-block: 40px;
             display: flex;
             flex-direction: column;
             gap: 22px;
+
+            @media (max-width: 768px) {
+                align-items: center;
+            }
+
             .sidebar-nav-link {
                 padding: 5px 40px;
                 font-size: em(15px, 16px);
@@ -57,40 +57,63 @@
                 align-items: center;
                 gap: 17px;
                 transition: all 0.2s;
+
+                @media (max-width: 768px) {
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 38px;
+                }
+
+                span {
+                    @media (max-width: 768px) {
+                        display: none;
+                    }
+                }
+
                 &:hover {
                     box-shadow: inset 5px 0 0 0 #121212;
                 }
+
                 .link-icon {
                     font-size: em(26px, 16px);
+                }
+
+                &.active {
+                    color: #7422dd;
+                    font-weight: bold;
                 }
             }
         }
     }
-    .logo-container {
-        background-color: #F8F8F8;
-        grid-area: logo;
-        padding: 40px 40px 0 40px;
-        .logo {
-            border-bottom: 1px #858585 solid;
-            height: 100%;
-            font-size: larger;
-            padding-bottom: 10px;
+
+    .user-container {
+        padding-inline: 40px;
+        position: fixed;
+        bottom: 20px;
+
+        p {
+            font-size: 1.1em;
+            font-weight: bold;
+
+            &.username {
+                text-transform: capitalize;
+                margin-bottom: 20px;
+            }
+        }
+
+        button {
+            border-radius: 10px;
+            background-color: #7422dd;
+            color: #e7defa;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            align-self: center;
         }
     }
-    @media (min-width: 1022px) {
-    }
-}
-@media (min-width: 1022px) {
-    .sidebar-section {
-        // width: 0px !important;
-        .hamburger-btn {
-            display: none;
-        }
-    }
-}
-.closed {
-    width: 300px;
-    .sidebar-full {
-        visibility: visible;
+
+    @media (max-width: 768px) {
+        width: 100px;
     }
 }

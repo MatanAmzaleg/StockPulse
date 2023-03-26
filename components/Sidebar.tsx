@@ -3,14 +3,17 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { AiOutlineBarChart, AiOutlineUser } from 'react-icons/ai';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 import { BsCurrencyBitcoin } from 'react-icons/bs';
+
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+
 export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { logout, user } = useAuth();
     const router = useRouter();
     const goToLogin = () => router.push('/login');
+
     return (
         <section className={`sidebar-section ${isSidebarOpen ? 'closed' : ''}`}>
             {/* <button
@@ -24,26 +27,51 @@ export default function Sidebar() {
             </div>
             <div className="sidebar">
                 <nav className="sidebar-nav">
-                    <Link href="/" className="sidebar-nav-link">
+                    <Link
+                        href="/"
+                        className={`sidebar-nav-link ${
+                            router.pathname === '/' && 'active'
+                        }`}
+                    >
                         <BsCurrencyBitcoin className="link-icon" />
-                        Crypto
+                        <span>Crypto</span>
                     </Link>
-                    <Link href="/" className="sidebar-nav-link">
+                    {/* <Link
+                        href="/"
+                        className={`sidebar-nav-link ${
+                            router.pathname === '/' && 'active'
+                        }`}
+                    >
                         <AiOutlineBarChart className="link-icon" />
-                        Market
+                        <span>Market</span>
                     </Link>
-                    <Link href="/" className="sidebar-nav-link">
+                    <Link
+                        href="/"
+                        className={`sidebar-nav-link ${
+                            router.pathname === '/' && 'active'
+                        }`}
+                    >
                         <HiOutlineSquares2X2 className="link-icon" />
-                        Dashboard
-                    </Link>
-                    <Link href="/profile" className="sidebar-nav-link">
+                        <span>Dashboard</span>
+                    </Link> */}
+                    <Link
+                        href="/profile"
+                        className={`sidebar-nav-link ${
+                            router.pathname.includes('profile') && 'active'
+                        }`}
+                    >
                         <AiOutlineUser className="link-icon" />
-                        Profile
+                        <span>Profile</span>
                     </Link>
-                    <Link href="/" className="sidebar-nav-link">
+                    {/* <Link
+                        href="/"
+                        className={`sidebar-nav-link ${
+                            router.pathname === '/' && 'active'
+                        }`}
+                    >
                         <IoSettingsOutline className="link-icon" />
-                        Settings
-                    </Link>
+                        <span>Settings</span>
+                    </Link> */}
                 </nav>
             </div>
             {user ? (

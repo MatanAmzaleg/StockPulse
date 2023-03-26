@@ -32,7 +32,6 @@ export default async function handler(
             { $push: { watchlist: symbol } },
             { new: true }
         );
-        console.log(user);
 
         res.json('ok');
     } else {
