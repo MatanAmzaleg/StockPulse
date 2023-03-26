@@ -6,14 +6,11 @@ import { BsCurrencyBitcoin } from 'react-icons/bs';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
 export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { logout, user } = useAuth();
     const router = useRouter();
-
     const goToLogin = () => router.push('/login');
-
     return (
         <section className={`sidebar-section ${isSidebarOpen ? 'closed' : ''}`}>
             {/* <button

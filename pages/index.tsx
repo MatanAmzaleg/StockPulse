@@ -130,7 +130,7 @@ export default function Home() {
             </section> */}
             <section className="hot-crypto-sec">
                 <h1>Hot 🔥</h1>
-                <section className="hot-crypto-list flex">
+                <section className="hot-crypto-list flex wrap">
                     {currenciesList.slice(0, 6).map((currency, idx) => (
                         <HotCryptoPreview
                             currencyKey={currenciesList[idx]}
