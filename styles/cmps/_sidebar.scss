@@ -19,6 +19,8 @@ visibility: visible;
 .sidebar-full{
 
     visibility: hidden;
+    transform: translateX(-200%);
+    transition: transform 0.3s;
     .sidebar {
         background-color: #f8f8f8;
         grid-area: sidebar;
@@ -103,6 +105,7 @@ visibility: visible;
     width: 300px;
 
     .sidebar-full{
+        transform: translateX(0);
         visibility: visible;
     }
 }
