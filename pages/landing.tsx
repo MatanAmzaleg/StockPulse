@@ -12,13 +12,13 @@ export default function Landing() {
             </header>
             <main>
                 <section className="content">
-                    <h1>Live and onddemand trading</h1>
+                    <h1>Live and ondemand trading</h1>
                     <h6>
                         Your guide to the world of an open financial system. Get
                         started with the easiest and most secure platform to
                         trade crypto currency and stocks{' '}
                     </h6>
-                    <button onClick={() => router.push('/')}>
+                    <button className='explore-btn' onClick={() => router.push('/')}>
                         Explore Now
                     </button>
                 </section>
@@ -28,7 +28,7 @@ export default function Landing() {
                     // width={''}
                     // height={100}
                 /> */}
-                <img src="landing2-removebg.png" alt="landing" />
+                <img src="landing2-removebg.png" alt="landing" className='landing-img' />
             </main>
         </section>
     );
