@@ -5,7 +5,7 @@ import {
     formmatedDate,
     calculateChange,
 } from '@/utils/format';
-import { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { getCryptoCompareUrl, getCurrencyDataURL } from '@/utils/requests';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -30,6 +30,7 @@ export default function CryptoDetails({
     const { symbol } = router.query;
     const [day, setDay] = useState('today');
     const [inputValue, setInputValue] = useState<number>(0);
+    const [usdInCrypto, setUsdInCrypto] = useState<number>(0);
     const { user } = useAuth();
 
     const { currencies } = symbol
@@ -40,6 +41,11 @@ export default function CryptoDetails({
         setDay(day);
         const { o, c, t } = day === 'today' ? data : yesterdayData;
         setOc({ open: o, close: c, ts: t });
+    };
+
+    const changeInput = ({ target }: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(parseFloat(target.value));
+        setUsdInCrypto(parseFloat(target.value || '0') / alpacaCrypto!.bp);
     };
 
     useEffect(() => {
@@ -60,7 +66,6 @@ export default function CryptoDetails({
             downColor: descendingColor,
             borderDownColor: descendingColor,
             wickDownColor: descendingColor,
-            // borderRadius: 5,
         });
         lineSeries.setData(chartData);
         chart.timeScale().fitContent();
@@ -73,12 +78,6 @@ export default function CryptoDetails({
             return alert('need more cash to preform action');
 
         try {
-            // const userEmail = getCookie('loggedInUser');
-            // const res = await axios.get(
-            //     `/api/user/getcoins?username=${userEmail}`
-            // );
-            // const userCoins = await res.data;
-
             const transaction = {
                 date: Date.now(),
                 price: inputValue,
@@ -110,7 +109,6 @@ export default function CryptoDetails({
     const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
     const alpacaCrypto =
         currencies[(symbol + 'USD').toUpperCase() as keyof typeof currencies];
-    // console.log('symbol', symbol, 'alpacaCrypto', alpacaCrypto, 'data', data);
 
     const [prevPrice, setPrevPrice] = useState([alpacaCrypto?.bp]);
 
@@ -222,16 +220,19 @@ export default function CryptoDetails({
                     </div>
                 </div>
                 <div className="card actions flex column">
-                    <div className="input-container">
-                        <input
-                            type="number"
-                            className="transaction-input"
-                            onChange={(e) =>
-                                setInputValue(parseFloat(e.target.value))
-                            }
-                        />
-                    </div>
-                    <div className="flex">
+                    <p>
+                        ~ {usdInCrypto.toFixed(9) || 0} {alpacaCrypto.S}
+                    </p>
+
+                    <input
+                        type="number"
+                        min={0}
+                        className="transaction-input"
+                        title="USD"
+                        onChange={changeInput}
+                        placeholder="$"
+                    />
+                    <div className="action-btns flex">
                         <button
                             className="buy"
                             onClick={() => handleTransaction('buy')}
