@@ -1,17 +1,19 @@
 .home-container {
     min-height: 100vh;
     background-color: white;
-    display: flex;
-margin: auto;
-    grid-template-areas: 'logo main' 'sidebar main';
+    // display: flex;
+    // margin: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    // grid-template-rows: 100px 1fr;
+    grid-template-areas: 'sidebar main';
     color: #121212;
 }
 
-
 @media (min-width: 1022px) {
-    .home-container{
-        display: grid;
-        grid-template-columns: 300px 1fr;
-        grid-template-rows: 100px 1fr;
-    }
+    // .home-container {
+    //     display: grid;
+    //     grid-template-columns: 300px 1fr;
+    //     grid-template-rows: 100px 1fr;
+    // }
 }

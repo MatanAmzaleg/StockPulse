@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { SlOptionsVertical } from 'react-icons/sl';
+import { AiOutlineStar } from 'react-icons/ai';
 import { Currency } from '@/typings';
 import {
     formattedPrice,
@@ -175,6 +176,9 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
                             </div>
                         )}
                     </button>
+                    {/* <button onClick={() => addToWatchList(crypto.S)}>
+                        <AiOutlineStar className="opt-icon" />
+                    </button> */}
                 </div>
                 <div className="bottom-sec flex space-between align-center">
                     <div className="graph" ref={graphRef}></div>

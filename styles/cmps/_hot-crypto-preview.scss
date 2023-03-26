@@ -1,13 +1,10 @@
 .hot-crypto-preview {
     padding: 30px 20px;
-    flex: 1;
+    // flex: 1;
+    flex-basis: 32.5%;
     background-color: #f8f8f8;
     border-radius: 8px;
     transition: background-color 0.3s;
-
-    &:hover {
-        background-color: darken($color: #f8f8f8, $amount: 5);
-    }
 
     .upper-sec {
         margin-bottom: 20px;
@@ -21,13 +18,15 @@
                 transform: translateX(10px);
                 border-radius: 50%;
                 padding: 5px;
-                width: 30px;
-                height: 30px;
+                width: 33px;
+                height: 33px;
                 cursor: pointer;
                 transition: background-color 0.2s;
+                // color: red;
 
                 &:hover {
-                    background-color: #c0c0c0;
+                    fill: rgb(242, 206, 4);
+                    // background-color: #c0c0c0;
                 }
             }
             .actions {
@@ -88,7 +87,7 @@
         gap: 20px;
 
         .graph {
-            background-color: #e5e6e9;
+            background-color: #f0f0f0;
             width: 75%;
             height: 50px;
         }
@@ -107,5 +106,14 @@
                 width: 35px;
             }
         }
+    }
+
+    &:hover {
+        background-color: darken($color: #f8f8f8, $amount: 5);
+
+        // .graph {
+        //     // background-color: black;
+        //     background-color: darken($color: #f0f0f0, $amount: 5);
+        // }
     }
 }

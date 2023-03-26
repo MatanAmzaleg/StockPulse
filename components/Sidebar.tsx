@@ -16,52 +16,50 @@ export default function Sidebar() {
 
     return (
         <section className={`sidebar-section ${isSidebarOpen ? 'closed' : ''}`}>
-            <button
+            {/* <button
                 className="hamburger-btn"
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
                 hamburger
-            </button>
-            <div className="sidebar-full">
-                <div className="logo-container">
-                    <h2 className="logo">stock pulse</h2>
-                </div>
-                <div className="sidebar">
-                    <nav className="sidebar-nav">
-                        <Link href="/" className="sidebar-nav-link">
-                            <BsCurrencyBitcoin className="link-icon" />
-                            Crypto
-                        </Link>
-                        <Link href="/" className="sidebar-nav-link">
-                            <AiOutlineBarChart className="link-icon" />
-                            Market
-                        </Link>
-                        <Link href="/" className="sidebar-nav-link">
-                            <HiOutlineSquares2X2 className="link-icon" />
-                            Dashboard
-                        </Link>
-                        <Link href="/profile" className="sidebar-nav-link">
-                            <AiOutlineUser className="link-icon" />
-                            Profile
-                        </Link>
-                        <Link href="/" className="sidebar-nav-link">
-                            <IoSettingsOutline className="link-icon" />
-                            Settings
-                        </Link>
-                    </nav>
-                </div>
-                {user ? (
-                    <div className="user-container">
-                        <p>Welcome back,</p>
-                        <p className="username">{user?.fullName}</p>
-                        <button onClick={logout}>Logout</button>
-                    </div>
-                ) : (
-                    <div className="user-container">
-                        <button onClick={goToLogin}>Login</button>
-                    </div>
-                )}
+            </button> */}
+            <div className="logo-container">
+                <h2 className="logo">stock pulse</h2>
             </div>
+            <div className="sidebar">
+                <nav className="sidebar-nav">
+                    <Link href="/" className="sidebar-nav-link">
+                        <BsCurrencyBitcoin className="link-icon" />
+                        Crypto
+                    </Link>
+                    <Link href="/" className="sidebar-nav-link">
+                        <AiOutlineBarChart className="link-icon" />
+                        Market
+                    </Link>
+                    <Link href="/" className="sidebar-nav-link">
+                        <HiOutlineSquares2X2 className="link-icon" />
+                        Dashboard
+                    </Link>
+                    <Link href="/profile" className="sidebar-nav-link">
+                        <AiOutlineUser className="link-icon" />
+                        Profile
+                    </Link>
+                    <Link href="/" className="sidebar-nav-link">
+                        <IoSettingsOutline className="link-icon" />
+                        Settings
+                    </Link>
+                </nav>
+            </div>
+            {user ? (
+                <div className="user-container">
+                    <p>Welcome back,</p>
+                    <p className="username">{user?.fullName}</p>
+                    <button onClick={logout}>Logout</button>
+                </div>
+            ) : (
+                <div className="user-container">
+                    <button onClick={goToLogin}>Login</button>
+                </div>
+            )}
         </section>
     );
 }
