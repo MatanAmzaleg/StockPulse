@@ -4,7 +4,7 @@
     grid-area: main;
     width: 100%;
 
-    .hamburger-btn{
+    .hamburger-btn {
         position: absolute;
         top: 0;
         left: 0;
@@ -36,9 +36,16 @@
         }
     }
 
-    .hot-crypto-list {
-        margin-top: 30px;
-        gap: 10px;
+    .hot-crypto-sec {
+        margin-top: 50px;
+        h1 {
+            font-size: 1.7rem;
+        }
+        .hot-crypto-list {
+            margin-top: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
     }
 
     .most-popular-sec {
@@ -47,9 +54,10 @@
         .main-title {
             font-size: 1.7rem;
         }
-        .little-cards-sec {
+        .most-popular-list {
             margin-top: 30px;
             gap: 10px;
+            flex-wrap: wrap;
         }
     }
 }
