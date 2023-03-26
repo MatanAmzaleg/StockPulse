@@ -3,7 +3,7 @@
     // background-color: #1d2e51;
     background-color: #161932;
     color: white;
-    padding: 50px 70px;
+    padding: 50px 40px;
 
     button {
         padding: 10px 30px;
@@ -11,7 +11,6 @@
     }
 
     .landing-header {
-        padding-bottom: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -19,6 +18,7 @@
 
     main {
         display: flex;
+        flex-direction: column-reverse;
         gap: 20px;
 
         > * {
@@ -27,24 +27,79 @@
 
         img {
             // width: 100%;
-            width: 40px;
+            width: 300px;
+            max-width: 600px;
             // height: 100%;
             // aspect-ratio: 1/1;
         }
 
         .content {
-            padding-top: 50px;
+
             h1 {
-                font-size: 5.8em;
+                font-size: 3.3em;
                 max-width: 9ch;
-                margin-bottom: 30px;
+                margin-bottom: 20px;
             }
 
             h6 {
                 font-weight: 500;
                 color: #515177;
                 margin-bottom: 30px;
+                max-width: 70%;
+            }
+            
+            .explore-btn{
+                transition:background-color 0.3s ;
+                
+                &:hover{
+                    background-color: #202447;
+                }
             }
         }
+    }
+}
+
+
+@media (min-width: 700px){
+    .landing-container{
+
+        .landing-header{
+            padding-bottom: 50px;
+        }
+        main{
+            margin-top: 100px;
+            align-items: center;
+            flex-direction: row;
+
+            .content{
+                padding-top: 30px;
+            }
+        }
+    }   
+}
+@media (min-width: 1100px){
+    .landing-container{
+        padding: 50px 100px;
+        .landing-header{
+            padding-bottom: 50px;
+        }
+        main{
+            margin-top: 0px;
+            .content{
+                h1{
+                    font-size: 4rem;
+                }
+                h6{
+                    font-size: 23px;
+                  
+                }
+            }
+        }
+    }   
+}
+
+@media (min-width: 1500px){
+    .landing-container{
+        padding: 50px 200px;
     }
 }
