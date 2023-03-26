@@ -2,9 +2,11 @@ import CryptoCard from '@/components/CryptoCard';
 import TransactionPreview from '@/components/TransactionPreview';
 import useAuth from '@/hooks/useAuth';
 import useWebSockets from '@/hooks/useWebSockets';
+import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export default function profile() {
+export default function profile(props: any) {
     const transactions = [
         {
             email: 'Guy@gmail.com',
@@ -65,10 +67,13 @@ export default function profile() {
         //     amount: 5322,
         // },
     ];
+
     const router = useRouter();
     const { user } = useAuth();
 
-    // if (!user) return <div className="">go to login</div>;
+    useEffect(() => {
+        if (!user) router.push('login');
+    }, [user]);
 
     const { currencies } = useWebSockets(
         userCurrencies.map((currency) =>
@@ -137,3 +142,20 @@ export default function profile() {
         </section>
     );
 }
+
+export const getServerSideProps = async ({
+    req,
+}: GetServerSidePropsContext) => {
+    if (!req.headers.cookie?.includes('loggedInUser')) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            },
+        };
+    }
+
+    return {
+        props: { user: '' },
+    };
+};

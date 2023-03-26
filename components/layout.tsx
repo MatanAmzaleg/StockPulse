@@ -18,6 +18,9 @@ export default function Layout({ children }: any) {
         setTitle('- ' + name || '');
     }, [router.pathname]);
 
+    const dontNeedLayout = () =>
+        router.pathname === '/login' || router.pathname === '/landing';
+
     return (
         <>
             <Head>
@@ -32,10 +35,14 @@ export default function Layout({ children }: any) {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className="home-container">
-                <Sidebar />
-                {children}
-            </main>
+            {!dontNeedLayout() ? (
+                <main className="home-container">
+                    <Sidebar />
+                    {children}
+                </main>
+            ) : (
+                children
+            )}
         </>
     );
 }

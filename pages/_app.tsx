@@ -2,8 +2,6 @@ import Layout from '@/components/layout';
 import '@/styles/main.scss';
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
-import { useRouter } from 'next/router';
-import { getCookie } from 'cookies-next';
 import { AuthProvider } from '@/hooks/useAuth';
 
 const roboto = Roboto({
@@ -12,11 +10,6 @@ const roboto = Roboto({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-    const router = useRouter();
-
-    const dontNeedLayout = () =>
-        router.pathname === '/login' || router.pathname === '/landing';
-
     return (
         <>
             <style jsx global>{`
@@ -26,13 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 }
             `}</style>
             <AuthProvider>
-                {dontNeedLayout() ? (
+                <Layout>
                     <Component {...pageProps} />
-                ) : (
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-                )}
+                </Layout>
             </AuthProvider>
         </>
     );

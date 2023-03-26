@@ -83,9 +83,9 @@ export const AuthProvider = ({ children }: Props) => {
 
     async function addToWatchList(symbol: string) {
         setLoading(true);
-        const newUser = { ...user, watchlist: [...user!.watchlist, symbol] };
+        // const newUser = { ...user, watchlist: [...user!.watchlist, symbol] };
         try {
-            await axios.post(`/api/user/${user?.email}`, newUser);
+            await axios.post(`/api/user/${user?.email}`, { symbol });
         } catch (error) {
             console.log(error);
         } finally {

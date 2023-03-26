@@ -143,8 +143,6 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
         setIsOpen((prev) => !prev);
     };
 
-    const add = () => {};
-
     if (!crypto) return <HotSkeleton />;
 
     return (
@@ -169,7 +167,11 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
 
                         {isOpen && (
                             <div className="actions">
-                                <button onClick={add}>add</button>
+                                <button
+                                    onClick={() => addToWatchList(crypto.S)}
+                                >
+                                    add
+                                </button>
                             </div>
                         )}
                     </button>
@@ -188,38 +190,38 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
     );
 }
 
-export const getServerSideProps = async ({ params }: { params: any }) => {
-    try {
-        const todayFormat = formmatedDate(new Date());
-        const yesterdayFormat = formmatedDate(new Date(Date.now() - 864e5));
-        const dayBeforeLastFormat = formmatedDate(
-            new Date(Date.now() - 864e5 * 2)
-        );
+// export const getServerSideProps = async ({ params }: { params: any }) => {
+//     try {
+//         const todayFormat = formmatedDate(new Date());
+//         const yesterdayFormat = formmatedDate(new Date(Date.now() - 864e5));
+//         const dayBeforeLastFormat = formmatedDate(
+//             new Date(Date.now() - 864e5 * 2)
+//         );
 
-        const response = await axios.get(
-            getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
-        );
+//         const response = await axios.get(
+//             getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
+//         );
 
-        const yesterdayData = await axios.get(
-            getCurrencyDataURL(
-                params.symbol,
-                yesterdayFormat,
-                dayBeforeLastFormat
-            )
-        );
+//         const yesterdayData = await axios.get(
+//             getCurrencyDataURL(
+//                 params.symbol,
+//                 yesterdayFormat,
+//                 dayBeforeLastFormat
+//             )
+//         );
 
-        return {
-            props: {
-                data: response.data.results[0],
-                yesterdayData: yesterdayData.data.results[0],
-            },
-        };
-    } catch (err) {
-        console.log('failed to fetch crypto details', err);
-        return {
-            props: {
-                error: err,
-            },
-        };
-    }
-};
+//         return {
+//             props: {
+//                 data: response.data.results[0],
+//                 yesterdayData: yesterdayData.data.results[0],
+//             },
+//         };
+//     } catch (err) {
+//         console.log('failed to fetch crypto details', err);
+//         return {
+//             props: {
+//                 error: err,
+//             },
+//         };
+//     }
+// };
