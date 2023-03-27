@@ -6,20 +6,48 @@
 
     .logo {
         display: flex;
-        flex-direction: row;
         margin-bottom: 20px;
-        align-items: center;
-        gap: 15px;
+        justify-content: space-between;
 
-        .icon-img {
-            background-color: gray;
-            padding: 10px;
-            border-radius: 12px;
+        div {
+            gap: 15px;
+
+            .icon-img {
+                background-color: #2f2f2f;
+                padding: 10px;
+                border-radius: 12px;
+            }
+
+            h2 {
+                color: white;
+                font-size: em(40px, 16px);
+                text-transform: uppercase;
+            }
         }
 
-        h2 {
-            color: white;
-            font-size: em(40px, 16px);
+        button {
+            .star-icon {
+                fill: white;
+                font-size: 2em;
+                transition: 0.2s;
+            }
+
+            &:hover .star-icon {
+                fill: #7422dd;
+                // transform: scale(1.1);
+                animation: spin 1s;
+            }
+
+            @keyframes spin {
+                0% {
+                    // transform: scale(1);
+                    transform: rotate(0);
+                }
+                100% {
+                    // transform: scale(2);
+                    transform: rotate(360deg);
+                }
+            }
         }
     }
 
@@ -43,7 +71,7 @@
         .small-detaills {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            justify-content: space-between;
 
             p {
                 text-transform: uppercase;

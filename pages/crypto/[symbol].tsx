@@ -13,6 +13,7 @@ import useWebSockets from '@/hooks/useWebSockets';
 import { createChart, CrosshairMode } from 'lightweight-charts';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import useAuth from '@/hooks/useAuth';
+import { AiOutlineStar } from 'react-icons/ai';
 
 const candleStickOption = {
     ascendingColor: '#7326d2',
@@ -125,14 +126,19 @@ export default function CryptoDetails({
     return (
         <section className="crypto-details">
             <div className="logo">
-                <Image
-                    src={`/${symbol}.svg`}
-                    alt="apple"
-                    className="icon-img"
-                    width={50}
-                    height={50}
-                />
-                <h2>{alpacaCrypto?.S.toUpperCase()}</h2>
+                <div className="flex">
+                    <Image
+                        src={`/${symbol}.svg`}
+                        alt="apple"
+                        className="icon-img"
+                        width={50}
+                        height={50}
+                    />
+                    <h2>{alpacaCrypto?.name}</h2>
+                </div>
+                <button>
+                    <AiOutlineStar className="star-icon" />
+                </button>
             </div>
             <div className="main-grid">
                 <div className="card small-detaills">
@@ -172,7 +178,7 @@ export default function CryptoDetails({
                     <table>
                         <tr>
                             <th>Pre-Market</th>
-                            <th>prev-Close</th>
+                            <th>Prev-Close</th>
                             <th>Open</th>
                         </tr>
                         <tr>

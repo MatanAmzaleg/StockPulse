@@ -25,11 +25,10 @@ export function formattedPrice(price: number) {
 }
 
 export function calculateChange(openingPrice: number, currentPrice: number) {
-    const change = currentPrice / openingPrice;
-    const percentageChange = (1 - change) * 100;
-    const orderType = percentageChange > 0 ? 'ascending' : 'descending';
+    const percentageChange = (1 - currentPrice / openingPrice) * 100;
+
     return {
         percentage: Math.abs(percentageChange).toFixed(2) + '%',
-        orderType,
+        orderType: percentageChange > 0 ? 'ascending' : 'descending',
     };
 }
