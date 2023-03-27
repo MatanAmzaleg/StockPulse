@@ -36,7 +36,7 @@ export default function Sidebar() {
                         <BsCurrencyBitcoin className="link-icon" />
                         <span>Crypto</span>
                     </Link>
-                    {/* <Link
+                    <Link
                         href="/"
                         className={`sidebar-nav-link ${
                             router.pathname === '/' && 'active'
@@ -53,7 +53,7 @@ export default function Sidebar() {
                     >
                         <HiOutlineSquares2X2 className="link-icon" />
                         <span>Dashboard</span>
-                    </Link> */}
+                    </Link>
                     <Link
                         href="/profile"
                         className={`sidebar-nav-link ${
@@ -63,7 +63,7 @@ export default function Sidebar() {
                         <AiOutlineUser className="link-icon" />
                         <span>Profile</span>
                     </Link>
-                    {/* <Link
+                    <Link
                         href="/"
                         className={`sidebar-nav-link ${
                             router.pathname === '/' && 'active'
@@ -71,7 +71,7 @@ export default function Sidebar() {
                     >
                         <IoSettingsOutline className="link-icon" />
                         <span>Settings</span>
-                    </Link> */}
+                    </Link>
                 </nav>
             </div>
             {user ? (

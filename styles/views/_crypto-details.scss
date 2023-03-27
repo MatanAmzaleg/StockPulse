@@ -85,11 +85,25 @@
 
             .day-actions {
                 display: flex;
+                // gap: 10px;
                 position: absolute;
                 top: 0;
                 left: 0;
                 transform: translateY(-100%);
                 border-top-left-radius: 12px;
+
+                // .curve {
+                //     margin: 0 37px 0 -10px;
+                //     padding: 0 20px;
+                //     // border-top: 2px solid #838383;
+                //     // border-bottom: 2.5px solid #fff;
+                //     border-right: 3px solid #838383;
+                //     border-radius: 0 12px 0 0;
+                //     transform: skew(45deg, 0deg);
+                //     // transform-origin: top left;
+                //     // box-sizing: border-box;
+                //     content: '';
+                // }
 
                 button {
                     background-color: #e9e9ec;
@@ -169,6 +183,7 @@
                 background-color: rgb(240, 240, 240);
                 border-radius: 10px;
                 padding: 10px 15px;
+                -moz-appearance: textfield;
 
                 &::-webkit-inner-spin-button {
                     -webkit-appearance: none;

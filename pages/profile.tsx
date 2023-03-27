@@ -2,14 +2,16 @@ import CryptoCard from '@/components/CryptoCard';
 import TransactionPreview from '@/components/TransactionPreview';
 import useAuth from '@/hooks/useAuth';
 import useWebSockets from '@/hooks/useWebSockets';
+import { Transaction } from '@/typings';
+import { getCookie } from 'cookies-next';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-export default function profile(props: any) {
+export default function profile() {
     const transactions = [
         {
-            email: 'Guy@gmail.com',
+            // email: 'Guy@gmail.com',
             action: 'buy',
             symbol: 'btc',
             symbolName: 'Bitcoin',
@@ -19,7 +21,7 @@ export default function profile(props: any) {
             price: 300,
         },
         {
-            email: 'Guy@gmail.com',
+            // email: 'Guy@gmail.com',
             action: 'sell',
             symbol: 'btc',
             symbolName: 'Bitcoin',
@@ -29,7 +31,7 @@ export default function profile(props: any) {
             price: 300,
         },
         {
-            email: 'Guy@gmail.com',
+            // email: 'Guy@gmail.com',
             action: 'buy',
             symbol: 'btc',
             symbolName: 'Bitcoin',
@@ -40,45 +42,45 @@ export default function profile(props: any) {
         },
     ];
 
-    const userCurrencies = [
-        {
-            symbol: 'btc',
-            symbolName: 'bitcoin',
-            amount: 1.23,
-        },
-        {
-            symbol: 'eth',
-            symbolName: 'ethereium',
-            amount: 123,
-        },
-        {
-            symbol: 'sushi',
-            symbolName: 'Sushi',
-            amount: 5322,
-        },
-        // {
-        //     symbol: 'sushi',
-        //     symbolName: 'Sushi',
-        //     amount: 5322,
-        // },
-        // {
-        //     symbol: 'sushi',
-        //     symbolName: 'Sushi',
-        //     amount: 5322,
-        // },
-    ];
+    // const userCurrencies = [
+    //     {
+    //         symbol: 'btc',
+    //         symbolName: 'bitcoin',
+    //         amount: 1.23,
+    //     },
+    //     {
+    //         symbol: 'eth',
+    //         symbolName: 'ethereium',
+    //         amount: 123,
+    //     },
+    //     {
+    //         symbol: 'sushi',
+    //         symbolName: 'Sushi',
+    //         amount: 5322,
+    //     },
+    //     // {
+    //     //     symbol: 'sushi',
+    //     //     symbolName: 'Sushi',
+    //     //     amount: 5322,
+    //     // },
+    //     // {
+    //     //     symbol: 'sushi',
+    //     //     symbolName: 'Sushi',
+    //     //     amount: 5322,
+    //     // },
+    // ];
 
     const router = useRouter();
     const { user } = useAuth();
 
-    useEffect(() => {
-        if (!user) router.push('login');
-    }, [user]);
+    // useEffect(() => {
+    //     if (!getCookie('loggedInUser')) router.push('login');
+    // }, [user]);
+
+    if (!user) return <div>Loading</div>;
 
     const { currencies } = useWebSockets(
-        userCurrencies.map((currency) =>
-            (currency.symbol + 'usd').toLocaleUpperCase()
-        )
+        user!.currencies.map((c) => (c.currency + 'usd').toLocaleUpperCase())
     );
 
     return (
@@ -104,19 +106,19 @@ export default function profile(props: any) {
                 <div className="card my-cryptos flex column space-between">
                     <h1>My Cryptos:</h1>
                     <div className="cryptos flex column">
-                        {userCurrencies.map((currency) => (
+                        {/* {user!.currencies.map((c) => (
                             <CryptoCard
                                 price={
                                     currencies[
                                         (
-                                            currency.symbol + 'USD'
+                                            c.currency + 'USD'
                                         ).toLocaleUpperCase() as keyof typeof currencies
                                     ]?.bp
                                 }
-                                key={currency.symbol}
-                                currency={currency}
+                                key={c.currency}
+                                currency={c}
                             />
-                        ))}
+                        ))} */}
                     </div>
                 </div>
                 <div className="card transaction-container">
@@ -130,12 +132,12 @@ export default function profile(props: any) {
                             <p className="heading">Quantity</p>
                             <p className="heading">Status</p>
                         </div>
-                        {/* {user?.transactions.map((t) => (
-                            <TransactionPreview key={t.date} transaction={t} />
-                        ))} */}
-                        {transactions.map((t) => (
+                        {user!.transactions.map((t: Transaction) => (
                             <TransactionPreview key={t.date} transaction={t} />
                         ))}
+                        {/* {transactions.map((t: Transaction) => (
+                            <TransactionPreview key={t.date} transaction={t} />
+                        ))} */}
                     </div>
                 </div>
             </div>
@@ -146,7 +148,10 @@ export default function profile(props: any) {
 export const getServerSideProps = async ({
     req,
 }: GetServerSidePropsContext) => {
+    console.log('hello', req.headers.cookie);
     if (!req.headers.cookie?.includes('loggedInUser')) {
+        console.log('goodbye', req.headers.cookie);
+
         return {
             redirect: {
                 destination: '/login',

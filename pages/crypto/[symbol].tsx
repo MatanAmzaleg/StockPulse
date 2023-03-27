@@ -161,6 +161,7 @@ export default function CryptoDetails({
                         >
                             Today
                         </button>
+                        {/* <span className="curve"></span> */}
                         <button
                             onClick={() => selectDay('yesterday')}
                             className={day === 'yesterday' ? 'active' : ''}
