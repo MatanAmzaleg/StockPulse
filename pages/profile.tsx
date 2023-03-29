@@ -7,75 +7,12 @@ import { getCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { avgTransaction } from "@/utils/format";
 
 export default function profile() {
-  // const transactions = [
-  //     {
-  //         // email: 'Guy@gmail.com',
-  //         action: 'buy',
-  //         symbol: 'btc',
-  //         symbolName: 'Bitcoin',
-  //         date: 126319289,
-  //         status: 'approved',
-  //         amount: 1723,
-  //         price: 300,
-  //     },
-  //     {
-  //         // email: 'Guy@gmail.com',
-  //         action: 'sell',
-  //         symbol: 'btc',
-  //         symbolName: 'Bitcoin',
-  //         date: 126334289,
-  //         status: 'approved',
-  //         amount: 1723,
-  //         price: 300,
-  //     },
-  //     {
-  //         // email: 'Guy@gmail.com',
-  //         action: 'buy',
-  //         symbol: 'btc',
-  //         symbolName: 'Bitcoin',
-  //         date: 1241219289,
-  //         status: 'pending',
-  //         amount: 1723,
-  //         price: 300,
-  //     },
-  // ];
-
-  // const userCurrencies = [
-  //     {
-  //         symbol: 'btc',
-  //         symbolName: 'bitcoin',
-  //         amount: 1.23,
-  //     },
-  //     {
-  //         symbol: 'eth',
-  //         symbolName: 'ethereium',
-  //         amount: 123,
-  //     },
-  //     {
-  //         symbol: 'sushi',
-  //         symbolName: 'Sushi',
-  //         amount: 5322,
-  //     },
-  //     // {
-  //     //     symbol: 'sushi',
-  //     //     symbolName: 'Sushi',
-  //     //     amount: 5322,
-  //     // },
-  //     // {
-  //     //     symbol: 'sushi',
-  //     //     symbolName: 'Sushi',
-  //     //     amount: 5322,
-  //     // },
-  // ];
 
   const router = useRouter();
   const { user } = useAuth();
-
-  // useEffect(() => {
-  //     if (!getCookie('loggedInUser')) router.push('login');
-  // }, [user]);
 
   if (!user) return <div>Loading</div>;
 
@@ -109,13 +46,14 @@ export default function profile() {
               <div className="flex align-center">
                 <p className="bolder">Currency</p>
               </div>
-              <p>Amount</p>
-              <p>USD worth</p>
-              <p className="scending">Change</p>
+              <p className="bolder">Amount</p>
+              <p className="bolder">USD worth</p>
+              <p className="bolder">Change</p>
             </section>
           <div className="cryptos flex column">
             {user!.currencies.map((c) => (
               <CryptoCard
+              avgBuyPrice = {avgTransaction(user.transactions, c.currency)}
                 price={
                   currencies[
                     (

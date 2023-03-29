@@ -1,5 +1,10 @@
-export default function CryptoCard({ currency, price }: any) {
+import { calculateChange2 } from "@/utils/format";
+
+export default function CryptoCard({ currency, price, avgBuyPrice }: any) {
+    console.log(avgBuyPrice);
+    
     const pricePerCoin = () => (price * currency.amount).toFixed(3);
+
 
     return (
         <section className="crypto-card-sec align-center">
@@ -12,7 +17,7 @@ export default function CryptoCard({ currency, price }: any) {
             </div>
             <p>{currency.amount}</p>
             <p>{pricePerCoin()}</p>
-            <p className="scending">10% | 88$</p>
+            <p className={calculateChange2(+pricePerCoin(), avgBuyPrice) > 0 ? "ascending" : "descending"}>{calculateChange2(+pricePerCoin(), avgBuyPrice).toFixed("2") + '%'}</p>
         </section>
     );
 }

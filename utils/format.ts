@@ -1,3 +1,5 @@
+import { Transaction } from "@/typings";
+
 export function formmatedDate(date: Date) {
     return `${date.getFullYear()}-${(date.getMonth() + 1)
         .toString()
@@ -32,3 +34,24 @@ export function calculateChange(openingPrice: number, currentPrice: number) {
         orderType: percentageChange > 0 ? 'ascending' : 'descending',
     };
 }
+
+export function avgTransaction(transactions : Transaction[] , currency : string) {
+    let totalAmount = 0;
+    let totalRate = 0;
+  
+    transactions.forEach((transaction) => {
+      if (transaction.symbol === currency) {
+        totalAmount += transaction.amount;
+        totalRate += transaction.price * transaction.amount;
+      }
+    });
+  
+    return totalRate / totalAmount;
+  }
+
+  
+  export function calculateChange2(currentPrice : number, avgPriceBuy : number) {
+    const change = (currentPrice - avgPriceBuy) / avgPriceBuy * 100;
+    return change;
+  }
+
