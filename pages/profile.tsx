@@ -9,38 +9,38 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export default function profile() {
-    const transactions = [
-        {
-            // email: 'Guy@gmail.com',
-            action: 'buy',
-            symbol: 'btc',
-            symbolName: 'Bitcoin',
-            date: 126319289,
-            status: 'approved',
-            amount: 1723,
-            price: 300,
-        },
-        {
-            // email: 'Guy@gmail.com',
-            action: 'sell',
-            symbol: 'btc',
-            symbolName: 'Bitcoin',
-            date: 126334289,
-            status: 'approved',
-            amount: 1723,
-            price: 300,
-        },
-        {
-            // email: 'Guy@gmail.com',
-            action: 'buy',
-            symbol: 'btc',
-            symbolName: 'Bitcoin',
-            date: 1241219289,
-            status: 'pending',
-            amount: 1723,
-            price: 300,
-        },
-    ];
+    // const transactions = [
+    //     {
+    //         // email: 'Guy@gmail.com',
+    //         action: 'buy',
+    //         symbol: 'btc',
+    //         symbolName: 'Bitcoin',
+    //         date: 126319289,
+    //         status: 'approved',
+    //         amount: 1723,
+    //         price: 300,
+    //     },
+    //     {
+    //         // email: 'Guy@gmail.com',
+    //         action: 'sell',
+    //         symbol: 'btc',
+    //         symbolName: 'Bitcoin',
+    //         date: 126334289,
+    //         status: 'approved',
+    //         amount: 1723,
+    //         price: 300,
+    //     },
+    //     {
+    //         // email: 'Guy@gmail.com',
+    //         action: 'buy',
+    //         symbol: 'btc',
+    //         symbolName: 'Bitcoin',
+    //         date: 1241219289,
+    //         status: 'pending',
+    //         amount: 1723,
+    //         price: 300,
+    //     },
+    // ];
 
     // const userCurrencies = [
     //     {
@@ -103,10 +103,10 @@ export default function profile() {
                         Change: <span className="scending">14.75% | 150$</span>{' '}
                     </h2>
                 </div>
-                <div className="card my-cryptos flex column space-between">
-                    <h1>My Cryptos:</h1>
+                <div className="card my-cryptos flex column">
+                    <h1>Wallet</h1>
                     <div className="cryptos flex column">
-                        {/* {user!.currencies.map((c) => (
+                        {user!.currencies.map((c) => (
                             <CryptoCard
                                 price={
                                     currencies[
@@ -118,20 +118,20 @@ export default function profile() {
                                 key={c.currency}
                                 currency={c}
                             />
-                        ))} */}
+                        ))}
                     </div>
                 </div>
-                <div className="card transaction-container">
+                <div className="card transaction-container flex column">
                     <h1>Transacrion History</h1>
+                    <div className="transaction-preview heading">
+                        <p>Currency</p>
+                        <p>Action</p>
+                        <p>Date</p>
+                        <p>Price</p>
+                        <p>Quantity</p>
+                        <p>Status</p>
+                    </div>
                     <div className="transaction-list">
-                        <div className="transaction-preview">
-                            <p className="heading">Currency</p>
-                            <p className="heading">Action</p>
-                            <p className="heading">Date</p>
-                            <p className="heading">Price</p>
-                            <p className="heading">Quantity</p>
-                            <p className="heading">Status</p>
-                        </div>
                         {user!.transactions.map((t: Transaction) => (
                             <TransactionPreview key={t.date} transaction={t} />
                         ))}

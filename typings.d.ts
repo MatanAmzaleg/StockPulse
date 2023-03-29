@@ -1,4 +1,5 @@
 import { Timestamp } from 'mongodb';
+import { UserDocument } from './model/user.schema';
 
 export interface Currency {
     name: string;
@@ -52,4 +53,9 @@ export interface Crypto {
 
 export interface CurrencyObjectMap {
     [key: string]: number;
+}
+
+export interface ModifyWatchlistObj {
+    message: string;
+    isOnWatchlist: boolean;
 }

@@ -4,8 +4,11 @@ export default function CryptoCard({ currency, price }: any) {
     return (
         <section className="crypto-card-sec align-center">
             <div className="flex align-center">
-                <img src={`/${currency.symbol}.svg`} alt={currency.symbol} />
-                <p className="bold">{currency.symbolName}</p>
+                <img
+                    src={`/${currency.currency}.svg`}
+                    alt={currency.currency}
+                />
+                <p className="bold">{currency.currency}</p>
             </div>
             <p>{currency.amount}</p>
             <p>{pricePerCoin()}</p>

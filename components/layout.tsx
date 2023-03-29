@@ -12,14 +12,14 @@ export default function Layout({ children }: any) {
     const [title, setTitle] = useState('');
 
     useEffect(() => {
-        const { pathname, query } = router;
-        if (!pathname.includes('crypto')) return setTitle('');
-        const name = nameLookup(query.symbol as string);
-        setTitle('- ' + name || '');
+        // const { pathname, query } = router;
+        // if (pathname === '/') return setTitle('');
+        // const name = nameLookup(query.symbol as string);
+        // setTitle('- ' + name || '');
     }, [router.pathname]);
 
     const dontNeedLayout = () =>
-        router.pathname === '/login' || router.pathname === '/landing';
+        router.pathname === '/login' || router.pathname === '/';
 
     return (
         <>

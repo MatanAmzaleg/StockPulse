@@ -25,8 +25,9 @@
                 transition: background-color 0.2s;
                 // color: red;
 
-                &:hover {
-                    fill: rgb(242, 206, 4);
+                &:hover,
+                &.mark {
+                    fill: rgb(242, 206, 4) !important;
                     // background-color: #c0c0c0;
                 }
             }

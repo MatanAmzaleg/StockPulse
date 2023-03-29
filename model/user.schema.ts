@@ -7,7 +7,7 @@ export interface UserDocument extends Document {
     password: string;
     coins: number;
     currencies: Crypto[];
-    watchlist: [];
+    watchlist: string[];
     transactions: Transaction[];
 }
 
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema<UserDocument>({
         required: false,
     },
     watchlist: {
-        type: [],
+        type: [String],
         required: false,
     },
     transactions: {

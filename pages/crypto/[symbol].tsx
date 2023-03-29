@@ -27,16 +27,17 @@ export default function CryptoDetails({
     error,
 }: any) {
     const router = useRouter();
-    const graphRef = useRef<HTMLDivElement>(null);
     const { symbol } = router.query;
+    const graphRef = useRef<HTMLDivElement>(null);
     const [day, setDay] = useState('today');
     const [inputValue, setInputValue] = useState<number>(0);
     const [usdInCrypto, setUsdInCrypto] = useState<number>(0);
     const { user } = useAuth();
 
-    const { currencies } = symbol
-        ? useWebSockets([(symbol + 'USD').toUpperCase()])
-        : { currencies: {} };
+    // const { currencies } = symbol
+    //     ? useWebSockets([(symbol + 'USD').toUpperCase()])
+    //     : { currencies: {} };
+    const { currencies } = useWebSockets([(symbol + 'usd').toUpperCase()]);
 
     const selectDay = (day: string) => {
         setDay(day);
@@ -86,7 +87,7 @@ export default function CryptoDetails({
                 action,
                 status: 'approved',
                 symbol: alpacaCrypto?.S,
-                symbolName: alpacaCrypto?.S,
+                symbolName: alpacaCrypto?.name,
             };
 
             const crypto = {
@@ -94,11 +95,13 @@ export default function CryptoDetails({
                 amount: +(inputValue / alpacaCrypto?.ap!).toFixed(8),
             };
 
-            await axios.post(`/api/user/transfer`, {
+            const res = await axios.post(`/api/user/transfer`, {
                 email: user.email,
                 transaction,
                 crypto,
             });
+            alert(res.data.message);
+            setInputValue(0);
         } catch (err) {
             console.log('failed to set transaction', err);
         }
@@ -238,6 +241,7 @@ export default function CryptoDetails({
                         title="USD"
                         onChange={changeInput}
                         placeholder="$"
+                        value={inputValue || ''}
                     />
                     <div className="action-btns flex">
                         <button

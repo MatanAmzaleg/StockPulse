@@ -23,8 +23,8 @@ interface Props {
 
 export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
     const graphRef = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
-    const { addToWatchList } = useAuth();
+    const [isOnWishlist, setIsOnWishlist] = useState<boolean>(false);
+    const { addToWatchList, user } = useAuth();
 
     // useEffect(() => {
     //     // const start =  formmatedDate();
@@ -139,10 +139,22 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
     //     }
     // }, [graphRef.current]);
 
-    const openActions = (event: React.MouseEvent) => {
+    useEffect(() => {
+        if (!user || user.watchlist?.length === 0 || !crypto) return;
+        setIsOnWishlist(user.watchlist.includes(crypto.S));
+    }, [crypto]);
+
+    const onToggleWatchlist = async (event: React.MouseEvent) => {
         event.preventDefault();
-        setIsOpen((prev) => !prev);
+        const res = await addToWatchList(crypto.S);
+        console.log(res);
+
+        setIsOnWishlist(res.isOnWatchlist);
     };
+
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
 
     if (!crypto) return <HotSkeleton />;
 
@@ -163,7 +175,7 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
                             {crypto.name || 'coin'}
                         </p>
                     </div>
-                    <button onClick={openActions}>
+                    {/* <button onClick={openActions}>
                         <SlOptionsVertical className="opt-icon"></SlOptionsVertical>
 
                         {isOpen && (
@@ -175,13 +187,20 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
                                 </button>
                             </div>
                         )}
-                    </button>
-                    {/* <button onClick={() => addToWatchList(crypto.S)}>
-                        <AiOutlineStar className="opt-icon" />
                     </button> */}
+                    <button onClick={(e) => onToggleWatchlist(e)}>
+                        <AiOutlineStar
+                            className={`opt-icon ${
+                                isOnWishlist ? 'mark' : ''
+                            } `}
+                        />
+                    </button>
                 </div>
                 <div className="bottom-sec flex space-between align-center">
-                    <div className="graph" ref={graphRef}></div>
+                    <div className="graph" ref={graphRef}>
+                        {/* <p>{ohlc.o}</p>
+                        <p>{ohlc.c}</p> */}
+                    </div>
                     <div className="">
                         <h2 className="price-title">
                             {formattedPrice(crypto.bp)}
@@ -193,39 +212,3 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
         </Link>
     );
 }
-
-// export const getServerSideProps = async ({ params }: { params: any }) => {
-//     try {
-//         const todayFormat = formmatedDate(new Date());
-//         const yesterdayFormat = formmatedDate(new Date(Date.now() - 864e5));
-//         const dayBeforeLastFormat = formmatedDate(
-//             new Date(Date.now() - 864e5 * 2)
-//         );
-
-//         const response = await axios.get(
-//             getCurrencyDataURL(params.symbol, todayFormat, yesterdayFormat)
-//         );
-
-//         const yesterdayData = await axios.get(
-//             getCurrencyDataURL(
-//                 params.symbol,
-//                 yesterdayFormat,
-//                 dayBeforeLastFormat
-//             )
-//         );
-
-//         return {
-//             props: {
-//                 data: response.data.results[0],
-//                 yesterdayData: yesterdayData.data.results[0],
-//             },
-//         };
-//     } catch (err) {
-//         console.log('failed to fetch crypto details', err);
-//         return {
-//             props: {
-//                 error: err,
-//             },
-//         };
-//     }
-// };

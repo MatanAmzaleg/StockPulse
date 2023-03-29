@@ -28,7 +28,7 @@ export default function Sidebar() {
             <div className="sidebar">
                 <nav className="sidebar-nav">
                     <Link
-                        href="/"
+                        href="/crypto"
                         className={`sidebar-nav-link ${
                             router.pathname === '/' && 'active'
                         }`}
@@ -37,15 +37,15 @@ export default function Sidebar() {
                         <span>Crypto</span>
                     </Link>
                     <Link
-                        href="/"
+                        href="/stock"
                         className={`sidebar-nav-link ${
                             router.pathname === '/' && 'active'
                         }`}
                     >
                         <AiOutlineBarChart className="link-icon" />
-                        <span>Market</span>
+                        <span>Stocks</span>
                     </Link>
-                    <Link
+                    {/* <Link
                         href="/"
                         className={`sidebar-nav-link ${
                             router.pathname === '/' && 'active'
@@ -53,7 +53,7 @@ export default function Sidebar() {
                     >
                         <HiOutlineSquares2X2 className="link-icon" />
                         <span>Dashboard</span>
-                    </Link>
+                    </Link> */}
                     <Link
                         href="/profile"
                         className={`sidebar-nav-link ${
@@ -64,7 +64,7 @@ export default function Sidebar() {
                         <span>Profile</span>
                     </Link>
                     <Link
-                        href="/"
+                        href="/settings"
                         className={`sidebar-nav-link ${
                             router.pathname === '/' && 'active'
                         }`}

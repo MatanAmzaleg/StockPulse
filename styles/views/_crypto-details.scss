@@ -21,7 +21,8 @@
             h2 {
                 color: white;
                 font-size: em(40px, 16px);
-                text-transform: uppercase;
+                text-transform: capitalize;
+                letter-spacing: 2px;
             }
         }
 
@@ -29,7 +30,8 @@
             .star-icon {
                 fill: white;
                 font-size: 2em;
-                transition: 0.2s;
+                transition: 0.3s;
+                // animation-fill-mode: backwards;
             }
 
             &:hover .star-icon {

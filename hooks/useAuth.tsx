@@ -3,13 +3,14 @@ import { useRouter } from 'next/router';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import { UserDocument } from '@/model/user.schema';
 import axios from 'axios';
+import { ModifyWatchlistObj } from '@/typings';
 
 interface IAuth {
     user: UserDocument | null;
     login: (email: string, password: string) => void;
     register: (email: string, password: string, fullName: string) => void;
     logout: () => void;
-    addToWatchList: (symbol: string) => void;
+    addToWatchList: (symbol: string) => Promise<ModifyWatchlistObj>;
     loading: boolean;
 }
 
@@ -22,7 +23,10 @@ const AuthContext = createContext<IAuth>({
     login: async () => {},
     register: async () => {},
     logout: async () => {},
-    addToWatchList: async () => {},
+    addToWatchList: async () => ({
+        message: '',
+        isOnWatchlist: false,
+    }),
     loading: true,
 });
 
@@ -82,14 +86,19 @@ export const AuthProvider = ({ children }: Props) => {
     }
 
     async function addToWatchList(symbol: string) {
-        setLoading(true);
+        // setLoading(true);
         // const newUser = { ...user, watchlist: [...user!.watchlist, symbol] };
         try {
-            await axios.post(`/api/user/${user?.email}`, { symbol });
+            // await axios.post(`/api/user/${user?.email}`, { symbol });
+            const { data } = await axios.post(`/api/user/modifyWatchlist`, {
+                symbol,
+                email: user?.email,
+            });
+            const { message, isOnWatchlist, newUser } = data;
+            setUser(newUser);
+            return { message, isOnWatchlist };
         } catch (error) {
             console.log(error);
-        } finally {
-            setLoading(false);
         }
     }
 

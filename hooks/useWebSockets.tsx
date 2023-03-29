@@ -62,7 +62,7 @@ export default function useWebSockets(symbols: string[]) {
         };
 
         socket.onclose = () => {
-            console.log('lost connection');
+            console.log('closing connection');
         };
 
         return () => {
