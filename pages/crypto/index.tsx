@@ -1,11 +1,6 @@
 import HotCryptoPreview from '@/components/HotCryptoPreview';
 import PopularCryptoPreview from '@/components/PopularCryptoPreview';
-import useAuth from '@/hooks/useAuth';
 import useWebSockets from '@/hooks/useWebSockets';
-import { formmatedDate } from '@/utils/format';
-import { getCurrencyDataURL } from '@/utils/requests';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 
 const currenciesList = [
     'BTCUSD',

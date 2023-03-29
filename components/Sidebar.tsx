@@ -14,6 +14,13 @@ export default function Sidebar() {
     const router = useRouter();
     const goToLogin = () => router.push('/login');
 
+    const links = {
+        crypto: <BsCurrencyBitcoin className="link-icon" />,
+        stocks: <AiOutlineBarChart className="link-icon" />,
+        profile: <AiOutlineUser className="link-icon" />,
+        settings: <IoSettingsOutline className="link-icon" />,
+    };
+
     return (
         <section className={`sidebar-section ${isSidebarOpen ? 'closed' : ''}`}>
             {/* <button
@@ -27,51 +34,17 @@ export default function Sidebar() {
             </div>
             <div className="sidebar">
                 <nav className="sidebar-nav">
-                    <Link
-                        href="/crypto"
-                        className={`sidebar-nav-link ${
-                            router.pathname === '/' && 'active'
-                        }`}
-                    >
-                        <BsCurrencyBitcoin className="link-icon" />
-                        <span>Crypto</span>
-                    </Link>
-                    <Link
-                        href="/stock"
-                        className={`sidebar-nav-link ${
-                            router.pathname === '/' && 'active'
-                        }`}
-                    >
-                        <AiOutlineBarChart className="link-icon" />
-                        <span>Stocks</span>
-                    </Link>
-                    {/* <Link
-                        href="/"
-                        className={`sidebar-nav-link ${
-                            router.pathname === '/' && 'active'
-                        }`}
-                    >
-                        <HiOutlineSquares2X2 className="link-icon" />
-                        <span>Dashboard</span>
-                    </Link> */}
-                    <Link
-                        href="/profile"
-                        className={`sidebar-nav-link ${
-                            router.pathname.includes('profile') && 'active'
-                        }`}
-                    >
-                        <AiOutlineUser className="link-icon" />
-                        <span>Profile</span>
-                    </Link>
-                    <Link
-                        href="/settings"
-                        className={`sidebar-nav-link ${
-                            router.pathname === '/' && 'active'
-                        }`}
-                    >
-                        <IoSettingsOutline className="link-icon" />
-                        <span>Settings</span>
-                    </Link>
+                    {Object.keys(links).map((link) => (
+                        <Link
+                            href={'/' + link}
+                            className={`sidebar-nav-link ${
+                                router.pathname.includes(link) && 'active'
+                            }`}
+                        >
+                            {links[link as keyof typeof links]}
+                            <span>{link}</span>
+                        </Link>
+                    ))}
                 </nav>
             </div>
             {user ? (
