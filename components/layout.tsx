@@ -38,7 +38,7 @@ export default function Layout({ children }: any) {
             {!dontNeedLayout() ? (
                 <main className="home-container">
                     <Sidebar />
-                    {children}
+                    <section className="main-container">{children}</section>
                 </main>
             ) : (
                 children
