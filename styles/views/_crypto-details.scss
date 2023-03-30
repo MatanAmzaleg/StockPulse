@@ -184,6 +184,7 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 20px 10px;
+                align-items: center;
 
                 p {
                     grid-column: 2;

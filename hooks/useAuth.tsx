@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: Props) => {
                 password,
             });
             setUser(user.data);
-            router.push('/');
+            router.push('/crypto');
         } catch ({ message }) {
             alert(message);
         } finally {
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }: Props) => {
             });
             if (!user) return;
             setUser(user.data);
-            router.push('/');
+            router.push('/crypto');
         } catch ({ message }) {
             alert(message);
         } finally {

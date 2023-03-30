@@ -3,7 +3,8 @@
     padding: 30px 20px;
     // flex: 1;
     flex-basis: 32.5%;
-    background-color: #f8f8f8;
+    // background-color: #f8f8f8;
+    background-color: white;
     border-radius: 8px;
     transition: background-color 0.3s;
 
@@ -15,9 +16,9 @@
             .opt-icon {
                 position: absolute !important;
                 top: 0;
-                right: 0;
+                right: 5px;
                 transform: translateX(10px);
-                border-radius: 50%;
+                // border-radius: 50%;
                 padding: 5px;
                 width: 33px;
                 height: 33px;
@@ -25,9 +26,22 @@
                 transition: background-color 0.2s;
                 // color: red;
 
-                &:hover,
+                path {
+                    fill: black;
+                    // stroke: black;
+                }
+
+                &:hover {
+                    // stroke: #7422dd;
+                    fill: #7422dd !important;
+                }
                 &.mark {
-                    fill: rgb(242, 206, 4) !important;
+                    path {
+                        fill: #7422dd !important;
+                        // stroke: #7422dd;
+                    }
+
+                    // fill: rgb(242, 206, 4) !important;
                     // background-color: #c0c0c0;
                 }
             }
@@ -113,9 +127,6 @@
     &:hover {
         background-color: darken($color: #f8f8f8, $amount: 5);
 
-        // .graph {
-        //     // background-color: black;
-        //     background-color: darken($color: #f0f0f0, $amount: 5);
-        // }
+        // background-color: #eee9f8;
     }
 }
