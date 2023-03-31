@@ -40,32 +40,56 @@ export function transactionAmount(transactions : Transaction[] , currency : stri
   
     transactions.forEach((transaction) => {
       if (transaction.symbol === currency) {
-        totalAmount += transaction.price;
+        if(transaction.action === "buy"){
+          totalAmount += transaction.price;
+        }else{
+          totalAmount -= transaction.price;
+        }
       }
     });
-  
-    console.log(totalAmount);
     
     return totalAmount;
   }
 
   
   export function calculateChange2(currentPrice : number, avgPriceBuy : number) {
-    console.log(avgPriceBuy, currentPrice);
-    
     const change = (currentPrice - avgPriceBuy) / avgPriceBuy * 100;
     return change;
   }
 
 
-  export function calculateAllChange(currencies: Crypto[], prices: any){
+  export function calculateAllChange(currencies: Crypto[], prices: any, totalTransactionsAmount : number){
     console.log(currencies, prices);
-    const updatedPrices = []
+    let totalUpdatedAmount = 0
     currencies.forEach((c, idx) => {
-        // updatedPrices.push({crypto:})
+      
+        totalUpdatedAmount += c.amount * prices[(c.currency + 'usd').toUpperCase()]?.bp
     })
-    
 
-    return "ok"
+    const totalUpdatedChange = calculateChange2(totalUpdatedAmount, totalTransactionsAmount)
+    console.log(totalUpdatedChange);
+
+    return {
+      totalUpdatedAmount,
+      totalGain: totalUpdatedAmount - totalTransactionsAmount,
+       totalUpdatedChange
+    }
   }
+
+
+  export function getTotalTransactionsAmount( transactions : Transaction[]){
+    let totalAmount = 0;
+  
+    transactions.forEach((transaction) => {
+      if (transaction.action === 'buy') {
+        totalAmount += transaction.price;
+      }else{
+        totalAmount -= transaction.price
+      }
+    });
+    return totalAmount;
+  }
+
+
+
 
