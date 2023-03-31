@@ -14,6 +14,8 @@ import { createChart, CrosshairMode } from 'lightweight-charts';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import useAuth from '@/hooks/useAuth';
 import { AiOutlineStar } from 'react-icons/ai';
+import { createCandleStickChart } from '@/services/front/ChartService';
+import { userService } from '@/services/front/UserService';
 
 const candleStickOption = {
     ascendingColor: '#7326d2',
@@ -52,25 +54,7 @@ export default function CryptoDetails({
 
     useEffect(() => {
         if (!graphRef.current) return;
-        const { ascendingColor, descendingColor } = candleStickOption;
-
-        const chart = createChart(graphRef.current!, {
-            crosshair: {
-                mode: CrosshairMode.Normal,
-            },
-            width: graphRef.current.offsetWidth - 72,
-            height: graphRef.current.offsetHeight - 28,
-        });
-        const lineSeries = chart.addCandlestickSeries({
-            upColor: ascendingColor,
-            borderUpColor: ascendingColor,
-            wickUpColor: ascendingColor,
-            downColor: descendingColor,
-            borderDownColor: descendingColor,
-            wickDownColor: descendingColor,
-        });
-        lineSeries.setData(chartData);
-        chart.timeScale().fitContent();
+        createCandleStickChart(graphRef.current!, chartData);
     }, [graphRef.current]);
 
     const handleTransaction = async (action: string) => {
@@ -80,26 +64,15 @@ export default function CryptoDetails({
             return alert('need more cash to preform action');
 
         try {
-            const transaction = {
-                date: Date.now(),
-                price: inputValue,
-                amount: +(inputValue / alpacaCrypto?.ap!).toFixed(8),
+            const res = await userService.handleTransaction(
+                user.email,
+                inputValue,
                 action,
-                status: 'approved',
-                symbol: alpacaCrypto?.S,
-                symbolName: alpacaCrypto?.name,
-            };
+                alpacaCrypto?.ap!,
+                alpacaCrypto?.S!
+            );
 
-            const crypto = {
-                currency: alpacaCrypto?.S,
-                amount: +(inputValue / alpacaCrypto?.ap!).toFixed(8),
-            };
-
-            const res = await axios.post(`/api/user/transfer`, {
-                email: user.email,
-                transaction,
-                crypto,
-            });
+            if (!res) return;
             alert(res.data.message);
             setInputValue(0);
         } catch (err) {

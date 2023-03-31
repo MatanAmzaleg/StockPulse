@@ -35,13 +35,10 @@ async function handleTransaction(
             amount: +(price / cryptoPrice).toFixed(8),
         };
 
-        await axios.post(`/api/user/transfer`, {
+        return await axios.post(`/api/user/transfer`, {
             email,
-            price,
-            action,
-            cryptoPrice,
-            symbol,
-            amount: +(price / cryptoPrice).toFixed(8),
+            transaction,
+            crypto,
         });
     } catch (err) {
         console.log('failed to set transaction', err);
