@@ -7,7 +7,7 @@ import { getCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { avgTransaction } from "@/utils/format";
+import { transactionAmount, calculateAllChange } from "@/utils/format";
 
 export default function profile() {
 
@@ -19,7 +19,6 @@ export default function profile() {
   const { currencies } = useWebSockets(
     user!.currencies.map((c) => (c.currency + "usd").toLocaleUpperCase())
   );
-
   return (
     <section className="profile-section">
       <header className="profile-header">
@@ -37,7 +36,7 @@ export default function profile() {
           <h1 className="bolder"> My Crypto portfolio:</h1>
           <h1 className="portfolio-worth">1342.15$</h1>
           <h2>
-            Change: <span className="scending">14.75% | 150$</span>{" "}
+            Change: <span className="ascending">{calculateAllChange(user?.currencies, currencies)}</span>{" "}
           </h2>
         </div>
         <div className="card my-cryptos flex column">
@@ -53,7 +52,7 @@ export default function profile() {
           <div className="cryptos flex column">
             {user!.currencies.map((c) => (
               <CryptoCard
-              avgBuyPrice = {avgTransaction(user.transactions, c.currency)}
+              totalBuyAmount = {transactionAmount(user.transactions, c.currency)}
                 price={
                   currencies[
                     (

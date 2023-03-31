@@ -1,4 +1,4 @@
-import { Transaction } from "@/typings";
+import { Currency, Transaction, Crypto } from "@/typings";
 
 export function formmatedDate(date: Date) {
     return `${date.getFullYear()}-${(date.getMonth() + 1)
@@ -35,23 +35,37 @@ export function calculateChange(openingPrice: number, currentPrice: number) {
     };
 }
 
-export function avgTransaction(transactions : Transaction[] , currency : string) {
+export function transactionAmount(transactions : Transaction[] , currency : string) {
     let totalAmount = 0;
-    let totalRate = 0;
   
     transactions.forEach((transaction) => {
       if (transaction.symbol === currency) {
-        totalAmount += transaction.amount;
-        totalRate += transaction.price * transaction.amount;
+        totalAmount += transaction.price;
       }
     });
   
-    return totalRate / totalAmount;
+    console.log(totalAmount);
+    
+    return totalAmount;
   }
 
   
   export function calculateChange2(currentPrice : number, avgPriceBuy : number) {
+    console.log(avgPriceBuy, currentPrice);
+    
     const change = (currentPrice - avgPriceBuy) / avgPriceBuy * 100;
     return change;
+  }
+
+
+  export function calculateAllChange(currencies: Crypto[], prices: any){
+    console.log(currencies, prices);
+    const updatedPrices = []
+    currencies.forEach((c, idx) => {
+        // updatedPrices.push({crypto:})
+    })
+    
+
+    return "ok"
   }
 
