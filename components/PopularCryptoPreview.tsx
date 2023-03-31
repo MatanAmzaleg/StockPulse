@@ -3,6 +3,7 @@ import { Currency } from '@/typings';
 import { formattedPrice } from '../utils/format';
 import Link from 'next/link';
 import PopularSkeleton from './skeleton/PopularSkeleton';
+import { AiOutlineStar } from 'react-icons/ai';
 
 interface Props {
     crypto: Currency;
@@ -16,6 +17,7 @@ export default function PopularCryptoPreview({ crypto }: Props) {
             className="popular-crypto-preview flex column space-between"
             href={`/crypto/${crypto.S}`}
         >
+            <AiOutlineStar className='opt-icon'></AiOutlineStar>
             <Image
                 // ref={image}
                 src={`/${crypto.S}.svg`}

@@ -38,7 +38,7 @@ export default function profile() {
           <h1 className="bolder"> My Crypto portfolio:</h1>
           <h1 className="portfolio-worth">{formattedPrice(updatedChange?.totalUpdatedAmount) }</h1>
           <h2>
-            Change: <span className="ascending">{updatedChange?.totalUpdatedChange.toFixed("2")+"%" + " | " + formattedPrice(updatedChange?.totalGain)}</span>{" "}
+            Change: <span className={updatedChange?.totalGain > 0 ? "ascending" : "descending"}>{updatedChange?.totalUpdatedChange.toFixed("2")+"%" + " | " + formattedPrice(updatedChange?.totalGain)}</span>{" "}
           </h2>
         </div>
         <div className="card my-cryptos flex column">
