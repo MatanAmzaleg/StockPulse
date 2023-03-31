@@ -10,15 +10,15 @@ import { useEffect } from "react";
 import { transactionAmount, calculateAllChange } from "@/utils/format";
 
 export default function profile() {
+    const router = useRouter();
+    const { user } = useAuth();
 
-  const router = useRouter();
-  const { user } = useAuth();
+    if (!user) return <div>Loading</div>;
 
-  if (!user) return <div>Loading</div>;
+    const { currencies } = useWebSockets(
+        user!.currencies.map((c) => (c.currency + 'usd').toLocaleUpperCase())
+    );
 
-  const { currencies } = useWebSockets(
-    user!.currencies.map((c) => (c.currency + "usd").toLocaleUpperCase())
-  );
   return (
     <section className="profile-section">
       <header className="profile-header">
@@ -83,29 +83,29 @@ export default function profile() {
             {/* {transactions.map((t: Transaction) => (
                             <TransactionPreview key={t.date} transaction={t} />
                         ))} */}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 export const getServerSideProps = async ({
-  req,
+    req,
 }: GetServerSidePropsContext) => {
-  console.log("hello", req.headers.cookie);
-  if (!req.headers.cookie?.includes("loggedInUser")) {
-    console.log("goodbye", req.headers.cookie);
+    console.log('hello', req.headers.cookie);
+    if (!req.headers.cookie?.includes('loggedInUser')) {
+        console.log('goodbye', req.headers.cookie);
+
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            },
+        };
+    }
 
     return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
+        props: { user: '' },
     };
-  }
-
-  return {
-    props: { user: "" },
-  };
 };

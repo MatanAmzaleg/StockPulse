@@ -15,6 +15,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { getCurrencyDataURL } from '@/utils/requests';
 import useAuth from '@/hooks/useAuth';
+import { Star } from './Star';
 
 interface Props {
     crypto: Currency;
@@ -23,7 +24,7 @@ interface Props {
 
 export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
     const graphRef = useRef(null);
-    const [isOnWishlist, setIsOnWishlist] = useState<boolean>(false);
+    const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
     const { addToWatchList, user } = useAuth();
 
     // useEffect(() => {
@@ -141,7 +142,7 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
 
     useEffect(() => {
         if (!user || user.watchlist?.length === 0 || !crypto) return;
-        setIsOnWishlist(user.watchlist.includes(crypto.S));
+        setIsOnWatchlist(user.watchlist.includes(crypto.S));
     }, [crypto]);
 
     const onToggleWatchlist = async (event: React.MouseEvent) => {
@@ -149,7 +150,7 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
         const res = await addToWatchList(crypto.S);
         console.log(res);
 
-        setIsOnWishlist(res.isOnWatchlist);
+        setIsOnWatchlist(res.isOnWatchlist);
     };
 
     useEffect(() => {
@@ -189,11 +190,12 @@ export default function HotCryptoPreview({ crypto, currencyKey }: Props) {
                         )}
                     </button> */}
                     <button onClick={(e) => onToggleWatchlist(e)}>
-                        <AiOutlineStar
+                        {/* <AiOutlineStar
                             className={`opt-icon ${
                                 isOnWishlist ? 'mark' : ''
                             } `}
-                        />
+                        /> */}
+                        <Star isOnWatchlist={isOnWatchlist}></Star>
                     </button>
                 </div>
                 <div className="bottom-sec flex space-between align-center">

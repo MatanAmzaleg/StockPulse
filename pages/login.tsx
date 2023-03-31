@@ -48,21 +48,21 @@ export default function Login() {
                     onSubmit={submit}
                 >
                     <h1>{type}</h1>
-                    <div className="flex column gap">
-                        <input type="email" name="email" placeholder="Email" />
-                        {type === 'register' ? (
-                            <input
-                                type="fullName"
-                                name="fullName"
-                                placeholder="full name"
-                            />
-                        ) : null}
+                    {/* <div className="flex column gap"> */}
+                    <input type="email" name="email" placeholder="Email" />
+                    {type === 'register' ? (
                         <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
+                            type="fullName"
+                            name="fullName"
+                            placeholder="full name"
                         />
-                    </div>
+                    ) : null}
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                    />
+                    {/* </div> */}
                     <input type="submit" value={type} />
                     {type === 'login' ? (
                         <Link href="/login?register=true">

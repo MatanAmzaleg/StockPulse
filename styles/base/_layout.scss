@@ -1,14 +1,22 @@
 .main-container {
-    > *:not(.full) {
-        padding-inline: 50px;
-    }
+    // > *:not(.full) {
+    //     padding-inline: 50px;
+    // }
 
-    .full {
-        padding-inline: 50px;
-    }
+    // .full {
+    //     padding-inline: 50px;
+    // }
 
-    @media (min-width: 1300px) {
-        max-width: 1000px;
-        margin: auto;
+    > * {
+        background: linear-gradient(180deg, #000000 20%, #eff1f5 0%);
+        > * {
+            @media (max-width: 1400px) {
+                padding-inline: 50px;
+            }
+            @media (min-width: 1300px) {
+                max-width: 1000px;
+                margin: auto;
+            }
+        }
     }
 }

@@ -3,12 +3,14 @@
     padding: 20px;
     // flex: 1;
     width: 24%;
-    background-color: #f8f8f8;
+    // background-color: #f8f8f8;
+    background-color: white;
     border-radius: 8px;
     transition: background-color 0.3s;
 
     &:hover {
-        background-color: #dcdcdc;
+        // background-color: #dcdcdc;
+        background-color: #eee9f8;
     }
 
     > * {
@@ -59,14 +61,13 @@
     }
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
     .popular-crypto-preview {
-
-        .title-sec{
+        .title-sec {
             flex-direction: row;
             align-items: center;
 
-            .stock-subtitle{
+            .stock-subtitle {
                 font-size: 0.9em;
             }
         }
