@@ -1,4 +1,4 @@
-import { calculateChange2 } from "@/utils/format";
+import { calculateChange2, formattedPrice } from "@/utils/format";
 
 export default function CryptoCard({ currency, price, totalBuyAmount }: any) {
     console.log(totalBuyAmount);
@@ -17,7 +17,7 @@ export default function CryptoCard({ currency, price, totalBuyAmount }: any) {
             </div>
             <p>{currency.amount.toFixed("8")}</p>
             <p>{pricePerCoin()}</p>
-            <p className={calculateChange2(+pricePerCoin(), totalBuyAmount) > 0 ? "ascending" : "descending"}>{calculateChange2(+pricePerCoin(), totalBuyAmount).toFixed("2") + '%'} | ${(+pricePerCoin() - totalBuyAmount).toFixed("2")}</p>
+            <p className={calculateChange2(+pricePerCoin(), totalBuyAmount) > 0 ? "ascending" : "descending"}>{calculateChange2(+pricePerCoin(), totalBuyAmount).toFixed("2") + '%'} | {formattedPrice(+pricePerCoin() - totalBuyAmount)}</p>
         </section>
     );
 }

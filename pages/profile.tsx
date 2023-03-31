@@ -7,7 +7,7 @@ import { getCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { transactionAmount, calculateAllChange } from "@/utils/format";
+import { transactionAmount, calculateAllChange, getTotalTransactionsAmount , formattedPrice} from "@/utils/format";
 
 export default function profile() {
     const router = useRouter();
@@ -18,6 +18,8 @@ export default function profile() {
     const { currencies } = useWebSockets(
         user!.currencies.map((c) => (c.currency + 'usd').toLocaleUpperCase())
     );
+
+    const updatedChange = calculateAllChange(user?.currencies, currencies, getTotalTransactionsAmount( user.transactions))
 
   return (
     <section className="profile-section">
@@ -34,9 +36,9 @@ export default function profile() {
       <div className="profile-grid">
         <div className="card crypto-portfolio flex column space-between">
           <h1 className="bolder"> My Crypto portfolio:</h1>
-          <h1 className="portfolio-worth">1342.15$</h1>
+          <h1 className="portfolio-worth">{formattedPrice(updatedChange?.totalUpdatedAmount) }</h1>
           <h2>
-            Change: <span className="ascending">{calculateAllChange(user?.currencies, currencies)}</span>{" "}
+            Change: <span className="ascending">{updatedChange?.totalUpdatedChange.toFixed("2")+"%" + " | " + formattedPrice(updatedChange?.totalGain)}</span>{" "}
           </h2>
         </div>
         <div className="card my-cryptos flex column">
