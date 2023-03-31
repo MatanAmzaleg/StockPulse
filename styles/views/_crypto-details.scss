@@ -3,6 +3,13 @@
     padding-top: 75px;
     background: linear-gradient(180deg, #000000 25%, #eff1f5 0%);
     grid-area: main;
+    min-height: 100vh;
+    position: relative;
+
+    .skeleton {
+        // background-color: white;
+        border-radius: 12px;
+    }
 
     .logo {
         display: flex;
@@ -16,6 +23,11 @@
                 background-color: #2f2f2f;
                 padding: 10px;
                 border-radius: 12px;
+
+                &.skeleton {
+                    width: 50px;
+                    aspect-ratio: 1/1;
+                }
             }
 
             h2 {
@@ -23,6 +35,10 @@
                 font-size: em(40px, 16px);
                 text-transform: capitalize;
                 letter-spacing: 2px;
+
+                &.skeleton {
+                    width: 100px;
+                }
             }
         }
 
@@ -54,6 +70,7 @@
     }
 
     .main-grid {
+        height: 78vh;
         display: grid;
         gap: 20px;
         grid-template-columns: 1fr 0.6fr 1fr;
@@ -112,6 +129,11 @@
             border-top-left-radius: 0px !important;
             height: calc(100% - 37px);
             align-self: self-end;
+
+            &.skeleton {
+                border-radius: 12px !important;
+                height: 100%;
+            }
 
             .day-actions {
                 display: flex;

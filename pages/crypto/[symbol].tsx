@@ -10,24 +10,23 @@ import { getCryptoCompareUrl, getCurrencyDataURL } from '@/utils/requests';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useWebSockets from '@/hooks/useWebSockets';
-import { createChart, CrosshairMode } from 'lightweight-charts';
-import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import useAuth from '@/hooks/useAuth';
 import { AiOutlineStar } from 'react-icons/ai';
 import { createCandleStickChart } from '@/services/front/ChartService';
 import { userService } from '@/services/front/UserService';
+import { CryptoDetailsSkeleton } from '@/components/skeleton/CryptoDetailsSkeleton';
 
-const candleStickOption = {
-    ascendingColor: '#7326d2',
-    descendingColor: '#c9c4d1',
-};
+interface Props {
+    data: any;
+    yesterdayData: any;
+    chartData: any;
+}
 
 export default function CryptoDetails({
     data,
     yesterdayData,
     chartData,
-    error,
-}: any) {
+}: Props) {
     const router = useRouter();
     const { symbol } = router.query;
     const graphRef = useRef<HTMLDivElement>(null);
@@ -72,8 +71,7 @@ export default function CryptoDetails({
                 alpacaCrypto?.S!
             );
 
-            if (!res) return;
-            alert(res.data.message);
+            alert(res!.data.message);
             setInputValue(0);
         } catch (err) {
             console.log('failed to set transaction', err);
@@ -81,7 +79,7 @@ export default function CryptoDetails({
     };
 
     if (!currencies || !data || !yesterdayData)
-        return <img className="loader" src="/loader.gif" alt="" />;
+        return <CryptoDetailsSkeleton />;
 
     const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
     const alpacaCrypto =
@@ -94,8 +92,7 @@ export default function CryptoDetails({
         // console.log(prevPrice);
     }, [alpacaCrypto?.bp]);
 
-    if (!alpacaCrypto)
-        return <img className="loader" src="/loader.gif" alt="" />;
+    if (!alpacaCrypto) return <CryptoDetailsSkeleton />;
 
     const { percentage, orderType } = calculateChange(data.o, alpacaCrypto?.ap);
 

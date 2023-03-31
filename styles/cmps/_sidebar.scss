@@ -1,19 +1,9 @@
 .sidebar-section {
-    // height: 100%;
-    // background-color: #f8f8f8;
     position: relative;
     width: 300px;
     grid-area: sidebar;
-    display: flex;
-    flex-direction: column;
-
-    // .hamburger-btn {
-    //     position: absolute;
-    //     right: 0;
-    //     transform: translateX(130%);
-    //     margin: 15px;
-    //     visibility: visible;
-    // }
+    // display: flex;
+    // flex-direction: column;
 
     .logo-container {
         padding: 50px 40px 0 40px;
@@ -24,14 +14,12 @@
         }
 
         .logo {
-            // border-bottom: 1px #7422dd solid;
             font-size: 1.5em;
             padding-bottom: 40px;
         }
     }
 
     .sidebar {
-        // background-color: #f8f8f8;
         display: flex;
         flex-direction: column;
 
@@ -39,18 +27,18 @@
             padding: 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
 
             @media (max-width: 768px) {
                 align-items: center;
             }
 
             .sidebar-nav-link {
-                padding: 10px 10px;
-                font-size: em(15px, 16px);
+                padding: 10px;
+                font-size: 1em;
                 display: flex;
                 align-items: center;
-                gap: 17px;
+                gap: 20px;
                 transition: all 0.2s;
                 border-radius: 5px;
 
@@ -68,8 +56,9 @@
                 }
 
                 &:hover {
-                    // box-shadow: inset 5px 0 0 0 #121212;
                     color: #7422dd;
+                    background-color: #f6f5f9;
+                    transform: translateY(-2px);
                 }
 
                 .link-icon {
@@ -80,6 +69,7 @@
                     color: #7422dd;
                     font-weight: bold;
                     background-color: #eee9f8;
+                    transform: none;
                 }
             }
         }
@@ -89,6 +79,7 @@
         padding-inline: 40px;
         position: fixed;
         bottom: 20px;
+        // width: 300px;
 
         p {
             font-size: 1.1em;
@@ -104,7 +95,8 @@
             border-radius: 10px;
             background-color: #7422dd;
             color: #e7defa;
-            padding: 10px;
+            padding: 10px 30px;
+            // width: 100%;
         }
 
         @media (max-width: 768px) {
