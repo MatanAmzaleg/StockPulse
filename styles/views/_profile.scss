@@ -1,10 +1,9 @@
 .profile-section {
-    // background: linear-gradient(180deg, #000000 25%, #eff1f5 0%);
-    // background-color: #0a1020;
     min-height: 100vh;
+    padding-block: 50px;
 
     .profile-header {
-        padding-block: 50px;
+        padding-bottom: 50px;
         display: flex;
         justify-content: space-between;
         gap: 20px;

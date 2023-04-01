@@ -8,9 +8,9 @@
     // }
 
     > * {
-        background: linear-gradient(180deg, #000000 20%, #eff1f5 0%);
+        background: linear-gradient(180deg, #000000 25vh, #eff1f5 0%);
         > * {
-            @media (max-width: 1400px) {
+            @media (min-width: 600px) {
                 padding-inline: 50px;
             }
             @media (min-width: 1300px) {
