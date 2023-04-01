@@ -7,19 +7,28 @@ import { getCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { transactionAmount, calculateAllChange, getTotalTransactionsAmount , formattedPrice} from "@/utils/format";
+import {
+  transactionAmount,
+  calculateAllChange,
+  getTotalTransactionsAmount,
+  formattedPrice,
+} from "@/utils/format";
 
 export default function profile() {
-    const router = useRouter();
-    const { user } = useAuth();
+  const router = useRouter();
+  const { user } = useAuth();
 
-    if (!user) return <div>Loading</div>;
+  if (!user) return <div>Loading</div>;
 
-    const { currencies } = useWebSockets(
-        user!.currencies.map((c) => (c.currency + 'usd').toLocaleUpperCase())
-    );
+  const { currencies } = useWebSockets(
+    user!.currencies.map((c) => (c.currency + "usd").toLocaleUpperCase())
+  );
 
-    const updatedChange = calculateAllChange(user?.currencies, currencies, getTotalTransactionsAmount( user.transactions))
+  const updatedChange = calculateAllChange(
+    user?.currencies,
+    currencies,
+    getTotalTransactionsAmount(user.transactions)
+  );
 
   return (
     <section className="profile-section">
@@ -36,25 +45,40 @@ export default function profile() {
       <div className="profile-grid">
         <div className="card crypto-portfolio flex column space-between">
           <h1 className="bolder"> My Crypto portfolio:</h1>
-          <h1 className="portfolio-worth">{formattedPrice(updatedChange?.totalUpdatedAmount) }</h1>
+          <h1 className="portfolio-worth">
+            {formattedPrice(updatedChange?.totalUpdatedAmount)}
+          </h1>
           <h2>
-            Change: <span className={updatedChange?.totalGain > 0 ? "ascending" : "descending"}>{updatedChange?.totalUpdatedChange.toFixed("2")+"%" + " | " + formattedPrice(updatedChange?.totalGain)}</span>{" "}
+            Change:{" "}
+            <span
+              className={
+                updatedChange?.totalGain > 0 ? "ascending" : "descending"
+              }
+            >
+              {updatedChange?.totalUpdatedChange.toFixed("2") +
+                "%" +
+                " | " +
+                formattedPrice(updatedChange?.totalGain)}
+            </span>{" "}
           </h2>
         </div>
         <div className="card my-cryptos flex column">
           <h1>Wallet</h1>
           <section className="header flex space-between">
-              <div className="flex align-center">
-                <p className="bolder">Currency</p>
-              </div>
-              <p className="bolder">Amount</p>
-              <p className="bolder">USD worth</p>
-              <p className="bolder">Change</p>
-            </section>
+            <div className="flex align-center">
+              <p className="bolder">Currency</p>
+            </div>
+            <p className="bolder">Amount</p>
+            <p className="bolder">USD worth</p>
+            <p className="bolder">Change</p>
+          </section>
           <div className="cryptos flex column">
             {user!.currencies.map((c) => (
               <CryptoCard
-              totalBuyAmount = {transactionAmount(user.transactions, c.currency)}
+                totalBuyAmount={transactionAmount(
+                  user.transactions,
+                  c.currency
+                )}
                 price={
                   currencies[
                     (
@@ -80,34 +104,34 @@ export default function profile() {
           </div>
           <div className="transaction-list">
             {user!.transactions.map((t: Transaction) => (
-              <TransactionPreview key={t.date} transaction={t} />
+              <TransactionPreview key={t.date} transaction={t} /> 
             ))}
             {/* {transactions.map((t: Transaction) => (
                             <TransactionPreview key={t.date} transaction={t} />
                         ))} */}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export const getServerSideProps = async ({
-    req,
+  req,
 }: GetServerSidePropsContext) => {
-    console.log('hello', req.headers.cookie);
-    if (!req.headers.cookie?.includes('loggedInUser')) {
-        console.log('goodbye', req.headers.cookie);
-
-        return {
-            redirect: {
-                destination: '/login',
-                permanent: false,
-            },
-        };
-    }
+  console.log("hello", req.headers.cookie);
+  if (!req.headers.cookie?.includes("loggedInUser")) {
+    console.log("goodbye", req.headers.cookie);
 
     return {
-        props: { user: '' },
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
     };
+  }
+
+  return {
+    props: { user: "" },
+  };
 };
