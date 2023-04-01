@@ -32,7 +32,7 @@ export function dateTimeFormat(date: Date) {
 
 export function formattedPrice(price: number) {
     return price < 10
-        ? '$' + price.toFixed(4)
+        ? '$' + price.toFixed(2)
         : new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
