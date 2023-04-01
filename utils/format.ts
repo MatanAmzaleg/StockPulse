@@ -2,9 +2,14 @@ import { Currency, Transaction, Crypto } from "@/typings";
 
 export function fotmattedTimestamp(timestamp: number){
   const date = new Date(timestamp)  
-  return `${date.getFullYear()}-${(date.getMonth() + 1)
-    .toString()
-    .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  return date
+  .toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+  })
+  .replace('at', ',');
 
 }
 
