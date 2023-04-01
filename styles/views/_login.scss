@@ -1,6 +1,6 @@
 .login-sec {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     min-height: 100vh;
 
     .image {
@@ -26,8 +26,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 20px;
+            // justify-content: center;
+            gap: 40px;
             padding: 30px;
             background-color: white;
             border-radius: 12px;
@@ -37,22 +37,63 @@
                 font-size: 1.4em;
             }
 
-            input {
-                padding: 10px 20px;
-                border-radius: 5px;
-                background-color: #eee9f8;
-                // background-color: #eff1f5;
-                border: 1px solid rgb(194, 194, 194);
-                font-size: 1.2em;
-                &:focus {
-                    outline: 1px solid #7422dd;
+            .input-container {
+                position: relative;
+                transition: transform 0.2s;
+
+                input:focus {
+                    label {
+                        transform: translateY(-200%) !important;
+                    }
                 }
+
+                label {
+                    position: absolute;
+                    left: 2px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    pointer-events: none;
+                    font-size: 1.1em;
+                }
+
+                img {
+                    position: absolute;
+                    width: 30px;
+                    right: 2px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+            input {
+                padding: 10px 2px;
+                // padding-block: 10px;
+                // border-radius: 5px;
+                // background-color: #eee9f8;
+                // width: 100%;
+                // background-color: #eff1f5;
+                border: none;
+                border-bottom: 1px solid rgb(194, 194, 194);
+                font-size: 1.2em;
+                transition: 0.2s;
+                // &:focus {
+                //     // outline: 1px solid #7422dd;
+                //     outline: none;
+                //     border-bottom: 1px solid rgb(177, 12, 12);
+
+                //     .input-container label {
+                //         transform: translateY(-200%) !important;
+                //     }
+                //     img {
+                //         width: 50px;
+                //     }
+                // }
 
                 &[type='submit'] {
                     background-color: #7422dd;
                     color: #e7defa;
                     text-transform: capitalize;
-                    padding: 5px 10px;
+                    padding: 10px 20px;
+                    border-radius: 12px;
                 }
             }
 

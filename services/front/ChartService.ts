@@ -13,7 +13,7 @@ export function createCandleStickChart(
     el: HTMLElement,
     data: CandlestickData[]
 ) {
-    if (el.children) return;
+    // if (el.children.length === 0) return;
 
     const { ascendingColor, descendingColor } = candleStickOption;
 
