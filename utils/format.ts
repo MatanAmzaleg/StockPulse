@@ -1,5 +1,18 @@
 import { Currency, Transaction, Crypto } from "@/typings";
 
+export function fotmattedTimestamp(timestamp: number){
+  const date = new Date(timestamp)  
+  return date
+  .toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+  })
+  .replace('at', ',');
+
+}
+
 export function formmatedDate(date: Date) {
     return `${date.getFullYear()}-${(date.getMonth() + 1)
         .toString()
@@ -19,7 +32,7 @@ export function dateTimeFormat(date: Date) {
 
 export function formattedPrice(price: number) {
     return price < 10
-        ? '$' + price.toFixed(4)
+        ? '$' + price.toFixed(2)
         : new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
@@ -59,16 +72,12 @@ export function transactionAmount(transactions : Transaction[] , currency : stri
 
 
   export function calculateAllChange(currencies: Crypto[], prices: any, totalTransactionsAmount : number){
-    console.log(currencies, prices);
     let totalUpdatedAmount = 0
     currencies.forEach((c, idx) => {
       
         totalUpdatedAmount += c.amount * prices[(c.currency + 'usd').toUpperCase()]?.bp
     })
-
     const totalUpdatedChange = calculateChange2(totalUpdatedAmount, totalTransactionsAmount)
-    console.log(totalUpdatedChange);
-
     return {
       totalUpdatedAmount,
       totalGain: totalUpdatedAmount - totalTransactionsAmount,
