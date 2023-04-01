@@ -200,9 +200,12 @@ export default function CryptoDetails({
                     </div>
                 </div>
                 <div className="card actions flex column">
+                    <div className="flex align-center">
                     <p>
-                        ~ {usdInCrypto.toFixed(9) || 0} {alpacaCrypto.S}
+                        ~ {usdInCrypto.toFixed(9) || 0}
                     </p>
+                        <img className='symbol-img' src={`/${symbol}.svg`} alt="" />
+                    </div>
 
                     <input
                         type="number"
