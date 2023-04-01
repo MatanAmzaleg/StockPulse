@@ -1,5 +1,13 @@
 import { Currency, Transaction, Crypto } from "@/typings";
 
+export function fotmattedTimestamp(timestamp: number){
+  const date = new Date(timestamp)  
+  return `${date.getFullYear()}-${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+
+}
+
 export function formmatedDate(date: Date) {
     return `${date.getFullYear()}-${(date.getMonth() + 1)
         .toString()
@@ -59,16 +67,12 @@ export function transactionAmount(transactions : Transaction[] , currency : stri
 
 
   export function calculateAllChange(currencies: Crypto[], prices: any, totalTransactionsAmount : number){
-    console.log(currencies, prices);
     let totalUpdatedAmount = 0
     currencies.forEach((c, idx) => {
       
         totalUpdatedAmount += c.amount * prices[(c.currency + 'usd').toUpperCase()]?.bp
     })
-
     const totalUpdatedChange = calculateChange2(totalUpdatedAmount, totalTransactionsAmount)
-    console.log(totalUpdatedChange);
-
     return {
       totalUpdatedAmount,
       totalGain: totalUpdatedAmount - totalTransactionsAmount,

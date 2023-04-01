@@ -1,5 +1,5 @@
 import { Transaction } from '@/typings';
-import { dateTimeFormat } from '@/utils/format';
+import { fotmattedTimestamp } from '@/utils/format';
 
 interface Props {
     transaction: Transaction;
@@ -13,7 +13,7 @@ export default function TransactionPreview({ transaction }: Props) {
                 <p>{transaction.symbolName}</p>
             </div>
             <p className="action">{transaction.action}</p>
-            <p className="date">{dateTimeFormat(transaction.date) }</p>
+            <p className="date">{fotmattedTimestamp(transaction.date) }</p>
             <p className="price">{transaction.price}</p>
             <p className="quantity">{transaction.amount}</p>
             <p className={`status ${transaction.status}`}>

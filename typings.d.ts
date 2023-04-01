@@ -40,7 +40,7 @@ export interface Transaction {
     action: string;
     symbol: string;
     symbolName: string;
-    date: Date;
+    date: number;
     status: string;
     amount: number;
     price: number;
