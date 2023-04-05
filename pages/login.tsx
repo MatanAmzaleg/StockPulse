@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
+import { toast } from 'react-hot-toast';
+import { toastOptions } from '@/utils/hot-toast';
 
 export default function Login() {
     const router = useRouter();
     const { register: isRegister } = router.query;
-    const { login, register } = useAuth();
+    const { login, register, user } = useAuth();
     const [type, setType] = useState('');
     const formRef = useRef(null);
 
@@ -14,7 +16,7 @@ export default function Login() {
         isRegister === 'true' ? setType('register') : setType('login');
     }, [router.query]);
 
-    const submit = async (e: React.SyntheticEvent) => {
+    const submit = async (e: SyntheticEvent) => {
         try {
             e.preventDefault();
             const { email, password, fullName } =
@@ -26,6 +28,7 @@ export default function Login() {
             type === 'register'
                 ? register(email.value, password.value, fullName.value)
                 : login(email.value, password.value);
+            toast(`welcom back `, toastOptions);
         } catch (error) {
             console.log(error);
         }

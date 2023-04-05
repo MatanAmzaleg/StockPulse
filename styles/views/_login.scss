@@ -41,12 +41,6 @@
                 position: relative;
                 transition: transform 0.2s;
 
-                input:focus {
-                    label {
-                        transform: translateY(-200%) !important;
-                    }
-                }
-
                 label {
                     position: absolute;
                     left: 2px;
@@ -63,38 +57,44 @@
                     top: 50%;
                     transform: translateY(-50%);
                 }
-            }
-            input {
-                padding: 10px 2px;
-                // padding-block: 10px;
-                // border-radius: 5px;
-                // background-color: #eee9f8;
-                // width: 100%;
-                // background-color: #eff1f5;
-                border: none;
-                border-bottom: 1px solid rgb(194, 194, 194);
-                font-size: 1.2em;
-                transition: 0.2s;
-                // &:focus {
-                //     // outline: 1px solid #7422dd;
-                //     outline: none;
-                //     border-bottom: 1px solid rgb(177, 12, 12);
+                input {
+                    padding: 10px 2px;
+                    // padding-block: 10px;
+                    // border-radius: 5px;
+                    // background-color: #eee9f8;
+                    // width: 100%;
+                    // background-color: #eff1f5;
+                    border: none;
+                    border-bottom: 1px solid rgb(194, 194, 194);
+                    font-size: 1.2em;
+                    transition: 0.2s;
+                    // &:focus {
+                    //     // outline: 1px solid #7422dd;
 
-                //     .input-container label {
-                //         transform: translateY(-200%) !important;
-                //     }
-                //     img {
-                //         width: 50px;
-                //     }
-                // }
+                    //     .input-container label {
+                    //         transform: translateY(-200%) !important;
+                    //     }
+                    //     img {
+                    //         width: 50px;
+                    //     }
+                    // }
 
-                &[type='submit'] {
-                    background-color: #7422dd;
-                    color: #e7defa;
-                    text-transform: capitalize;
-                    padding: 10px 20px;
-                    border-radius: 12px;
+                    &:focus {
+                        outline: none;
+                        border-bottom: 1px solid rgb(177, 12, 12);
+                        ~ label {
+                            transform: translateY(-200%) !important;
+                        }
+                    }
                 }
+            }
+            input[type='submit'] {
+                background-color: #7422dd;
+                color: #e7defa;
+                text-transform: capitalize;
+                padding: 10px 20px;
+                border-radius: 12px;
+                border: none;
             }
 
             a {
