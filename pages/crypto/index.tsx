@@ -114,7 +114,6 @@ export default function Home() {
                 <section className="hot-crypto-list flex wrap">
                     {currenciesList.slice(0, 5).map((currency, idx) => (
                         <HotCryptoPreview
-                            currencyKey={currenciesList[idx]}
                             key={currency}
                             crypto={
                                 currencies[currency as keyof typeof currencies]!

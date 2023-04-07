@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { cryptoSymbol } from 'crypto-symbol';
 import { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const { nameLookup } = cryptoSymbol({});
 
@@ -36,10 +37,13 @@ export default function Layout({ children }: any) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {!dontNeedLayout() ? (
-                <main className="home-container">
-                    <Sidebar />
-                    <section className="main-container">{children}</section>
-                </main>
+                <>
+                    <main className="home-container">
+                        <Sidebar />
+                        <section className="main-container">{children}</section>
+                    </main>
+                    <Toaster position="bottom-center" />
+                </>
             ) : (
                 children
             )}

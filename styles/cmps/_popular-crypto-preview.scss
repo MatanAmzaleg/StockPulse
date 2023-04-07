@@ -14,7 +14,7 @@
         // background-color: #dcdcdc;
         background-color: #eee9f8;
 
-        .opt-icon{
+        .opt-icon {
             transform: translateX(0);
         }
     }
@@ -23,7 +23,7 @@
         margin-block: 5px;
     }
 
-    .opt-icon{
+    .opt-icon {
         position: absolute;
         top: 0;
         right: 0;
@@ -33,7 +33,7 @@
 
         transition: transform 0.3s, color 0.2s;
 
-        &:hover{
+        &:hover {
             color: #7422dd;
         }
     }

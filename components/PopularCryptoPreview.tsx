@@ -17,15 +17,16 @@ export default function PopularCryptoPreview({ crypto }: Props) {
             className="popular-crypto-preview flex column space-between"
             href={`/crypto/${crypto.S}`}
         >
-            <AiOutlineStar className='opt-icon'></AiOutlineStar>
-            <Image
-                // ref={image}
-                src={`/${crypto.S}.svg`}
-                alt={crypto.S}
-                className="icon-img"
-                width={45}
-                height={45}
-            />
+            <div>
+                <Image
+                    src={`/${crypto.S}.svg`}
+                    alt={crypto.S}
+                    className="icon-img"
+                    width={45}
+                    height={45}
+                />
+                <AiOutlineStar className="opt-icon" />
+            </div>
             <div className="title-sec flex ">
                 <h1 className="stock-title">{crypto?.S}</h1>
                 <p className="stock-subtitle">{crypto?.name || 'crypto'}</p>

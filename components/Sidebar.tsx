@@ -7,7 +7,7 @@ import { BsCurrencyBitcoin } from 'react-icons/bs';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { toastOptions } from '@/utils/hot-toast';
 
@@ -30,57 +30,51 @@ export default function Sidebar() {
     };
 
     return (
-        <>
-            <Toaster position="bottom-center" />
-
-            <section
-                className={`sidebar-section ${isSidebarOpen ? 'closed' : ''}`}
-            >
-                {/* <button
+        <section className={`sidebar-section ${isSidebarOpen ? 'closed' : ''}`}>
+            {/* <button
                 className="hamburger-btn"
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
                 hamburger
             </button> */}
-                <div className="logo-container">
-                    <h2 className="logo">stock pulse</h2>
-                </div>
-                <div className="sidebar">
-                    <nav className="sidebar-nav">
-                        {Object.keys(links).map((link) => (
-                            <Link
-                                href={'/' + link}
-                                className={`sidebar-nav-link ${
-                                    router.pathname.includes(link) && 'active'
-                                }`}
-                            >
-                                {links[link as keyof typeof links]}
-                                <span>{link}</span>
-                            </Link>
-                        ))}
-                        <button
-                            className="sidebar-nav-link"
-                            onClick={() => {
-                                console.log('toast');
-                                toast('toast', toastOptions);
-                            }}
+            <div className="logo-container">
+                <h2 className="logo">stock pulse</h2>
+            </div>
+            <div className="sidebar">
+                <nav className="sidebar-nav">
+                    {Object.keys(links).map((link) => (
+                        <Link
+                            href={'/' + link}
+                            className={`sidebar-nav-link ${
+                                router.pathname.includes(link) && 'active'
+                            }`}
                         >
-                            Toast
-                        </button>
-                    </nav>
+                            {links[link as keyof typeof links]}
+                            <span>{link}</span>
+                        </Link>
+                    ))}
+                    <button
+                        className="sidebar-nav-link"
+                        onClick={() => {
+                            console.log('toast');
+                            toast('toast', toastOptions);
+                        }}
+                    >
+                        Toast
+                    </button>
+                </nav>
+            </div>
+            {user ? (
+                <div className="user-container">
+                    <p>Welcome back,</p>
+                    <p className="username">{user?.fullName}</p>
+                    <button onClick={onLogout}>Logout</button>
                 </div>
-                {user ? (
-                    <div className="user-container">
-                        <p>Welcome back,</p>
-                        <p className="username">{user?.fullName}</p>
-                        <button onClick={onLogout}>Logout</button>
-                    </div>
-                ) : (
-                    <div className="user-container">
-                        <button onClick={goToLogin}>Login</button>
-                    </div>
-                )}
-            </section>
-        </>
+            ) : (
+                <div className="user-container">
+                    <button onClick={goToLogin}>Login</button>
+                </div>
+            )}
+        </section>
     );
 }
