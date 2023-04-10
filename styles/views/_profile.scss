@@ -6,6 +6,7 @@
     padding-bottom: 50px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 20px;
 
     .profile-user,
@@ -17,7 +18,7 @@
         color: #a6a8b3;
       }
       h1 {
-        font-size: 2em;
+        font-size:1em;
         color: white;
         text-transform: capitalize;
       }
@@ -29,10 +30,9 @@
   }
 
   .profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 30vh 42vh;
-    gap: 30px;
+   display: flex;
+   flex-direction: column;
+   gap: 50px;
 
     > * > * {
       &::-webkit-scrollbar-track {
@@ -93,6 +93,24 @@
       flex-grow: 1;
       padding-top: 15px;
       overflow-y: auto;
+    }
+  }
+}
+
+
+@media (min-width: 768px){
+  .profile-section{
+    .profile-header{
+      h1{
+        font-size: 2rem;
+      }
+    }
+
+    .profile-grid{
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 30vh 42vh;
+      gap: 30px;
     }
   }
 }

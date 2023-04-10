@@ -10,6 +10,7 @@
     > * {
         background: linear-gradient(180deg, #000000 25vh, #eff1f5 0%);
         > * {
+            padding-inline: 20px;
             @media (min-width: 600px) {
                 padding-inline: 50px;
             }
