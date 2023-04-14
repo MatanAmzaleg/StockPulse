@@ -3,6 +3,7 @@
   padding-block: 50px;
 
   .profile-header {
+    font-size: 1.2rem;
     padding-bottom: 50px;
     display: flex;
     justify-content: space-between;
@@ -101,9 +102,7 @@
 @media (min-width: 768px){
   .profile-section{
     .profile-header{
-      h1{
-        font-size: 2rem;
-      }
+      font-size: 2rem;
     }
 
     .profile-grid{

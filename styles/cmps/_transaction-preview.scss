@@ -13,8 +13,12 @@
 
     .symbol{
         .symbol-img{
-            width: 25px;
+            width: 20px;
             margin-inline-end: 10px;
+
+            @media (min-width:650px){
+                width: 25px;
+            }
         }
     }
 

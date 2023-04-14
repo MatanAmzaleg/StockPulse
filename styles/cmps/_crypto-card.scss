@@ -1,22 +1,28 @@
 .crypto-card-sec {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding-block: 10px;
+  &:not(:last-child) {
+    border-bottom: 1px solid rgb(213, 213, 213);
+  }
+
+  div {
     gap: 10px;
-    padding-block: 10px;
-    &:not(:last-child) {
-        border-bottom: 1px solid rgb(213, 213, 213);
-    }
+  }
 
-    div {
-        gap: 10px;
-    }
+  img {
+    width: 20px;
+    height: 20px;
+   
 
-    img {
-        width: 30px;
-        height: 30px;
+    @media (min-width: 670px) {
+     width: 30px;
+    height: 30px;
     }
+  }
 
-    .bold {
-        text-transform: capitalize;
-    }
+  .bold {
+    text-transform: capitalize;
+  }
 }

@@ -42,7 +42,7 @@ h5,
 h6,
 p {
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.65rem;
     color: inherit;
 }
 
@@ -88,4 +88,11 @@ a {
 .grid-center {
     display: grid;
     place-items: center;
+}
+
+
+@media (min-width: 638px) {
+p{
+    font-size: 1.2rem;
+}
 }
