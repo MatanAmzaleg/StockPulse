@@ -72,7 +72,7 @@ a {
 }
 
 .card {
-    padding: 30px;
+    padding: 20px;
     background-color: white;
     border-radius: 12px;
 }
@@ -94,5 +94,9 @@ a {
 @media (min-width: 638px) {
 p{
     font-size: 1.2rem;
+}
+
+.card{
+padding: 30px;
 }
 }

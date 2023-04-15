@@ -105,6 +105,15 @@ export default function profile() {
         </div>
         <div className="card transaction-container flex column">
           <h1>Transacrion History</h1>
+          {/* <div className="transaction-preview heading">
+            <p>Currency</p>
+            <p>Action</p>
+            <p>Date</p>
+            <p>Price</p>
+            <p>Quantity</p>
+            <p>Status</p>
+          </div> */}
+          <div className="transaction-list">
           <div className="transaction-preview heading">
             <p>Currency</p>
             <p>Action</p>
@@ -113,7 +122,6 @@ export default function profile() {
             <p>Quantity</p>
             <p>Status</p>
           </div>
-          <div className="transaction-list">
             {user!.transactions.map((t: Transaction) => (
               <TransactionPreview key={t.date} transaction={t} />
             ))}

@@ -5,8 +5,17 @@
     padding-block: 20px;
     text-transform: capitalize;
 
+    >*{
+        margin-inline: 5px;
+    }
+
     &.heading {
         color: #bcbcbc;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.5fr 1fr 1fr 1fr;
+        align-items: center;
+        padding-block: 20px;
+        text-transform: capitalize;
         // box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
         // border-bottom: 1px solid black;
     }
@@ -24,5 +33,11 @@
 
     .approved {
         color: #00ac45;
+        text-overflow: ellipsis;
+        max-width: 3px;
+
+        @media (min-width:768px){
+            width: auto;
+        }
     }
 }
