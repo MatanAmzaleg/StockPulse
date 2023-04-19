@@ -11,6 +11,7 @@ export default function Login() {
     const { login, register, user } = useAuth();
     const [type, setType] = useState('');
     const formRef = useRef(null);
+    const [inputFocuses, setInputFocuses ] = useState({email : false});
 
     useEffect(() => {
         isRegister === 'true' ? setType('register') : setType('login');
@@ -34,6 +35,15 @@ export default function Login() {
         }
     };
 
+    const handleFocusEmail = (isFocused:"t" | "f") => {
+     setInputFocuses((prev) => ({...prev, email: isFocused === "t" ? true : false}))
+    }
+
+    const handleType = () => {
+        
+    }
+
+
     return (
         <section className="login-sec">
             <div className="image grid-center">
@@ -47,8 +57,10 @@ export default function Login() {
                     <h1>{type}</h1>
                     <div className="input-container">
                         <img src="email.svg" alt="" />
-                        <label htmlFor="">Email</label>
+                        <label onInput={ () => handleType()} className={inputFocuses.email ? 'email-focus' : ''} id="email-label" htmlFor="">Email</label>
                         <input
+                        onFocus={() => handleFocusEmail("t")}
+                        onBlur={() => handleFocusEmail("f")}
                             type="email"
                             name="email" /*placeholder="Email"*/
                         />
@@ -56,7 +68,7 @@ export default function Login() {
                     {type === 'register' ? (
                         <div className="input-container">
                             <img src="user.svg" alt="" />
-                            <label htmlFor="">Fullname</label>
+                            <label  htmlFor="">Fullname</label>
                             <input
                                 type="fullName"
                                 name="fullName"

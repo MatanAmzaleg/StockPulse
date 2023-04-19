@@ -1,9 +1,9 @@
-import Layout from '@/components/Layout';
+
 import '@/styles/main.scss';
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
 import { AuthProvider } from '@/hooks/useAuth';
-// import Layout from '@/components/layout';
+import Layout from '@/components/layout';
 
 const roboto = Roboto({
     weight: '400',

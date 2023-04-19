@@ -105,7 +105,11 @@
             }
 
             .price {
-                font-size: em(42px, 16px);
+                // font-size: em(30px 15px);
+
+                @media (min-width: 768px) {
+                    font-size: em(42px, 16px);
+                }
             }
         }
 
