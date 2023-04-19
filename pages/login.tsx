@@ -4,6 +4,7 @@ import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import { toast } from 'react-hot-toast';
 import { toastOptions } from '@/utils/hot-toast';
+import InputField from '@/components/InputField';
 
 export default function Login() {
     const router = useRouter();
@@ -11,7 +12,7 @@ export default function Login() {
     const { login, register, user } = useAuth();
     const [type, setType] = useState('');
     const formRef = useRef(null);
-    const [inputFocuses, setInputFocuses ] = useState({email : false});
+ 
 
     useEffect(() => {
         isRegister === 'true' ? setType('register') : setType('login');
@@ -35,14 +36,6 @@ export default function Login() {
         }
     };
 
-    const handleFocusEmail = (isFocused:"t" | "f") => {
-     setInputFocuses((prev) => ({...prev, email: isFocused === "t" ? true : false}))
-    }
-
-    const handleType = () => {
-        
-    }
-
 
     return (
         <section className="login-sec">
@@ -55,36 +48,11 @@ export default function Login() {
             <div className="login-container">
                 <form ref={formRef} className="login-form" onSubmit={submit}>
                     <h1>{type}</h1>
-                    <div className="input-container">
-                        <img src="email.svg" alt="" />
-                        <label onInput={ () => handleType()} className={inputFocuses.email ? 'email-focus' : ''} id="email-label" htmlFor="">Email</label>
-                        <input
-                        onFocus={() => handleFocusEmail("t")}
-                        onBlur={() => handleFocusEmail("f")}
-                            type="email"
-                            name="email" /*placeholder="Email"*/
-                        />
-                    </div>
+                    <InputField label="Email" type="email" icon="email.svg"></InputField>                
                     {type === 'register' ? (
-                        <div className="input-container">
-                            <img src="user.svg" alt="" />
-                            <label  htmlFor="">Fullname</label>
-                            <input
-                                type="fullName"
-                                name="fullName"
-                                // placeholder="full name"
-                            />
-                        </div>
+                         <InputField label="Fullname" type="fullName" icon="user.svg"></InputField>
                     ) : null}
-                    <div className="input-container">
-                        <img src="lock.svg" alt="" />
-                        <label htmlFor="">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            // placeholder="Password"
-                        />
-                    </div>
+                    <InputField label="password" type="password" icon="lock.svg"></InputField>
                     <input type="submit" value={type} />
                     {type === 'login' ? (
                         <Link href="/login?register=true">
