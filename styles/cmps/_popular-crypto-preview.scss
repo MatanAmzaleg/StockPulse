@@ -56,7 +56,7 @@
         align-items: flex-start;
 
         .stock-title {
-            font-size: 1.1em;
+            font-size: 1.4em;
             text-transform: uppercase;
 
             &.skeleton {
@@ -75,7 +75,9 @@
             }
         }
     }
-
+    .price-title{
+        font-size: 0.8rem;
+    }
     .price-title.skeleton {
         width: 50%;
         height: 0.9em;
