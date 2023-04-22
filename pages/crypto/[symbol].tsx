@@ -15,6 +15,8 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { createCandleStickChart } from '@/services/front/ChartService';
 import { userService } from '@/services/front/UserService';
 import { CryptoDetailsSkeleton } from '@/components/skeleton/CryptoDetailsSkeleton';
+import { toast } from 'react-hot-toast';
+import { errorToastOptions, toastOptions } from '@/utils/hot-toast';
 
 interface Props {
     data: any;
@@ -57,10 +59,10 @@ export default function CryptoDetails({
     }, [graphRef.current]);
 
     const handleTransaction = async (action: string) => {
-        if (!user) return alert('please login first');
+        if (!user) return toast('please login first', errorToastOptions);
 
         if (action === 'buy' && inputValue > user.coins)
-            return alert('need more cash to preform action');
+            return toast('need more cash to preform action', errorToastOptions);
 
         try {
             const res = await userService.handleTransaction(
@@ -71,10 +73,12 @@ export default function CryptoDetails({
                 alpacaCrypto?.S!
             );
 
-            alert(res!.data.message);
+            // alert(res!.data.message);
             setInputValue(0);
+            toast('purchased successfully', toastOptions);
         } catch (err) {
             console.log('failed to set transaction', err);
+            toast('failed to purchase', errorToastOptions);
         }
     };
 
@@ -201,10 +205,12 @@ export default function CryptoDetails({
                 </div>
                 <div className="card actions flex column">
                     <div className="flex align-center">
-                    <p>
-                        ~ {usdInCrypto.toFixed(9) || 0}
-                    </p>
-                        <img className='symbol-img' src={`/${symbol}.svg`} alt="" />
+                        <p>~ {usdInCrypto.toFixed(9) || 0}</p>
+                        <img
+                            className="symbol-img"
+                            src={`/${symbol}.svg`}
+                            alt=""
+                        />
                     </div>
 
                     <input
