@@ -24,6 +24,8 @@ export default function HotCryptoPreview({ crypto }: Props) {
 
     const onToggleWatchlist = async (event: React.MouseEvent) => {
         event.preventDefault();
+        console.log(crypto);
+        
         const res = await addToWatchList(crypto.S);
         console.log(res);
 

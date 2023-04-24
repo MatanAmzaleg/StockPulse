@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { IoSettingsOutline } from 'react-icons/io5';
-import { AiOutlineBarChart, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineBarChart, AiOutlineUser, AiOutlineStar } from 'react-icons/ai';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 import { BsCurrencyBitcoin } from 'react-icons/bs';
 
@@ -17,7 +17,7 @@ export default function Sidebar() {
     const router = useRouter();
     const links = {
         crypto: <BsCurrencyBitcoin className="link-icon" />,
-        stocks: <AiOutlineBarChart className="link-icon" />,
+        wishlist: <AiOutlineStar className="link-icon" />,
         profile: <AiOutlineUser className="link-icon" />,
         settings: <IoSettingsOutline className="link-icon" />,
     };
