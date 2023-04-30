@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { IoSettingsOutline } from 'react-icons/io5';
-import { AiOutlineBarChart, AiOutlineUser, AiOutlineStar } from 'react-icons/ai';
+import {
+    AiOutlineBarChart,
+    AiOutlineUser,
+    AiOutlineStar,
+} from 'react-icons/ai';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 import { BsCurrencyBitcoin } from 'react-icons/bs';
 
@@ -9,7 +13,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-import { toastOptions } from '@/utils/hot-toast';
+import { errorToastOptions, toastOptions } from '@/utils/hot-toast';
 
 export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -57,7 +61,7 @@ export default function Sidebar() {
                         className="sidebar-nav-link"
                         onClick={() => {
                             console.log('toast');
-                            toast('toast', toastOptions);
+                            toast('toast', errorToastOptions);
                         }}
                     >
                         Toast
