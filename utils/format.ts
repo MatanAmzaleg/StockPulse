@@ -53,9 +53,9 @@ export function transactionAmount(transactions : Transaction[] , currency : stri
   
     transactions.forEach((transaction) => {
       if (transaction.symbol === currency) {
-        if(transaction.action === "buy"){
+        if(transaction.action === "buy" && transaction.status === "approved") {
           totalAmount += transaction.price;
-        }else{
+        }else if (transaction.status !== "denied"){
           totalAmount -= transaction.price;
         }
       }
