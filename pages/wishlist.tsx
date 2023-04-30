@@ -4,41 +4,40 @@ import useWebSockets from "@/hooks/useWebSockets";
 import { Currency } from "@/typings";
 import { useRouter } from "next/router";
 
-
-
 export default function Wishlist() {
-    const { user } = useAuth();
-    const router = useRouter();
+  const { user } = useAuth();
+  const router = useRouter();
 
-    const watchlistCurrencies = user?.watchlist.map((currency)=> {
-        return currency?.S.toUpperCase()
-    })
-    const { currencies } = useWebSockets(user?.watchlist!);
+  console.log(user?.watchlist);
 
-    console.log(currencies);
-    
+  const watchlistCurrencies = user?.watchlist.map((currency) => {
+    return currency.toUpperCase() + "USD";
+  });
+  console.log(watchlistCurrencies);
 
+  const { currencies } = useWebSockets(watchlistCurrencies!);
 
-    if(!user) router.push('/login');
+  console.log(currencies);
 
-    return (
-        <section className="wishlist-sec">
-           <h1 className="main-title">Stock Market</h1>
-            <p className="subtitle">Trending market group</p>
+  
+//   if (!user) router.push('/login')
 
-            <section className="hot-crypto-sec">
-                <h1>Hot 🔥</h1>
-                <section className="hot-crypto-list flex wrap">
-                    {user?.watchlist.map((currency, idx) => (
-                        <HotCryptoPreview
-                            key={currency}
-                            crypto= {currencies[currency as keyof typeof currencies]!}
-                        />
-                    ))}
-                </section>
-            </section>
+  return (
+    <section className="wishlist-sec">
+      <h1 className="main-title">Stock Market</h1>
+      <p className="subtitle">Trending market group</p>
+
+      <section className="hot-crypto-sec">
+        <h1>Hot 🔥</h1>
+        <section className="hot-crypto-list flex wrap">
+          {watchlistCurrencies?.map((currency, idx) => (    
+            <HotCryptoPreview
+              key={currency}
+              crypto={currencies[currency as keyof typeof currencies]!}
+            />
+          ))}
         </section>
-    );
+      </section>
+    </section>
+  );
 }
-
-

@@ -16,6 +16,7 @@ export default function HotCryptoPreview({ crypto }: Props) {
     const graphRef = useRef(null);
     const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
     const { addToWatchList, user } = useAuth();
+    
 
     useEffect(() => {
         if (!user || user.watchlist?.length === 0 || !crypto) return;
