@@ -1,43 +1,61 @@
-import HotCryptoPreview from "@/components/HotCryptoPreview";
-import useAuth from "@/hooks/useAuth";
-import useWebSockets from "@/hooks/useWebSockets";
-import { Currency } from "@/typings";
-import { useRouter } from "next/router";
+import HotCryptoPreview from '@/components/HotCryptoPreview';
+import useAuth from '@/hooks/useAuth';
+import useWebSockets from '@/hooks/useWebSockets';
+import { Currency } from '@/typings';
+import { GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 export default function Wishlist() {
-  const { user } = useAuth();
-  const router = useRouter();
+    const { user } = useAuth();
 
-  console.log(user?.watchlist);
+    if (!user) return <div>Loading</div>;
 
-  const watchlistCurrencies = user?.watchlist.map((currency) => {
-    return currency.toUpperCase() + "USD";
-  });
-  console.log(watchlistCurrencies);
+    // const router = useRouter();
+    //   if (!user) router.push('/login')
 
-  const { currencies } = useWebSockets(watchlistCurrencies!);
+    const watchlistCurrencies = user?.watchlist.map(
+        (currency) => currency.toUpperCase() + 'USD'
+    );
 
-  console.log(currencies);
+    const { currencies } = useWebSockets(watchlistCurrencies!);
 
-  
-//   if (!user) router.push('/login')
+    return (
+        <section className="wishlist-sec">
+            <header>
+                <h1 className="main-title">Stock Market</h1>
+                <p className="subtitle">Trending market group</p>
+            </header>
 
-  return (
-    <section className="wishlist-sec">
-      <h1 className="main-title">Stock Market</h1>
-      <p className="subtitle">Trending market group</p>
-
-      <section className="hot-crypto-sec">
-        <h1>Hot 🔥</h1>
-        <section className="hot-crypto-list flex wrap">
-          {watchlistCurrencies?.map((currency, idx) => (    
-            <HotCryptoPreview
-              key={currency}
-              crypto={currencies[currency as keyof typeof currencies]!}
-            />
-          ))}
+            <section className="hot-crypto-sec">
+                <h1>Hot 🔥</h1>
+                <section className="hot-crypto-list flex wrap">
+                    {watchlistCurrencies?.map((currency, idx) => (
+                        <HotCryptoPreview
+                            key={currency}
+                            crypto={
+                                currencies[currency as keyof typeof currencies]!
+                            }
+                        />
+                    ))}
+                </section>
+            </section>
         </section>
-      </section>
-    </section>
-  );
+    );
 }
+
+export const getServerSideProps = async ({
+    req,
+}: GetServerSidePropsContext) => {
+    if (!req.headers.cookie?.includes('loggedInUser')) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            },
+        };
+    }
+
+    return {
+        props: { user: '' },
+    };
+};

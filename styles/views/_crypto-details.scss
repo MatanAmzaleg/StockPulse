@@ -1,7 +1,5 @@
 .crypto-details {
-
     padding-top: 75px;
-    background: linear-gradient(180deg, #000000 25%, #eff1f5 0%);
     grid-area: main;
     min-height: 100vh;
     position: relative;
@@ -72,20 +70,19 @@
     .main-grid {
         // height: 78vh;
         display: flex;
-    flex-direction: column;
-    gap: 50px;
+        flex-direction: column;
+        gap: 50px;
 
-    @media (min-width: 760px) {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: 1fr 0.6fr 1fr;
-        grid-template-rows: 1fr 2fr 1fr;
-        grid-template-areas:
-            'short close close'
-            'graph graph details'
-            'graph graph actions';
-    }
-
+        @media (min-width: 760px) {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr 0.6fr 1fr;
+            grid-template-rows: 1fr 2fr 1fr;
+            grid-template-areas:
+                'short close close'
+                'graph graph details'
+                'graph graph actions';
+        }
 
         .rising {
             color: #00ac45;
@@ -142,7 +139,6 @@
             align-self: self-end;
             width: 100%;
 
-
             &.skeleton {
                 border-radius: 12px !important;
                 height: 100%;
@@ -197,7 +193,6 @@
 
                 @media (min-width: 768px) {
                     font-size: em(15px, 16px);
-                    
                 }
                 th {
                     color: #6a6a6f;
@@ -298,7 +293,7 @@
         }
     }
 
-    @media (min-width: 768px){
+    @media (min-width: 768px) {
         padding: 50px;
     }
 }

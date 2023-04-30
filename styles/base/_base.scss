@@ -42,7 +42,7 @@ h5,
 h6,
 p {
     font-family: inherit;
-    font-size: 0.65rem;
+    font-size: 1rem;
     color: inherit;
 }
 
@@ -90,13 +90,12 @@ a {
     place-items: center;
 }
 
+// @media (min-width: 638px) {
+//     p {
+//         font-size: 1.2rem;
+//     }
 
-@media (min-width: 638px) {
-p{
-    font-size: 1.2rem;
-}
-
-.card{
-padding: 30px;
-}
-}
+//     .card {
+//         padding: 30px;
+//     }
+// }
