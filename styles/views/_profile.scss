@@ -19,7 +19,7 @@
         color: #a6a8b3;
       }
       h1 {
-        font-size:1em;
+        font-size: 1em;
         color: white;
         text-transform: capitalize;
       }
@@ -31,9 +31,9 @@
   }
 
   .profile-grid {
-   display: flex;
-   flex-direction: column;
-   gap: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 
     > * > * {
       &::-webkit-scrollbar-track {
@@ -74,6 +74,7 @@
         > *:not(:last-child) {
           border-bottom: 1px solid rgb(213, 213, 213);
         }
+
       }
     }
 
@@ -98,14 +99,13 @@
   }
 }
 
-
-@media (min-width: 768px){
-  .profile-section{
-    .profile-header{
+@media (min-width: 768px) {
+  .profile-section {
+    .profile-header {
       font-size: 2rem;
     }
 
-    .profile-grid{
+    .profile-grid {
       display: grid;
       grid-template-columns: 1fr 2fr;
       grid-template-rows: 30vh 42vh;
