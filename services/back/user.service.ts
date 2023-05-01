@@ -37,7 +37,7 @@ export function sellTransaction(crypto: Crypto, currencies: Array<Crypto>) {
             amount: currencies[currencyIdx].amount - crypto.amount,
         };
     }
-    return {currencies};
+    return {status:"selled succesfully", currencies};
 }
 
 export function checkBuyStatus (crypto: Crypto, currencies: Array<Crypto>){

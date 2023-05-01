@@ -90,9 +90,9 @@ export function transactionAmount(transactions : Transaction[] , currency : stri
     let totalAmount = 0;
   
     transactions.forEach((transaction) => {
-      if (transaction.action === 'buy') {
-        totalAmount += transaction.price;
-      }else{
+      if (transaction.action === 'buy' && transaction.status === "approved") {
+        totalAmount += transaction.price
+      }else if (transaction.status !== "denied"){
         totalAmount -= transaction.price
       }
     });

@@ -28,11 +28,16 @@ export default async function handler(
         } else {
             console.log('selling');
             const sellTransactionDetails = sellTransaction(crypto, user.currencies)
-            if(sellTransactionDetails.status) {
+            console.log(sellTransactionDetails.status);
+            
+            if(sellTransactionDetails.status === 'not enough cash') {
                 user.transactions.unshift({...transaction, status:'denied'});
                 res.status(200).json({ message: sellTransactionDetails.status })
+                await user.save();
+                return
             }
             else{
+                user.transactions.unshift(transaction);
                 user.currencies = sellTransactionDetails.currencies;
                 user.coins += transaction.price;
             }

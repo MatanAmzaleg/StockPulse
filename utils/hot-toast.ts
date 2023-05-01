@@ -1,5 +1,5 @@
 export const toastOptions = {
-    duration: 3000,
+    duration: 4000,
     style: {
         color: 'black',
         fontWeight: 'bold',
@@ -9,7 +9,7 @@ export const toastOptions = {
 };
 
 export const errorToastOptions = {
-    duration: 3000,
+    duration: 4000,
     style: {
         color: 'white',
         backgroundColor: 'red',

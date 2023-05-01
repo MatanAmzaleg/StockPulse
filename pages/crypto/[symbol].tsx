@@ -72,13 +72,21 @@ export default function CryptoDetails({
                 alpacaCrypto?.ap!,
                 alpacaCrypto?.S!
             );
-
+                if(res?.data.message === 'not enough cash') {
+                    toast(`Not enough ${alpacaCrypto?.S} to preform action`, errorToastOptions);
+                    setInputValue(0);
+                    return
+                }else if(res?.data.message === 'selled succesfully'){
+                    toast(`$${inputValue} worth ${alpacaCrypto?.S.toLocaleUpperCase()} has been selled successfully`, toastOptions);
+                    setInputValue(0);
+                    return
+                }
             // alert(res!.data.message);
+            toast(`$${inputValue} worth ${alpacaCrypto?.S.toLocaleUpperCase()} has been purchased successfully`, toastOptions);
             setInputValue(0);
-            toast('purchased successfully', toastOptions);
         } catch (err) {
             console.log('failed to set transaction', err);
-            toast('failed to purchase', errorToastOptions);
+            toast('Failed to purchase', errorToastOptions);
         }
     };
 
