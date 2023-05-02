@@ -42,8 +42,16 @@ h5,
 h6,
 p {
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.6rem;
     color: inherit;
+
+    @media (min-width: 568px) {
+        font-size: 0.8rem;
+    }
+
+    @media (min-width: 762px) {
+        font-size: 1rem;
+    }
 }
 
 button {

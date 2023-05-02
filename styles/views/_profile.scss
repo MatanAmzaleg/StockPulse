@@ -33,7 +33,11 @@
   .profile-grid {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 20px;
+
+    @media (min-width: 768px) {
+      gap: 50px;
+    }
 
     > * > * {
       &::-webkit-scrollbar-track {

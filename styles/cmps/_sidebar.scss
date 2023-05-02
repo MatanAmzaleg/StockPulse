@@ -78,6 +78,20 @@
             }
         }
     }
+    .logout-btn {
+        border-radius: 10px;
+        background-color: #7422dd;
+        color: #e7defa;
+        padding: 7px 10px;
+        position: absolute;
+        bottom: 50%;
+        visibility: visible;
+        margin-inline-start: 5px;
+        
+        @media (min-width: 768px) {
+            visibility: hidden;
+        }
+    }
 
     .user-container {
         padding-inline: 40px;
@@ -105,6 +119,7 @@
 
         @media (max-width: 768px) {
             align-self: center;
+            visibility: hidden;
         }
     }
 
