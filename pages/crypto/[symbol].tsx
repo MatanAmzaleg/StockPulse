@@ -77,12 +77,12 @@ export default function CryptoDetails({
                     setInputValue(0);
                     return
                 }else if(res?.data.message === 'selled succesfully'){
-                    toast(`$${inputValue} worth ${alpacaCrypto?.S.toLocaleUpperCase()} has been selled successfully`, toastOptions);
+                    toast(`$${inputValue} Worth ${alpacaCrypto?.S.toLocaleUpperCase()} has been selled successfully.`, toastOptions);
                     setInputValue(0);
                     return
                 }
             // alert(res!.data.message);
-            toast(`$${inputValue} worth ${alpacaCrypto?.S.toLocaleUpperCase()} has been purchased successfully`, toastOptions);
+            toast(`$${inputValue} Worth ${alpacaCrypto?.S.toLocaleUpperCase()} has been purchased successfully.`, toastOptions);
             setInputValue(0);
         } catch (err) {
             console.log('failed to set transaction', err);

@@ -72,7 +72,7 @@ export default function Sidebar() {
                 <div className="">
                 <div className="user-container">
                     <p>Welcome back,</p>
-                    <p className="username">{user?.fullName}</p>
+                    <p className="username">{user?.fullName}.</p>
                     <button onClick={onLogout}>Logout</button>
                 </div>
                     <button className='logout-btn' onClick={onLogout}>Logout</button>
