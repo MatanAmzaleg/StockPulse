@@ -99,6 +99,18 @@ export function transactionAmount(transactions : Transaction[] , currency : stri
     return totalAmount;
   }
 
+  export function calculateGreet (){
+    const hours = new Date().getHours();
+    if (hours > 5 && hours < 12) {
+      return("Good Morning");
+    } else if (hours > 12 && hours < 18) {
+      return("Good Afternoon");
+    } else if (hours > 18 && hours < 23) {
+      return("Good Evening");
+    } else if (hours > 23 && hours < 5) {
+      return("Good Night");
+    }
+  }
 
 
 

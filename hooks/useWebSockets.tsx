@@ -1,6 +1,7 @@
 import { Currencies, Currency } from '@/typings';
 import { useState, useEffect } from 'react';
 import { cryptoSymbol } from 'crypto-symbol';
+import { log } from 'console';
 
 const { nameLookup } = cryptoSymbol({});
 
@@ -46,7 +47,7 @@ export default function useWebSockets(symbols: string[]) {
             socket.send(JSON.stringify(authMessage));
         };
 
-        socket.onmessage = (event) => {
+        socket.onmessage =  (event) => {
             const data = JSON.parse(event.data);
 
             if (data[0].msg === 'authenticated') {
@@ -57,8 +58,8 @@ export default function useWebSockets(symbols: string[]) {
                 };
                 socket.send(JSON.stringify(subscribe));
             }
-
-            handleData(data[0]);
+            
+             handleData(data[0]);
         };
 
         socket.onclose = () => {

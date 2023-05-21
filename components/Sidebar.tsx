@@ -42,7 +42,7 @@ export default function Sidebar() {
                 hamburger
             </button> */}
             <div className="logo-container">
-                <h2 className="logo">stock pulse</h2>
+                <h2 className="logo">CryptoPulse.</h2>
             </div>
             <div className="sidebar">
                 <nav className="sidebar-nav">

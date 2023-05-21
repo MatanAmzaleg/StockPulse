@@ -15,7 +15,8 @@ console.log(currency);
       </div>
       <p>{currency.amount.toFixed("8")}</p>
       <p>{pricePerCoin()}</p>
-      <p
+      {
+        !currency ? <h1>Lodaing...</h1> :<p
         className={
           calculateChange2(+pricePerCoin(), totalBuyAmount) > 0
             ? "ascending"
@@ -25,6 +26,8 @@ console.log(currency);
         {calculateChange2(+pricePerCoin(), totalBuyAmount).toFixed(2) + "%"} |{" "}
         {formattedPrice(+pricePerCoin() - totalBuyAmount)}
       </p>
+      }
+      
     </section>
   );
 }

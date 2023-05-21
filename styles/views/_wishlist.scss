@@ -3,6 +3,28 @@
     padding-block: 50px;
 
     header {
+        margin-block: 40px;
         color: white;
+        h1{
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+    }
+    .hot-crypto-sec {
+        margin-top: 50px;
+        h1 {
+            font-size: 1.7rem;
+            color: white;
+        }
+        .hot-crypto-list {
+            margin-top: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            @media (max-width:490px){
+                display: grid;
+                place-items: center;
+            }
+        }
     }
 }

@@ -12,30 +12,27 @@ import {
   calculateAllChange,
   getTotalTransactionsAmount,
   formattedPrice,
+  calculateGreet,
 } from "@/utils/format";
 
 export default function profile() {
   const { user } = useAuth();
-
+  
   if (!user) return <div>Loading</div>;
-
-  const [greet, setGreet] = useState("");
-
   const { currencies } = useWebSockets(
     user!.currencies.map((c) => (c.currency + "usd").toLocaleUpperCase())
   );
 
+  console.log("currencies", currencies);
+  
+
+  const [greet, setGreet] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+
   useEffect(() => {
-    const hours = new Date().getHours();
-    if (hours > 5 && hours < 12) {
-      setGreet("Good Morning");
-    } else if (hours > 12 && hours < 18) {
-      setGreet("Good Afternoon");
-    } else if (hours > 18 && hours < 23) {
-      setGreet("Good Evening");
-    } else if (hours > 23 && hours < 5) {
-      setGreet("Good Night");
-    }
+   setGreet(calculateGreet() || "")
+   setIsLoading(false); 
   }, []);
 
   const { totalUpdatedAmount, totalGain, totalUpdatedChange } =
@@ -63,7 +60,7 @@ export default function profile() {
           <h1 className="portfolio-worth">
             {formattedPrice(totalUpdatedAmount)}
           </h1>
-          <h2>
+          {currencies ?  <h2>
             Change:{" "}
             <span className={totalGain > 0 ? "ascending" : "descending"}>
               {totalUpdatedChange.toFixed(2) +
@@ -71,7 +68,8 @@ export default function profile() {
                 " | " +
                 formattedPrice(totalGain)}
             </span>{" "}
-          </h2>
+          </h2> : 'loading...'}
+         
         </div>
         <div className="card my-cryptos flex column">
           <h1>Wallet</h1>
@@ -84,7 +82,7 @@ export default function profile() {
             <p className="bolder">Change</p>
           </section>
           <div className="cryptos flex column">
-            {user!.currencies.map((c) => (
+            { user!.currencies.map((c) => (
               <CryptoCard
                 totalBuyAmount={transactionAmount(
                   user.transactions,

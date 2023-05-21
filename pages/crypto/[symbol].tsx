@@ -41,6 +41,8 @@ export default function CryptoDetails({
     //     ? useWebSockets([(symbol + 'USD').toUpperCase()])
     //     : { currencies: {} };
     const { currencies } = useWebSockets([(symbol + 'usd').toUpperCase()]);
+    console.log(graphRef);
+    
 
     const selectDay = (day: string) => {
         setDay(day);
@@ -193,7 +195,10 @@ export default function CryptoDetails({
                         </tr>
                     </table>
                 </div>
-                <div className="card graph" ref={graphRef}></div>
+                
+                  <div className="card graph" ref={graphRef}>{!graphRef.current ?   "Loading..." : null }</div>
+                
+                
                 <div className="card details">
                     <h4>Details</h4>
                     <div className="details-grid">
