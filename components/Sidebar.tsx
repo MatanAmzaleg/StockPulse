@@ -57,15 +57,6 @@ export default function Sidebar() {
                             <span>{link}</span>
                         </Link>
                     ))}
-                    <button
-                        className="sidebar-nav-link"
-                        onClick={() => {
-                            console.log('toast');
-                            toast('toast', errorToastOptions);
-                        }}
-                    >
-                        Toast
-                    </button>
                 </nav>
             </div>
             {user ? (
