@@ -1,78 +1,76 @@
-import Link from 'next/link';
-import { IoSettingsOutline } from 'react-icons/io5';
+import Link from "next/link";
+import { IoSettingsOutline } from "react-icons/io5";
 import {
-    AiOutlineBarChart,
-    AiOutlineUser,
-    AiOutlineStar,
-} from 'react-icons/ai';
-import { HiOutlineSquares2X2 } from 'react-icons/hi2';
-import { BsCurrencyBitcoin } from 'react-icons/bs';
+  AiOutlineBarChart,
+  AiOutlineUser,
+  AiOutlineStar,
+} from "react-icons/ai";
+import { HiOutlineSquares2X2 } from "react-icons/hi2";
+import { BsCurrencyBitcoin } from "react-icons/bs";
 
-import useAuth from '@/hooks/useAuth';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
-import { errorToastOptions, toastOptions } from '@/utils/hot-toast';
+import { errorToastOptions, toastOptions } from "@/utils/hot-toast";
 
 export default function Sidebar() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { logout, user } = useAuth();
-    const router = useRouter();
-    const links = {
-        crypto: <BsCurrencyBitcoin className="link-icon" />,
-        wishlist: <AiOutlineStar className="link-icon" />,
-        profile: <AiOutlineUser className="link-icon" />,
-        settings: <IoSettingsOutline className="link-icon" />,
-    };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { logout, user } = useAuth();
+  const router = useRouter();
+  const links = {
+    crypto: <BsCurrencyBitcoin className="link-icon" />,
+    wishlist: <AiOutlineStar className="link-icon" />,
+    profile: <AiOutlineUser className="link-icon" />,
+    settings: <IoSettingsOutline className="link-icon" />,
+  };
 
-    const goToLogin = () => router.push('/login');
+  const goToLogin = () => router.push("/login");
 
-    const onLogout = () => {
-        logout();
-        toast(`Bye`, toastOptions);
-    };
+  const onLogout = () => {
+    logout();
+    toast(`Bye`, toastOptions);
+  };
 
-    return (
-        <section className={`sidebar-section ${isSidebarOpen ? 'closed' : ''}`}>
-            {/* <button
-                className="hamburger-btn"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-                hamburger
-            </button> */}
-            <div className="logo-container">
-                <h2 className="logo">CryptoPulse.</h2>
-            </div>
-            <div className="sidebar">
-                <nav className="sidebar-nav">
-                    {Object.keys(links).map((link) => (
-                        <Link
-                            href={'/' + link}
-                            className={`sidebar-nav-link ${
-                                router.pathname.includes(link) && 'active'
-                            }`}
-                        >
-                            {links[link as keyof typeof links]}
-                            <span>{link}</span>
-                        </Link>
-                    ))}
-                </nav>
-            </div>
-            {user ? (
-                <div className="">
-                <div className="user-container">
-                    <p>Welcome back,</p>
-                    <p className="username">{user?.fullName}.</p>
-                    <button onClick={onLogout}>Logout</button>
-                </div>
-                    <button className='logout-btn' onClick={onLogout}>Logout</button>
-                </div>
-            ) : (
-                <div className="user-container">
-                    <button onClick={goToLogin}>Login</button>
-                </div>
-            )}
-        </section>
-    );
+  return (
+    <section className={`sidebar-section ${isSidebarOpen ? "closed" : ""}`}>
+      <div className="upper-container">
+        <div className="logo-container">
+          <img src="/logo1.png" className="logo" alt="" />
+        </div>
+        <div className="sidebar">
+          <nav className="sidebar-nav">
+            {Object.keys(links).map((link) => (
+              <Link
+                href={"/" + link}
+                className={`sidebar-nav-link ${
+                  router.pathname.includes(link) && "active"
+                }`}
+              >
+                {links[link as keyof typeof links]}
+                <span>{link}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+      {user ? (
+        <div className="">
+          <div className="user-container">
+            <p>Welcome back,</p>
+            <p className="username">{user?.fullName}.</p>
+            <button onClick={onLogout}>Logout</button>
+          </div>
+          <button className="logout-btn" onClick={onLogout}>
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div className="user-container">
+          <button onClick={goToLogin}>Login</button>
+        </div>
+      )}
+    </section>
+  );
 }

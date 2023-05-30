@@ -17,11 +17,6 @@ export default async function handler(
         sendError(res, 400, 'Please provide an email and password');
 
     try {
-        // const isPasswordCorrect = await bcrypt.compare(password, user.password);
-        // if (!isPasswordCorrect) {
-        //     res.status(400).json({ error: 'Incorrect password' });
-        //     return;
-        // }
         const user: UserDocument | null = await User.findOne({
             email,
             password,

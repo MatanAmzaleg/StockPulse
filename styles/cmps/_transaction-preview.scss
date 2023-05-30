@@ -25,6 +25,14 @@
             width: 20px;
             margin-inline-end: 10px;
 
+
+            &.start{
+                margin-inline-start: 10px;
+                @media (max-width:400px){
+                    display: none;
+                }
+            }
+
             @media (min-width:650px){
                 width: 25px;
             }

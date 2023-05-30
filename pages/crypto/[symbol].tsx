@@ -29,6 +29,10 @@ export default function CryptoDetails({
     yesterdayData,
     chartData,
 }: Props) {
+    console.log(chartData);
+    
+
+
     const router = useRouter();
     const { symbol } = router.query;
     const graphRef = useRef<HTMLDivElement>(null);
@@ -92,7 +96,7 @@ export default function CryptoDetails({
         }
     };
 
-    if (!currencies || !data || !yesterdayData)
+    if (!currencies || !yesterdayData)
         return <CryptoDetailsSkeleton />;
 
     const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
@@ -196,8 +200,7 @@ export default function CryptoDetails({
                     </table>
                 </div>
                 
-                  <div className="card graph" ref={graphRef}>{!graphRef.current ?   "Loading..." : null }</div>
-                
+                  <div className="card graph" ref={graphRef}>{!graphRef.current ?   <img className='photo' src="/loader1.gif" alt="" />: null }</div>
                 
                 <div className="card details">
                     <h4>Details</h4>
@@ -287,7 +290,9 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
         console.log('failed to fetch crypto details', error);
         return {
             props: {
-                error,
+                data: 0,
+                yesterdayData: 0,
+                chartData: 0,
             },
         };
     }

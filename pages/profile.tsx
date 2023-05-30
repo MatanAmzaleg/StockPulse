@@ -68,7 +68,7 @@ export default function profile() {
                 " | " +
                 formattedPrice(totalGain)}
             </span>{" "}
-          </h2> : 'loading...'}
+          </h2> : <img src="/loader1.gif" alt="" /> }
          
         </div>
         <div className="card my-cryptos flex column">

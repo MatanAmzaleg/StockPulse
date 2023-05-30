@@ -41,8 +41,7 @@ export default function Login() {
         <section className="login-sec">
             <div className="image grid-center">
                 <div className="flex column align-center">
-                    <img src="/market.png" className="logo" alt="" />
-                    <h1 className="main-title">StockPulse</h1>
+                    <img src="/logo1.png" className="logo" alt="" />
                 </div>
             </div>
             <div className="login-container">

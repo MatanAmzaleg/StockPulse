@@ -1,136 +1,140 @@
 .sidebar-section {
-    position: relative;
+  position: relative;
+  width: 300px;
+  grid-area: sidebar;
+  // display: flex;
+  // flex-direction: column;
+  .upper-container {
+    @media (max-width: 768px) {
+      width: inherit;
+      align-items: center;
+      position: fixed;
+    }
     width: 300px;
-    grid-area: sidebar;
-    // display: flex;
-    // flex-direction: column;
-
+    position: fixed;
     .logo-container {
-        padding: 50px 40px 0 40px;
-        color: #7422dd;
+      width: 100%;
+      margin-inline: auto;
+      @media (max-width: 768px) {
+        display: none;
+      }
 
-        @media (max-width: 768px) {
-            display: none;
-        }
-
-        .logo {
-            font-family: 'Bruno Ace SC', cursive;
-            font-size: 1.5em;
-            padding-bottom: 40px;
-        }
+      .logo {
+        width: 70%;
+      }
     }
 
     .sidebar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .sidebar-nav {
+        padding-block: 30px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-
-        .sidebar-nav {
-            padding-block: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 90%;
-
-            @media (max-width: 768px) {
-                align-items: center;
-            }
-
-            .sidebar-nav-link {
-                padding: 10px;
-                font-size: 1em;
-                display: flex;
-                align-items: center;
-                gap: 20px;
-                transition: all 0.2s;
-                border-radius: 5px;
-                
-
-                @media (max-width: 768px) {
-                    display: flex;
-                    align-items: center;
-                    padding: 5px;
-                }
-
-                span {
-                    text-transform: capitalize;
-                    @media (max-width: 768px) {
-                        display: none;
-                    }
-                }
-
-                &:hover {
-                    color: #7422dd;
-                    background-color: #f6f5f9;
-                    transform: translateY(-2px);
-                }
-
-                .link-icon {
-                    font-size: em(26px, 16px);
-                }
-
-                &.active {
-                    color: #7422dd;
-                    font-weight: bold;
-                    background-color: #eee9f8;
-                    transform: none;
-                    
-                }
-            }
-        }
-    }
-    .logout-btn {
-        border-radius: 10px;
-        background-color: #7422dd;
-        color: #e7defa;
-        padding: 7px 10px;
-        position: absolute;
-        bottom: 50%;
-        visibility: visible;
-        margin-inline-start: 5px;
-        
-        @media (min-width: 768px) {
-            visibility: hidden;
-        }
-    }
-
-    .user-container {
-        padding-inline: 40px;
-        position: fixed;
-        bottom: 20px;
-        // width: 300px;
-
-        p {
-            font-size: 1.1em;
-            font-weight: bold;
-
-            &.username {
-                text-transform: capitalize;
-                margin-bottom: 20px;
-            }
-        }
-
-        button {
-            border-radius: 10px;
-            background-color: #7422dd;
-            color: #e7defa;
-            padding: 10px 30px;
-            // width: 100%;
-        }
+        gap: 15px;
+        width: 90%;
 
         @media (max-width: 768px) {
-            align-self: center;
-            visibility: hidden;
+          align-items: center;
         }
+
+        .sidebar-nav-link {
+          padding: 10px;
+          font-size: 1em;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          transition: all 0.2s;
+          border-radius: 5px;
+
+          @media (max-width: 768px) {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+          }
+
+          span {
+            text-transform: capitalize;
+            @media (max-width: 768px) {
+              display: none;
+            }
+          }
+
+          &:hover {
+            color: #7422dd;
+            background-color: #f6f5f9;
+            transform: translateY(-2px);
+          }
+
+          .link-icon {
+            font-size: em(26px, 16px);
+          }
+
+          &.active {
+            color: #7422dd;
+            font-weight: bold;
+            background-color: #eee9f8;
+            transform: none;
+          }
+        }
+      }
+    }
+  }
+  .logout-btn {
+    border-radius: 10px;
+    background-color: #7422dd;
+    color: #e7defa;
+    padding: 7px 10px;
+    position: fixed;
+    top: 600px;
+    visibility: visible;
+    margin-inline-start: 3px;
+    font-size: 8px;
+
+    @media (min-width: 768px) {
+      visibility: hidden;
+    }
+  }
+
+  .user-container {
+    padding-inline: 40px;
+    position: fixed;
+    bottom: 20px;
+    // width: 300px;
+
+    p {
+      font-size: 1.1em;
+      font-weight: bold;
+
+      &.username {
+        text-transform: capitalize;
+        margin-bottom: 20px;
+      }
     }
 
-    @media (max-width: 1200px) {
-        width: 250px;
+    button {
+      border-radius: 10px;
+      background-color: #7422dd;
+      color: #e7defa;
+      padding: 10px 30px;
+      // width: 100%;
     }
+
     @media (max-width: 768px) {
-        width: 70px;
+      align-self: center;
+      visibility: hidden;
     }
-    @media (max-width: 500px) {
-        width: 60px;
-    }
+  }
+
+  @media (max-width: 1200px) {
+    width: 250px;
+  }
+  @media (max-width: 768px) {
+    width: 70px;
+  }
+  @media (max-width: 500px) {
+    width: 50px;
+  }
 }
