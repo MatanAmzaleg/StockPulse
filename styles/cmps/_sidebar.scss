@@ -5,6 +5,10 @@
   // display: flex;
   // flex-direction: column;
   .upper-container {
+    @media(max-width: 1200px ){
+      width: 250px;
+    }
+
     @media (max-width: 768px) {
       width: inherit;
       align-items: center;
@@ -79,6 +83,20 @@
             transform: none;
           }
         }
+      }
+    }
+
+    .portfolio-section {
+      padding-block: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 90%;
+      margin-inline: auto;
+      margin-top: 30px;
+
+      .portfolio{
+        gap: 5px;
       }
     }
   }

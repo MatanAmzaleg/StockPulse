@@ -14,14 +14,18 @@ import {
   formattedPrice,
   calculateGreet,
 } from "@/utils/format";
+import { CryptoDetailsSkeleton } from "@/components/skeleton/CryptoDetailsSkeleton";
 
-export default function profile() {
+export default function profile({currencies}: any) {
   const { user } = useAuth();
   
   if (!user) return <div>Loading</div>;
-  const { currencies } = useWebSockets(
-    user!.currencies.map((c) => (c.currency + "usd").toLocaleUpperCase())
-  );
+
+  console.log(  user.currencies);
+  
+  // const { currencies } = useWebSockets(
+  //   user!.currencies.map((c) => (c.currency + "usd").toLocaleUpperCase())
+  // );
 
   console.log("currencies", currencies);
   
@@ -41,6 +45,8 @@ export default function profile() {
       currencies,
       getTotalTransactionsAmount(user.transactions)
     );
+
+    if (!totalUpdatedChange) return <CryptoDetailsSkeleton />;
 
   return (
     <section className="profile-section">
@@ -63,7 +69,7 @@ export default function profile() {
           {currencies ?  <h2>
             Change:{" "}
             <span className={totalGain > 0 ? "ascending" : "descending"}>
-              {totalUpdatedChange.toFixed(2) +
+              {  totalUpdatedChange.toFixed(2) +
                 "%" +
                 " | " +
                 formattedPrice(totalGain)}

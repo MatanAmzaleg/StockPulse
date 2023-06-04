@@ -7,15 +7,29 @@ import {
 } from "react-icons/ai";
 import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import { BsCurrencyBitcoin } from "react-icons/bs";
-
+import {
+  transactionAmount,
+  calculateAllChange,
+  getTotalTransactionsAmount,
+  formattedPrice,
+  calculateGreet,
+} from "@/utils/format";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 import { errorToastOptions, toastOptions } from "@/utils/hot-toast";
+import useWebSockets from "@/hooks/useWebSockets";
+import { Currencies } from "@/typings";
 
-export default function Sidebar() {
+// interface Props{
+//   currncies: Currencies
+// }
+
+export default function Sidebar({ currencies }: any) {
+  // console.log(currencies);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { logout, user } = useAuth();
   const router = useRouter();
@@ -25,6 +39,7 @@ export default function Sidebar() {
     profile: <AiOutlineUser className="link-icon" />,
     settings: <IoSettingsOutline className="link-icon" />,
   };
+  if (!user) return <div>Loading</div>;
 
   const goToLogin = () => router.push("/login");
 
@@ -32,6 +47,13 @@ export default function Sidebar() {
     logout();
     toast(`Bye`, toastOptions);
   };
+
+  const { totalUpdatedAmount, totalGain, totalUpdatedChange } =
+    calculateAllChange(
+      user?.currencies,
+      currencies,
+      getTotalTransactionsAmount(user.transactions)
+    );
 
   return (
     <section className={`sidebar-section ${isSidebarOpen ? "closed" : ""}`}>
@@ -54,6 +76,34 @@ export default function Sidebar() {
             ))}
           </nav>
         </div>
+        {totalUpdatedChange ? (
+          <div className="portfolio-section">
+            <h1>Current balance: ${user?.coins}</h1>
+            <div className="portfolio flex">
+              <h1>Portfolio value: </h1>
+              <h1
+                className={
+                  totalGain > 0
+                    ? "portfolio-worth ascending"
+                    : "portfolio-worth descending"
+                }
+              >
+                  {formattedPrice(totalUpdatedAmount)}
+              </h1>
+            </div>
+            <h2>
+              Change:{" "}
+              <span className={totalGain > 0 ? "ascending" : "descending"}>
+                {totalUpdatedChange.toFixed(2) +
+                  "%" +
+                  " | " +
+                  formattedPrice(totalGain)}
+              </span>{" "}
+            </h2>
+          </div>
+        ) : (
+          <img className="loader-s" src="/loader1.gif" alt="" />
+        )}
       </div>
       {user ? (
         <div className="">

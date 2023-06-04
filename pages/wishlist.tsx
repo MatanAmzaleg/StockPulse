@@ -5,7 +5,7 @@ import { Currency } from '@/typings';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 
-export default function Wishlist() {
+export default function Wishlist({currencies}: any) {
     const { user } = useAuth();
 
     if (!user) return <div>Loading</div>;
@@ -16,8 +16,6 @@ export default function Wishlist() {
     const watchlistCurrencies = user?.watchlist.map(
         (currency) => currency.toUpperCase() + 'USD'
     );
-
-    const { currencies } = useWebSockets(watchlistCurrencies!);
 
     return (
         <section className="wishlist-sec ">

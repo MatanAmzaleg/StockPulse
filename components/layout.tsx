@@ -5,12 +5,40 @@ import { useRouter } from "next/router";
 import { cryptoSymbol } from "crypto-symbol";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
+import useWebSockets from "@/hooks/useWebSockets";
+import React from 'react';
+
+
+const currenciesList = [
+  'BTCUSD',
+  'ETHUSD',
+  'USDTUSD',
+  'YFIUSD',
+  'AVAXUSD',
+  'MATICUSD',
+  'LTCUSD',
+  'DOGEUSD',
+  'SOLUSD',
+  'SUSHIUSD',
+  'SHIBUSD',
+  'LINKUSD',
+  'TRXUSD',
+  'UNIUSD',
+  'BCHUSD',
+  'NEARUSD',
+  'ALGOUSD',
+  'GRTUSD',
+  'AAVEUSD',
+  'BATUSD',
+  'MKRUSD',
+];
 
 const { nameLookup } = cryptoSymbol({});
 
 export default function Layout({ children }: any) {
   const router = useRouter();
   const [title, setTitle] = useState("");
+  const { currencies } = useWebSockets(currenciesList);
 
   useEffect(() => {
     // const { pathname, query } = router;
@@ -21,6 +49,8 @@ export default function Layout({ children }: any) {
 
   const dontNeedLayout = () =>
     router.pathname === "/login" || router.pathname === "/";
+
+
 
   return (
     <>
@@ -39,8 +69,13 @@ export default function Layout({ children }: any) {
       {!dontNeedLayout() ? (
         <>
           <main className="home-container">
-            <Sidebar />
-            <section className="main-container">{children}</section>
+            <Sidebar currencies={currencies}/>
+            <section className="main-container">
+              {React.Children.map(children, (child) => {
+                // Clone each child and add the 'currencies' prop
+                return React.cloneElement(child, { currencies });
+              })}
+            </section>
           </main>
           <Toaster position="bottom-center" />
         </>
