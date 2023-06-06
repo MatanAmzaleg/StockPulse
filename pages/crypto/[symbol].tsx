@@ -40,6 +40,9 @@ export default function CryptoDetails({
   const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
   const { addToWatchList, user } = useAuth();
   const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
+
+  console.log(oc);
+  
   
   const currency = currencies[symbol?.toUpperCase() + "USD"];
   console.log(currency);
@@ -48,8 +51,11 @@ export default function CryptoDetails({
 
   
 
-  useEffect(() => {
+  useEffect(() => {    
+    console.log("creating chart1");
     if (!graphRef.current || !currency) return;
+    console.log("creating chart2");
+    
     createCandleStickChart(graphRef.current!, chartData);
   }, []);
 
@@ -180,12 +186,12 @@ export default function CryptoDetails({
           <table>
             <tbody>
               <tr>
-                <th>Pre-Market</th>
+                <th>Symbol</th>
                 <th>Prev-Close</th>
                 <th>Open</th>
               </tr>
               <tr>
-                <td className="table-price">$130.00</td>
+                <td className="table-price">{currency.S.toUpperCase()}</td>
                 <td className="table-price">{formattedPrice(oc.close)}</td>
                 <td className="table-price">{formattedPrice(oc.open)}</td>
               </tr>
@@ -203,7 +209,7 @@ export default function CryptoDetails({
                 <td className="table-date">
                   {dateTimeFormat(new Date(oc.ts))}
                 </td>
-                <td className="table-date">June 16, 4:00pm</td>
+                <td className="table-date">  {dateTimeFormat(new Date(oc.ts + (60 * 60 * 24 * 1000)))}</td>
               </tr>
             </tbody>
           </table>
