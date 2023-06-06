@@ -72,7 +72,6 @@ export default function Layout({ children }: any) {
             <Sidebar currencies={currencies}/>
             <section className="main-container">
               {React.Children.map(children, (child) => {
-                // Clone each child and add the 'currencies' prop
                 return React.cloneElement(child, { currencies });
               })}
             </section>

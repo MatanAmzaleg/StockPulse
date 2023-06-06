@@ -19,7 +19,7 @@ export default function useWebSockets(symbols: string[]) {
     };
 
     const handleData = (crypto: Currency) => {
-        if (!crypto.S) return;
+        if (!crypto.S || crypto.s) return;
 
         const delay = 1000 * 2; //2ms
         const prevCurrency = currencies[crypto.S as keyof typeof currencies];
@@ -58,6 +58,8 @@ export default function useWebSockets(symbols: string[]) {
                 };
                 socket.send(JSON.stringify(subscribe));
             }
+            // console.log(data[0]);
+            // if(data[0].s) console.log("yeah");
             
              handleData(data[0]);
         };

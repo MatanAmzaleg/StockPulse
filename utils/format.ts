@@ -72,6 +72,8 @@ export function transactionAmount(transactions : Transaction[] , currency : stri
 
 
   export function calculateAllChange(currencies: Crypto[], prices: any, totalTransactionsAmount : number){
+    // console.log(prices);
+    
     let totalUpdatedAmount = 0
     currencies.forEach((c, idx) => {
       

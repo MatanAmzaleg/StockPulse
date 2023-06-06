@@ -77,29 +77,33 @@ export default function Sidebar({ currencies }: any) {
           </nav>
         </div>
         {totalUpdatedChange ? (
-          <div className="portfolio-section">
-            <h1>Current balance: ${user?.coins}</h1>
-            <div className="portfolio flex">
-              <h1>Portfolio value: </h1>
-              <h1
+          <div className="portfolio-section align-center">
+            <div className="portfolio flex align-center">
+              <img className="portfolio-img" src="/portfolio.png" alt="" />
+              <h1>My Portfolio: </h1>
+            </div>
+            <h1
+              className={
+                totalGain > 0
+                  ? "portfolio-worth ascending"
+                  : "portfolio-worth descending"
+              }
+            >
+              {formattedPrice(totalUpdatedAmount)}
+            </h1>
+            <h2>
+              <span
                 className={
                   totalGain > 0
-                    ? "portfolio-worth ascending"
-                    : "portfolio-worth descending"
+                    ? "portfolio-change ascending"
+                    : "portfolio-change descending"
                 }
               >
-                  {formattedPrice(totalUpdatedAmount)}
-              </h1>
-            </div>
-            <h2>
-              Change:{" "}
-              <span className={totalGain > 0 ? "ascending" : "descending"}>
-                {totalUpdatedChange.toFixed(2) +
-                  "%" +
-                  " | " +
-                  formattedPrice(totalGain)}
-              </span>{" "}
+                {totalUpdatedChange.toFixed(2) + "%"}
+              </span>
             </h2>
+
+            <h1>Current balance: ${user?.coins}</h1>
           </div>
         ) : (
           <img className="loader-s" src="/loader1.gif" alt="" />

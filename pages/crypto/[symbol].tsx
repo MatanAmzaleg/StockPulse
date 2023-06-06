@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import useWebSockets from "@/hooks/useWebSockets";
 import useAuth from "@/hooks/useAuth";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { createCandleStickChart } from "@/services/front/ChartService";
 import { userService } from "@/services/front/UserService";
 import { CryptoDetailsSkeleton } from "@/components/skeleton/CryptoDetailsSkeleton";
@@ -37,7 +37,8 @@ export default function CryptoDetails({
   const [day, setDay] = useState("today");
   const [inputValue, setInputValue] = useState<number>(0);
   const [usdInCrypto, setUsdInCrypto] = useState<number>(0);
-  const { user } = useAuth();
+  const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
+  const { addToWatchList, user } = useAuth();
   const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
   
   const currency = currencies[symbol?.toUpperCase() + "USD"];
@@ -45,8 +46,10 @@ export default function CryptoDetails({
   const [prevPrice, setPrevPrice] = useState([currency?.bp]);
   const [color, setColor] = useState()
 
+  
+
   useEffect(() => {
-    if (!graphRef.current) return;
+    if (!graphRef.current || !currency) return;
     createCandleStickChart(graphRef.current!, chartData);
   }, []);
 
@@ -104,6 +107,16 @@ export default function CryptoDetails({
     }
   };
 
+  const onToggleWatchlist = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    console.log(crypto);
+
+    const res = await addToWatchList(currency.S);
+    console.log(res);
+
+    setIsOnWatchlist(res.isOnWatchlist);
+  };
+
   if (!currencies || !yesterdayData) return <CryptoDetailsSkeleton />;
 
   if (!currency) return <CryptoDetailsSkeleton />;
@@ -123,8 +136,12 @@ export default function CryptoDetails({
           />
           <h2>{currency?.name}</h2>
         </div>
-        <button>
-          <AiOutlineStar className="star-icon" />
+        <button onClick={(e) => onToggleWatchlist(e)}>
+        {user?.watchlist?.includes(currency.S) ? (
+              <AiFillStar className="star-icon" />
+            ) : (
+              <AiOutlineStar className="star-icon" />
+            )}
         </button>
       </div>
       <div className="main-grid">

@@ -9,6 +9,7 @@ export interface Currency {
     as: number;
     bp: number;
     bs: number;
+    s:number;
     t: string;
     x: string;
 }
