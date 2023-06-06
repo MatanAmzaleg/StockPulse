@@ -1,0 +1,120 @@
+.login-sec {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .image {
+    // background: linear-gradient(180deg, #3b4b80, #94b3cc);
+    background: linear-gradient(180deg, #7422dd, #ffffff);
+    padding-block-end: 50px;
+
+    .main-title {
+      font-size: 45px;
+      font-weight: bolder;
+      font-family: 'Bruno Ace SC', cursive;
+    }
+
+    .logo {
+      width: 100%;
+    }
+  }
+
+  .login-container {
+    display: grid;
+    place-content: center;
+    // background-color: #eff1f5;
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // justify-content: center;
+      gap: 40px;
+      padding: 30px;
+      background-color: white;
+      border-radius: 12px;
+      text-transform: capitalize;
+
+      h1 {
+        font-size: 1.4em;
+      }
+
+      .input-container {
+        position: relative;
+        transition: transform 0.2s;
+
+        label {
+          position: absolute;
+          left: 2px;
+          top: 15px;
+          // transform: translateY(-50%);
+          transition: top 0.3s ease-in-out;
+          pointer-events: none;
+          font-size: 1em;
+          color: gray;
+        }
+
+        img {
+          position: absolute;
+          width: 20px;
+          right: 2px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        input {
+          padding: 10px 2px;
+          // padding-block: 10px;
+          // border-radius: 5px;
+          // background-color: #eee9f8;
+          // width: 100%;
+          // background-color: #eff1f5;
+          border: none;
+          border-bottom: 1px solid rgb(194, 194, 194);
+          font-size: 1.1em;
+          transition: 0.2s;
+          // &:focus {
+          //     // outline: 1px solid #7422dd;
+
+          //     .input-container label {
+          //         transform: translateY(-200%) !important;
+          //     }
+          //     img {
+          //         width: 50px;
+          //     }
+          // }
+
+          &:focus {
+            outline: none;
+            border-bottom: 1px solid rgb(177, 12, 12);
+            // #email-label {
+            //     top: -10px !important;
+            // }
+          }
+        }
+      }
+      input[type="submit"] {
+        background-color: #7422dd;
+        color: #e7defa;
+        text-transform: capitalize;
+        padding: 10px 20px;
+        border-radius: 12px;
+        border: none;
+      }
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (min-width: 999px) {
+  .login-sec {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.email-focus {
+  top: -17px !important;
+}
