@@ -32,7 +32,7 @@ export default function CryptoDetails({
   currencies,
 }: Props) {
   const router = useRouter();
-  const { symbol } = router.query;
+  const { symbol } = router.query ;
   const graphRef = useRef<HTMLDivElement>(null);
   const [day, setDay] = useState("today");
   const [inputValue, setInputValue] = useState<number>(0);
@@ -44,7 +44,7 @@ export default function CryptoDetails({
   console.log(oc);
   
   
-  const currency = currencies[symbol?.toUpperCase() + "USD"];
+  const currency = currencies[`${symbol}USD`.toUpperCase()];
   console.log(currency);
   const [prevPrice, setPrevPrice] = useState([currency?.bp]);
   const [color, setColor] = useState()
