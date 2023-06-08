@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: Props) => {
             setUser(user.data);
             router.push('/crypto');
         } catch ({ message }) {
-            alert(message);
+            alert("user is not exist");
         } finally {
             setLoading(false);
         }
@@ -86,21 +86,19 @@ export const AuthProvider = ({ children }: Props) => {
     }
 
     async function addToWatchList(symbol: string) {
-        // setLoading(true);
-        // const newUser = { ...user, watchlist: [...user!.watchlist, symbol] };
         try {
-            // await axios.post(`/api/user/${user?.email}`, { symbol });
-            const { data } = await axios.post(`/api/user/modifyWatchlist`, {
-                symbol,
-                email: user?.email,
-            });
-            const { message, isOnWatchlist, newUser } = data;
-            setUser(newUser);
-            return { message, isOnWatchlist };
+          const { data } = await axios.post(`/api/user/modifyWatchlist`, {
+            symbol,
+            email: user?.email,
+          });
+          const { message, isOnWatchlist, newUser } = data;
+          setUser(newUser);
+          return { message, isOnWatchlist } as ModifyWatchlistObj;
         } catch (error) {
-            console.log(error);
+          console.log(error);
+          return { message: '', isOnWatchlist: false } as ModifyWatchlistObj;
         }
-    }
+      }
 
     const checkCookie = async () => {
         const userFromCookie = getCookie(USER_COOKIE);
