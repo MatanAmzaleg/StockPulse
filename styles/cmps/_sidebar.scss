@@ -123,6 +123,11 @@
       width: 70px;
       position: relative;
       right: 50%;
+      visibility: hidden;
+
+      @media(min-width: 768px){
+        visibility: visible;
+      }
     }
   }
   .logout-btn {
