@@ -36,8 +36,7 @@ export default function Sidebar({ currencies }: any) {
   const links = {
     crypto: <BsCurrencyBitcoin className="link-icon" />,
     wishlist: <AiOutlineStar className="link-icon" />,
-    profile: <AiOutlineUser className="link-icon" />,
-    settings: <IoSettingsOutline className="link-icon" />,
+    profile: <AiOutlineUser className="link-icon" />
   };
   if (!user) return <div>Loading</div>;
 
