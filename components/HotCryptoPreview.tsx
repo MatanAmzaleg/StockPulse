@@ -17,12 +17,34 @@ export default function HotCryptoPreview({ crypto }: Props) {
   const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
   const [watchlist, setWatchList] = useState<string[]>([]);
   const { addToWatchList, user } = useAuth();
+  const [prevPrice, setPrevPrice] = useState(crypto?.bp);
+  const [color, setColor] = useState("");
+  
 
   useEffect(() => {
     if (!user || user.watchlist?.length === 0 || !crypto) return;
     setIsOnWatchlist(user.watchlist.includes(crypto.S));
-    
   }, [crypto]);
+
+
+  useEffect(() => {
+    if(prevPrice > crypto?.bp) setColor("descending");
+    if(prevPrice < crypto?.bp) setColor("ascending");
+    setPrevPrice(crypto?.bp);
+  }, [crypto?.bp]);
+
+
+  useEffect(() => {
+    if (color) {
+      const timeout = setTimeout(() => {
+        setColor("");
+      }, 700);
+  
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [color]);
 
 
   useEffect(() => {
@@ -33,17 +55,10 @@ const watchlistCurrencies = user?.watchlist.map((currency) => currency);
 
   const onToggleWatchlist = async (event: React.MouseEvent) => {
     event.preventDefault();
-    console.log(crypto);
-
     const res = await addToWatchList(crypto.S);
-    console.log(res);
-
     setIsOnWatchlist(res.isOnWatchlist);
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   if (!crypto) return <HotSkeleton />;
 
@@ -74,7 +89,7 @@ const watchlistCurrencies = user?.watchlist.map((currency) => currency);
         <div className="bottom-sec flex space-between align-center">
           <div className="graph" ref={graphRef}></div>
           <div className="">
-            <h2 className="price-title">{formattedPrice(crypto.bp)}</h2>
+            <h2 className={`price-title ${color}`}>{formattedPrice(crypto.bp)}</h2>
           </div>
         </div>
       </article>

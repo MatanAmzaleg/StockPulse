@@ -40,14 +40,11 @@ export default function CryptoDetails({
   const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
   const { addToWatchList, user } = useAuth();
   const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
-
-  console.log(oc);
   
   
   const currency = currencies[`${symbol}USD`.toUpperCase()];
-  console.log(currency);
-  const [prevPrice, setPrevPrice] = useState([currency?.bp]);
-  const [color, setColor] = useState()
+  const [prevPrice, setPrevPrice] = useState(currency?.bp);
+  const [color, setColor] = useState("");
 
   
 
@@ -60,9 +57,26 @@ export default function CryptoDetails({
   }, []);
 
   useEffect(() => {
-    if (prevPrice.length > 1) prevPrice.push(currency?.bp);
-    // console.log(prevPrice);
+    console.log(prevPrice);
+    
+    if(prevPrice > currency?.bp) setColor("descending");
+    if(prevPrice < currency?.bp) setColor("ascending");
+    setPrevPrice(currency?.bp);
   }, [currency?.bp]);
+
+  useEffect(() => {
+    if (color) {
+      const timeout = setTimeout(() => {
+        setColor("");
+      }, 700);
+  
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [color]);
+
+  
 
   const selectDay = (day: string) => {
     setDay(day);
@@ -153,7 +167,7 @@ export default function CryptoDetails({
       <div className="main-grid">
         <div className="card small-detaills">
           <p className="symbol">{currency?.S}</p>
-          <h3 className="price">{formattedPrice(currency!.bp)}</h3>
+          <h3 className={`price ${color}`}>{formattedPrice(currency!.bp)}</h3>
           <div className="">
             <div className="percentage-container">
               <Image

@@ -40,9 +40,7 @@ export function formattedPrice(price: number) {
 }
 
 export function calculateChange(openingPrice: number, currentPrice: number) {
-    const percentageChange = (1 - currentPrice / openingPrice) * 100;
-  console.log(percentageChange);
-  
+    const percentageChange = (1 - currentPrice / openingPrice) * 100;  
     return {
         percentage: Math.abs(percentageChange).toFixed(2) + '%',
         orderType: currentPrice > openingPrice ? 'ascending' : 'descending',
