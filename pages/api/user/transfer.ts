@@ -15,7 +15,6 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { email, transaction, crypto } = req.body;
-    console.log(transaction);
 
     try {
         const user: UserDocument | null = await User.findOne({ email });
@@ -26,10 +25,7 @@ export default async function handler(
             user.currencies = buyTransaction(crypto, user.currencies);
             user.coins -= transaction.price;
         } else {
-            console.log('selling');
-            const sellTransactionDetails = sellTransaction(crypto, user.currencies)
-            console.log(sellTransactionDetails.status);
-            
+            const sellTransactionDetails = sellTransaction(crypto, user.currencies)          
             if(sellTransactionDetails.status === 'not enough cash') {
                 user.transactions.unshift({...transaction, status:'denied'});
                 res.status(200).json({ message: sellTransactionDetails.status })

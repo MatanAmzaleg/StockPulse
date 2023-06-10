@@ -48,7 +48,6 @@ export default function HotCryptoPreview({ crypto }: Props) {
 
 
   useEffect(() => {
-console.log("ser changed");
 const watchlistCurrencies = user?.watchlist.map((currency) => currency);
     setWatchList(watchlistCurrencies !);
   },[user])

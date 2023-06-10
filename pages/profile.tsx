@@ -21,15 +21,6 @@ export default function profile({currencies}: any) {
   
   if (!user) return <div>Loading</div>;
 
-  console.log(  user.currencies);
-  
-  // const { currencies } = useWebSockets(
-  //   user!.currencies.map((c) => (c.currency + "usd").toLocaleUpperCase())
-  // );
-
-  console.log("currencies", currencies);
-  
-
   const [greet, setGreet] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 

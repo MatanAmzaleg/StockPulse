@@ -75,7 +75,6 @@ export const AuthProvider = ({ children }: Props) => {
         setLoading(true);
         try {
             const { data } = await axios.post('/api/auth/logout');
-            console.log(data.message);
             deleteCookie(USER_COOKIE);
             setUser(null);
         } catch ({ message }) {
@@ -95,7 +94,6 @@ export const AuthProvider = ({ children }: Props) => {
           setUser(newUser);
           return { message, isOnWatchlist } as ModifyWatchlistObj;
         } catch (error) {
-          console.log(error);
           return { message: '', isOnWatchlist: false } as ModifyWatchlistObj;
         }
       }

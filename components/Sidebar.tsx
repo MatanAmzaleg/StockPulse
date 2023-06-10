@@ -16,20 +16,14 @@ import {
 } from "@/utils/format";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import { errorToastOptions, toastOptions } from "@/utils/hot-toast";
 import useWebSockets from "@/hooks/useWebSockets";
 import { Currencies } from "@/typings";
 
-// interface Props{
-//   currncies: Currencies
-// }
-
 export default function Sidebar({ currencies }: any) {
-  // console.log(currencies);
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { logout, user } = useAuth();
   const router = useRouter();

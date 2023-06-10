@@ -27,8 +27,6 @@ export default function PopularCryptoPreview({ crypto }: Props) {
     }, [crypto]);
 
     useEffect(() => {
-      console.log(prevPrice);
-      
       if(prevPrice > crypto?.bp) setColor("descending");
       if(prevPrice < crypto?.bp) setColor("ascending");
       setPrevPrice(crypto?.bp);
@@ -49,7 +47,6 @@ export default function PopularCryptoPreview({ crypto }: Props) {
   
   
     useEffect(() => {
-  console.log("ser changed");
   const watchlistCurrencies = user?.watchlist.map((currency) => currency);
       setWatchList(watchlistCurrencies !);
     },[user])

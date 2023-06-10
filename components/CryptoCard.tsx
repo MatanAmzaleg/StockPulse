@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 export default function CryptoCard({ currency, price, totalBuyAmount }: any) {
   const pricePerCoin = () => (price * currency.amount).toFixed(3);
-console.log(currency);
 
   return (
     <section className="crypto-card-sec align-center">

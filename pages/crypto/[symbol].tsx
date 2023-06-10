@@ -49,16 +49,11 @@ export default function CryptoDetails({
   
 
   useEffect(() => {    
-    console.log("creating chart1");
-    if (!graphRef.current || !currency) return;
-    console.log("creating chart2");
-    
+    if (!graphRef.current || !currency) return; 
     createCandleStickChart(graphRef.current!, chartData);
   }, []);
 
-  useEffect(() => {
-    console.log(prevPrice);
-    
+  useEffect(() => { 
     if(prevPrice > currency?.bp) setColor("descending");
     if(prevPrice < currency?.bp) setColor("ascending");
     setPrevPrice(currency?.bp);
@@ -93,7 +88,7 @@ export default function CryptoDetails({
     if (!user) return toast("please login first", errorToastOptions);
 
     if (action === "buy" && inputValue > user.coins)
-      return toast("need more cash to preform action", errorToastOptions);
+      return toast("Need more cash to preform action.", errorToastOptions);
 
     try {
       const res = await userService.handleTransaction(
@@ -122,18 +117,13 @@ export default function CryptoDetails({
       );
       setInputValue(0);
     } catch (err) {
-      console.log("failed to set transaction", err);
       toast("Failed to purchase", errorToastOptions);
     }
   };
 
   const onToggleWatchlist = async (event: React.MouseEvent) => {
-    event.preventDefault();
-    console.log(crypto);
-
+    event.preventDefault()
     const res = await addToWatchList(currency.S);
-    console.log(res);
-
     setIsOnWatchlist(res.isOnWatchlist);
   };
 

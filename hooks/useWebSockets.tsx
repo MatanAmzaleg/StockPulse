@@ -58,9 +58,6 @@ export default function useWebSockets(symbols: string[]) {
                 };
                 socket.send(JSON.stringify(subscribe));
             }
-            // console.log(data[0]);
-            // if(data[0].s) console.log("yeah");
-            
              handleData(data[0]);
         };
 
