@@ -4,6 +4,7 @@ import {
   formattedPrice,
   formmatedDate,
   calculateChange,
+  transactionAmount,
 } from "@/utils/format";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { getCryptoCompareUrl, getCurrencyDataURL } from "@/utils/requests";
@@ -17,6 +18,7 @@ import { userService } from "@/services/front/UserService";
 import { CryptoDetailsSkeleton } from "@/components/skeleton/CryptoDetailsSkeleton";
 import { toast } from "react-hot-toast";
 import { errorToastOptions, toastOptions } from "@/utils/hot-toast";
+import CryptoCard2 from "@/components/CryptoCard2";
 
 interface Props {
   data: any;
@@ -32,7 +34,7 @@ export default function CryptoDetails({
   currencies,
 }: Props) {
   const router = useRouter();
-  const { symbol } = router.query ;
+  const { symbol } = router.query;
   const graphRef = useRef<HTMLDivElement>(null);
   const [day, setDay] = useState("today");
   const [inputValue, setInputValue] = useState<number>(0);
@@ -40,22 +42,19 @@ export default function CryptoDetails({
   const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
   const { addToWatchList, user } = useAuth();
   const [oc, setOc] = useState({ open: data.o, close: data.c, ts: data.t });
-  
-  
+
   const currency = currencies[`${symbol}USD`.toUpperCase()];
   const [prevPrice, setPrevPrice] = useState(currency?.bp);
   const [color, setColor] = useState("");
 
-  
-
-  useEffect(() => {    
-    if (!graphRef.current || !currency) return; 
+  useEffect(() => {
+    if (!graphRef.current || !currency) return;
     createCandleStickChart(graphRef.current!, chartData);
   }, []);
 
-  useEffect(() => { 
-    if(prevPrice > currency?.bp) setColor("descending");
-    if(prevPrice < currency?.bp) setColor("ascending");
+  useEffect(() => {
+    if (prevPrice > currency?.bp) setColor("descending");
+    if (prevPrice < currency?.bp) setColor("ascending");
     setPrevPrice(currency?.bp);
   }, [currency?.bp]);
 
@@ -64,14 +63,12 @@ export default function CryptoDetails({
       const timeout = setTimeout(() => {
         setColor("");
       }, 700);
-  
+
       return () => {
         clearTimeout(timeout);
       };
     }
   }, [color]);
-
-  
 
   const selectDay = (day: string) => {
     setDay(day);
@@ -90,13 +87,16 @@ export default function CryptoDetails({
     if (action === "buy" && inputValue > user.coins)
       return toast("Need more cash to preform action.", errorToastOptions);
 
+      console.log(currency);
+      
     try {
       const res = await userService.handleTransaction(
         user.email,
         inputValue,
         action,
         currency?.ap!,
-        currency?.S!
+        currency?.S!,
+        currency.bp
       );
       if (res?.data.message === "not enough cash") {
         toast(`Not enough ${currency?.S} to preform action`, errorToastOptions);
@@ -122,7 +122,7 @@ export default function CryptoDetails({
   };
 
   const onToggleWatchlist = async (event: React.MouseEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     const res = await addToWatchList(currency.S);
     setIsOnWatchlist(res.isOnWatchlist);
   };
@@ -147,11 +147,11 @@ export default function CryptoDetails({
           <h2>{currency?.name}</h2>
         </div>
         <button onClick={(e) => onToggleWatchlist(e)}>
-        {user?.watchlist?.includes(currency.S) ? (
-              <AiFillStar className="star-icon" />
-            ) : (
-              <AiOutlineStar className="star-icon" />
-            )}
+          {user?.watchlist?.includes(currency.S) ? (
+            <AiFillStar className="star-icon" />
+          ) : (
+            <AiOutlineStar className="star-icon" />
+          )}
         </button>
       </div>
       <div className="main-grid">
@@ -213,7 +213,10 @@ export default function CryptoDetails({
                 <td className="table-date">
                   {dateTimeFormat(new Date(oc.ts))}
                 </td>
-                <td className="table-date">  {dateTimeFormat(new Date(oc.ts + (60 * 60 * 24 * 1000)))}</td>
+                <td className="table-date">
+                  {" "}
+                  {dateTimeFormat(new Date(oc.ts + 60 * 60 * 24 * 1000))}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -228,8 +231,6 @@ export default function CryptoDetails({
         <div className="card details">
           <h4>Details</h4>
           <div className="details-grid">
-            {/* <span>Days Range</span>
-                        <p>128.46 - 130px</p> */}
             <span>Weighted Average</span>
             <p>{formattedPrice(data.vw)}</p>
             <span>Volume</span>
@@ -243,9 +244,33 @@ export default function CryptoDetails({
           </div>
         </div>
         <div className="card actions flex column">
-          <div className="flex align-center">
+          <div className="currency-owned">
+            {user!.currencies
+              .filter((c) => c.currency === currency.S)
+              .map((c) => (
+                <CryptoCard2
+                handleTransaction={handleTransaction}
+                  totalBuyAmount={transactionAmount(
+                    user!.transactions,
+                    c.currency
+                  )}
+                  price={
+                    currencies[
+                      (
+                        c.currency + "USD"
+                      ).toLocaleUpperCase() as keyof typeof currencies
+                    ]?.bp
+                  }
+                  key={c.currency}
+                  currency={c}
+                />
+              ))}
+          </div>
+          <div className="flex align-center space-between">
+            <div className="flex align-center">
             <p>~ {usdInCrypto.toFixed(9) || 0}</p>
             <img className="symbol-img" src={`/${symbol}.svg`} alt="" />
+            </div>
           </div>
 
           <input

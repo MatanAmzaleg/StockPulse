@@ -37,7 +37,7 @@ export default function profile({currencies}: any) {
       getTotalTransactionsAmount(user.transactions)
     );
 
-    if (!totalUpdatedChange) return <CryptoDetailsSkeleton />;
+    // if (!totalUpdatedChange) return <CryptoDetailsSkeleton />;
 
   return (
     <section className="profile-section">

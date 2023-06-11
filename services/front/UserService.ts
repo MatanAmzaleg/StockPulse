@@ -17,7 +17,8 @@ async function handleTransaction(
     price: number,
     action: string,
     cryptoPrice: number,
-    symbol: string
+    symbol: string,
+    buyPrice: number
 ) {
     try {
         const transaction = {
@@ -28,6 +29,7 @@ async function handleTransaction(
             status: 'approved',
             symbol: symbol,
             symbolName: symbol,
+            buyPrice,
         };
 
         const crypto = {
@@ -35,6 +37,8 @@ async function handleTransaction(
             amount: +(price / cryptoPrice).toFixed(8),
         };
 
+        console.log(transaction);
+        
         return await axios.post(`/api/user/transfer`, {
             email,
             transaction,

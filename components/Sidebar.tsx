@@ -96,7 +96,7 @@ export default function Sidebar({ currencies }: any) {
               </span>
             </h2>
 
-            <h1>Current balance: ${user?.coins}</h1>
+            <h1>Current balance: ${user?.coins.toFixed(1)}</h1>
           </div>
         ) : (
           <img className="loader-s" src="/loader1.gif" alt="" />
