@@ -27,9 +27,7 @@ export default function Profile({ currencies }: any) {
     setIsLoading(false);
   }, []);
 
-
   if (!user) return <div>Loading</div>;
-
 
   const { totalUpdatedAmount, totalGain, totalUpdatedChange } =
     calculateAllChange(
@@ -83,27 +81,23 @@ export default function Profile({ currencies }: any) {
             <p className="bolder">Change</p>
           </section>
           <div className="cryptos flex column">
-            {user!.currencies.length === 0 ? (
-              <h1>You don't have any currencies at the moment</h1>
-            ) : (
-              user!.currencies.map((c) => (
-                <CryptoCard
-                  totalBuyAmount={transactionAmount(
-                    user.transactions,
-                    c.currency
-                  )}
-                  price={
-                    currencies[
-                      (
-                        c.currency + "USD"
-                      ).toLocaleUpperCase() as keyof typeof currencies
-                    ]?.bp
-                  }
-                  key={c.currency}
-                  currency={c}
-                />
-              ))
-            )}
+            {user!.currencies.map((c) => (
+              <CryptoCard
+                totalBuyAmount={transactionAmount(
+                  user.transactions,
+                  c.currency
+                )}
+                price={
+                  currencies[
+                    (
+                      c.currency + "USD"
+                    ).toLocaleUpperCase() as keyof typeof currencies
+                  ]?.bp
+                }
+                key={c.currency}
+                currency={c}
+              />
+            ))}
           </div>
         </div>
         <div className="card transaction-container flex column">
