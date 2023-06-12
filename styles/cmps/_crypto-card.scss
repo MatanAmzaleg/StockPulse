@@ -36,6 +36,7 @@
 .crypto-card-sec2 {
   gap: 10px;
   padding-block: 10px;
+  justify-content: space-between;
   &:not(:last-child) {
     border-bottom: 1px solid rgb(213, 213, 213);
   }

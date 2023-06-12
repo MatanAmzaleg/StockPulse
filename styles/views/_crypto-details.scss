@@ -1,8 +1,13 @@
 .crypto-details {
-    padding-top: 75px;
+    padding-top: 50px;
     grid-area: main;
     min-height: 100vh;
     position: relative;
+    padding-bottom: 40px;
+
+    @media(min-width:768px) {
+
+    }
 
     .skeleton {
         // background-color: white;
@@ -203,8 +208,13 @@
                     font-weight: bold;
 
                     @media (min-width: 768px) {
-                        font-size: em(25px, 15px);
+                        font-size: 1.15em;
                     }
+
+                    @media (min-width: 1200px) {
+                        font-size: 1.6em;
+                    }
+                    
                 }
 
                 .table-date {
@@ -279,18 +289,23 @@
             }
 
             .sell{
-                background-color: #defae0;
-                color: #4edd22;
+                background-color: #fadede;
+                color: #dd4722;
                 border-radius: 10px;
                 padding: 5px 15px;
+                font-size: 15px;
                 font-weight: bold;
                 height: 40px;
 
                 &:hover{
-                    background-color: #d4f8d7;
+                    background-color: #f8d4d4;
                 }
             }
 
+            hr{
+                border:1px solid rgb(211, 211, 211);
+                margin-bottom: 10px;
+            }
             .action-btns {
                 gap: 10px;
 
@@ -315,6 +330,6 @@
     }
 
     @media (min-width: 768px) {
-        padding: 50px;
+        padding: 20px;
     }
 }

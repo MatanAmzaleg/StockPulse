@@ -266,6 +266,7 @@ export default function CryptoDetails({
                 />
               ))}
           </div>
+          <hr />
           <div className="flex align-center space-between">
             <div className="flex align-center">
             <p>~ {usdInCrypto.toFixed(9) || 0}</p>
