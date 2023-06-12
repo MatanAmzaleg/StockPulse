@@ -15,21 +15,21 @@ import {
   calculateGreet,
 } from "@/utils/format";
 import { CryptoDetailsSkeleton } from "@/components/skeleton/CryptoDetailsSkeleton";
+import Image from "next/image";
 
 export default function Profile({ currencies }: any) {
+  const { user } = useAuth();
   const [greet, setGreet] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  
-  const { user } = useAuth();
-
-  if (!user) return <div>Loading</div>;
-
-  
 
   useEffect(() => {
     setGreet(calculateGreet() || "");
     setIsLoading(false);
   }, []);
+
+
+  if (!user) return <div>Loading</div>;
+
 
   const { totalUpdatedAmount, totalGain, totalUpdatedChange } =
     calculateAllChange(
@@ -69,7 +69,7 @@ export default function Profile({ currencies }: any) {
               </span>{" "}
             </h2>
           ) : (
-            <img src="/loader1.gif" alt="" />
+            <Image src="/loader1.gif" alt="" />
           )}
         </div>
         <div className="card my-cryptos flex column">
