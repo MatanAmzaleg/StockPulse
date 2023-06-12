@@ -1,7 +1,7 @@
 import { calculateChange2, formattedPrice } from "@/utils/format";
 import Link from 'next/link';
 
-export default function CryptoCard({ currency, price, totalBuyAmount }: any) {
+export default function CryptoCard({ currency, price, totalBuyAmount }: any) {  
   const pricePerCoin = () => (price * currency.amount).toFixed(3);
 
   return (
@@ -13,7 +13,7 @@ export default function CryptoCard({ currency, price, totalBuyAmount }: any) {
       </Link>
       </div>
       <p>{currency.amount.toFixed("8")}</p>
-      <p>{pricePerCoin()}</p>
+      <p>${pricePerCoin()}</p>
       {
         !currency ? <h1>Lodaing...</h1> :<p
         className={

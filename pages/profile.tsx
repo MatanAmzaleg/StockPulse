@@ -16,18 +16,17 @@ import {
 } from "@/utils/format";
 import { CryptoDetailsSkeleton } from "@/components/skeleton/CryptoDetailsSkeleton";
 
-export default function profile({currencies}: any) {
+export default function profile({ currencies }: any) {
   const { user } = useAuth();
-  
+
   if (!user) return <div>Loading</div>;
 
   const [greet, setGreet] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-
   useEffect(() => {
-   setGreet(calculateGreet() || "")
-   setIsLoading(false); 
+    setGreet(calculateGreet() || "");
+    setIsLoading(false);
   }, []);
 
   const { totalUpdatedAmount, totalGain, totalUpdatedChange } =
@@ -37,7 +36,7 @@ export default function profile({currencies}: any) {
       getTotalTransactionsAmount(user.transactions)
     );
 
-    // if (!totalUpdatedChange) return <CryptoDetailsSkeleton />;
+  // if (!totalUpdatedChange) return <CryptoDetailsSkeleton />;
 
   return (
     <section className="profile-section">
@@ -47,7 +46,7 @@ export default function profile({currencies}: any) {
           <h1>Welcom Back, {user?.fullName}</h1>
         </div>
         <div className="user-balance">
-          <h1>{user?.coins}$ PulseCoins</h1>
+          <h1>${user?.coins.toFixed(2)}</h1>
           <p>Current balance</p>
         </div>
       </header>
@@ -57,16 +56,19 @@ export default function profile({currencies}: any) {
           <h1 className="portfolio-worth">
             {formattedPrice(totalUpdatedAmount)}
           </h1>
-          {currencies ?  <h2>
-            Change:{" "}
-            <span className={totalGain > 0 ? "ascending" : "descending"}>
-              {  totalUpdatedChange.toFixed(2) +
-                "%" +
-                " | " +
-                formattedPrice(totalGain)}
-            </span>{" "}
-          </h2> : <img src="/loader1.gif" alt="" /> }
-         
+          {currencies ? (
+            <h2>
+              Change:{" "}
+              <span className={totalGain > 0 ? "ascending" : "descending"}>
+                {totalUpdatedChange.toFixed(2) +
+                  "%" +
+                  " | " +
+                  formattedPrice(totalGain)}
+              </span>{" "}
+            </h2>
+          ) : (
+            <img src="/loader1.gif" alt="" />
+          )}
         </div>
         <div className="card my-cryptos flex column">
           <h1>Wallet</h1>
@@ -79,23 +81,27 @@ export default function profile({currencies}: any) {
             <p className="bolder">Change</p>
           </section>
           <div className="cryptos flex column">
-            { user!.currencies.map((c) => (
-              <CryptoCard
-                totalBuyAmount={transactionAmount(
-                  user.transactions,
-                  c.currency
-                )}
-                price={
-                  currencies[
-                    (
-                      c.currency + "USD"
-                    ).toLocaleUpperCase() as keyof typeof currencies
-                  ]?.bp
-                }
-                key={c.currency}
-                currency={c}
-              />
-            ))}
+            {user!.currencies.length === 0 ? (
+              <h1>You don't have any currencies at the moment</h1>
+            ) : (
+              user!.currencies.map((c) => (
+                <CryptoCard
+                  totalBuyAmount={transactionAmount(
+                    user.transactions,
+                    c.currency
+                  )}
+                  price={
+                    currencies[
+                      (
+                        c.currency + "USD"
+                      ).toLocaleUpperCase() as keyof typeof currencies
+                    ]?.bp
+                  }
+                  key={c.currency}
+                  currency={c}
+                />
+              ))
+            )}
           </div>
         </div>
         <div className="card transaction-container flex column">
@@ -109,14 +115,14 @@ export default function profile({currencies}: any) {
             <p>Status</p>
           </div> */}
           <div className="transaction-list">
-          <div className="transaction-preview heading">
-            <p>Currency</p>
-            <p>Action</p>
-            <p>Date</p>
-            <p>Price</p>
-            <p>Quantity</p>
-            <p>Status</p>
-          </div>
+            <div className="transaction-preview heading">
+              <p>Currency</p>
+              <p>Action</p>
+              <p>Date</p>
+              <p>Price</p>
+              <p>Quantity</p>
+              <p>Status</p>
+            </div>
             {user!.transactions.map((t: Transaction) => (
               <TransactionPreview key={t.date} transaction={t} />
             ))}

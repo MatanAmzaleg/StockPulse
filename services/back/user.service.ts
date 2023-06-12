@@ -50,12 +50,13 @@ export function sellAllCrypto(
     (c) => c.currency === crypto.currency
   );
   const selledAmount = currencies[currencyIdx].amount * buyPrice;
-   currencies.splice(currencyIdx, 1);
-  console.log(currencies);
+  const amount = currencies[currencyIdx].amount
+   currencies.splice(currencyIdx, 1);   
 
   return {
     status: `selled ${selledAmount} succesfully`,
     currencies,
     selledAmount,
+    amount,
   };
 }
