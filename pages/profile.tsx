@@ -16,7 +16,7 @@ import {
 } from "@/utils/format";
 import { CryptoDetailsSkeleton } from "@/components/skeleton/CryptoDetailsSkeleton";
 
-export default function profile({ currencies }: any) {
+export default function Profile({ currencies }: any) {
   const { user } = useAuth();
 
   if (!user) return <div>Loading</div>;
