@@ -3,7 +3,6 @@ import TransactionPreview from "@/components/TransactionPreview";
 import useAuth from "@/hooks/useAuth";
 import useWebSockets from "@/hooks/useWebSockets";
 import { Transaction } from "@/typings";
-import { getCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
