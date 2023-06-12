@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 
 export default function InputField({ label, type, icon }: any) {
@@ -15,7 +16,7 @@ export default function InputField({ label, type, icon }: any) {
 
   return (
     <div className="input-container">
-      <img src={icon} alt="" />
+      <Image src={icon} alt="" />
       {(hasText ) ? null : <label className={inputFocuses ? 'email-focus' : ''} htmlFor={type}>{label}</label>}
       <input
         onFocus={() => handleFocusEmail("t")}
