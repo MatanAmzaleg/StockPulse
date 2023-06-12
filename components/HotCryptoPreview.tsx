@@ -4,7 +4,7 @@ import { Currency } from "@/typings";
 import { formattedPrice } from "../utils/format";
 import HotSkeleton from "./skeleton/HotSkeleton";
 import { useEffect, useRef, useState } from "react";
-import checkAuth from "@/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { Star } from "./Star";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
@@ -16,7 +16,7 @@ export default function HotCryptoPreview({ crypto }: Props) {
   const graphRef = useRef(null);
   const [isOnWatchlist, setIsOnWatchlist] = useState<boolean>(false);
   const [watchlist, setWatchList] = useState<string[]>([]);
-  const { addToWatchList, user } = checkAuth();
+  const { addToWatchList, user } = useAuth();
   const [prevPrice, setPrevPrice] = useState(crypto?.bp);
   const [color, setColor] = useState("");
   
