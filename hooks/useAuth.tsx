@@ -145,6 +145,6 @@ export const AuthProvider = ({ children }: Props) => {
 };
 
 // Create a custom hook to access the auth context
-export default function useAuth() {
+export default function checkAuth() {
     return useContext(AuthContext);
 }
