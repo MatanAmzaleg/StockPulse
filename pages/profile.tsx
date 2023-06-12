@@ -17,12 +17,14 @@ import {
 import { CryptoDetailsSkeleton } from "@/components/skeleton/CryptoDetailsSkeleton";
 
 export default function Profile({ currencies }: any) {
+  const [greet, setGreet] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  
   const { user } = useAuth();
 
   if (!user) return <div>Loading</div>;
 
-  const [greet, setGreet] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  
 
   useEffect(() => {
     setGreet(calculateGreet() || "");
