@@ -68,7 +68,7 @@ export default function PopularCryptoPreview({ crypto }: Props) {
       href={`/crypto/${crypto.S}`}
     >
       <div>
-        <Image
+        <img
           src={`/${crypto.S}.svg`}
           alt={crypto.S}
           className="icon-img"

@@ -55,13 +55,13 @@ export function transactionAmount(
   for (let i = 0; i < transactions.length; i++) {
     const transaction = transactions[i];
     if (transaction.symbol === currency) {
-      if (transaction.action === 'sell-all') {
+      if (transaction.action === "sell-all") {
         break;
       }
-  
-      if (transaction.action === 'buy' && transaction.status === 'approved') {
+
+      if (transaction.action === "buy" && transaction.status === "approved") {
         totalAmount += transaction.price;
-      } else if (transaction.status !== 'denied') {
+      } else if (transaction.status !== "denied") {
         totalAmount -= transaction.price;
       }
     }
@@ -71,8 +71,6 @@ export function transactionAmount(
 }
 
 export function calculateChange2(currentPrice: number, avgPriceBuy: number) {
-  console.log(currentPrice, avgPriceBuy);
-  
   if (currentPrice === 0) return 0;
   const change = ((currentPrice - avgPriceBuy) / avgPriceBuy) * 100;
   return change;

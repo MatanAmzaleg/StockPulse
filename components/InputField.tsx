@@ -16,7 +16,7 @@ export default function InputField({ label, type, icon }: any) {
 
   return (
     <div className="input-container">
-      <Image src={icon} alt="" />
+      <img src={icon} alt="" />
       {(hasText ) ? null : <label className={inputFocuses ? 'email-focus' : ''} htmlFor={type}>{label}</label>}
       <input
         onFocus={() => handleFocusEmail("t")}

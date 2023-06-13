@@ -47,9 +47,32 @@ export default function CryptoDetails({
   const [prevPrice, setPrevPrice] = useState(currency?.bp);
   const [color, setColor] = useState("");
 
+  const chartDataCacheKey = `chartData_${symbol}`;
+
+  // useEffect(() => {
+    
+  //   const cachedChartData = localStorage.getItem(chartDataCacheKey);
+  //   if (cachedChartData && graphRef.current) {
+  //     const parsedChartData = JSON.parse(cachedChartData);
+  //     createCandleStickChart(graphRef.current!, parsedChartData.chartData);
+  //   } else {
+  //     createCandleStickChart(graphRef.current!, chartData);
+  //     const chartDataToCache = {
+  //       data,
+  //       yesterdayData,
+  //       chartData,
+  //     };
+  //     localStorage.setItem(chartDataCacheKey, JSON.stringify(chartDataToCache));
+  //   }
+  // }, []);
+
+  
   useEffect(() => {
-    if (!graphRef.current || !currency) return;
-    createCandleStickChart(graphRef.current!, chartData);
+    setTimeout(() =>{   
+    if (graphRef.current) {
+      createCandleStickChart(graphRef.current, chartData);
+    }
+    }, 2000)    
   }, []);
 
   useEffect(() => {
@@ -87,8 +110,8 @@ export default function CryptoDetails({
     if (action === "buy" && inputValue > user.coins)
       return toast("Need more cash to preform action.", errorToastOptions);
 
-      console.log(currency);
-      
+    console.log(currency);
+
     try {
       const res = await userService.handleTransaction(
         user.email,
@@ -109,6 +132,14 @@ export default function CryptoDetails({
         );
         setInputValue(0);
         return;
+      } else if (res?.data.output === "sell-all") {
+        console.log("ok");
+
+        toast(`${res?.data.message}`, toastOptions);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        return;
       }
       // alert(res!.data.message);
       toast(
@@ -119,6 +150,11 @@ export default function CryptoDetails({
     } catch (err) {
       toast("Failed to purchase", errorToastOptions);
     }
+    if (inputValue !== 0) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   };
 
   const onToggleWatchlist = async (event: React.MouseEvent) => {
@@ -126,6 +162,7 @@ export default function CryptoDetails({
     const res = await addToWatchList(currency.S);
     setIsOnWatchlist(res.isOnWatchlist);
   };
+  
 
   if (!currencies || !yesterdayData) return <CryptoDetailsSkeleton />;
 
@@ -249,7 +286,7 @@ export default function CryptoDetails({
               .filter((c) => c.currency === currency.S)
               .map((c) => (
                 <CryptoCard2
-                handleTransaction={handleTransaction}
+                  handleTransaction={handleTransaction}
                   totalBuyAmount={transactionAmount(
                     user!.transactions,
                     c.currency
@@ -269,8 +306,8 @@ export default function CryptoDetails({
           <hr />
           <div className="flex align-center space-between">
             <div className="flex align-center">
-            <p>~ {usdInCrypto.toFixed(9) || 0}</p>
-            <img className="symbol-img" src={`/${symbol}.svg`} alt="" />
+              <p>~ {usdInCrypto.toFixed(9) || 0}</p>
+              <img className="symbol-img" src={`/${symbol}.svg`} alt="" />
             </div>
           </div>
 

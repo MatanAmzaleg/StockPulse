@@ -36,7 +36,9 @@ export default async function handler(
         price: sellTransactionDetails.selledAmount,
       };
       user.transactions.unshift(changedTransaction);
-      res.status(200).json({ message: sellTransactionDetails.status });
+      res
+        .status(200)
+        .json({ output: "sell-all", message: sellTransactionDetails.status });
       console.log(user.currencies);
 
       await user.save();

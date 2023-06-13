@@ -66,7 +66,7 @@ export default function Profile({ currencies }: any) {
               </span>{" "}
             </h2>
           ) : (
-            <Image src="/loader1.gif" alt="" />
+            <img src="/loader1.gif" alt="" />
           )}
         </div>
         <div className="card my-cryptos flex column">

@@ -21,8 +21,8 @@ export function createCandleStickChart(
         crosshair: {
             mode: CrosshairMode.Normal,
         },
-        width: el.offsetWidth - 72,
-        height: el.offsetHeight - 28,
+        width: el?.offsetWidth - 72,
+        height: el?.offsetHeight - 28,
     });
 
     const lineSeries = chart.addCandlestickSeries({

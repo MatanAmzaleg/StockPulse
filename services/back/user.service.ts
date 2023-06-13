@@ -45,16 +45,18 @@ export function sellAllCrypto(
   currencies: Array<Crypto>,
   buyPrice: number
 ) {
-
   const currencyIdx = currencies.findIndex(
     (c) => c.currency === crypto.currency
   );
   const selledAmount = currencies[currencyIdx].amount * buyPrice;
-  const amount = currencies[currencyIdx].amount
-   currencies.splice(currencyIdx, 1);   
+  const amount = currencies[currencyIdx].amount;
+  const currency = currencies[currencyIdx].currency;
+  currencies.splice(currencyIdx, 1);
 
   return {
-    status: `selled ${selledAmount} succesfully`,
+    status: `${currency.toUpperCase()} worth $${selledAmount.toFixed(
+      2
+    )} has been sold succesfully.`,
     currencies,
     selledAmount,
     amount,

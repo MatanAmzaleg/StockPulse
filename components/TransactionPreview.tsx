@@ -10,7 +10,7 @@ export default function TransactionPreview({ transaction }: Props) {
   return (
     <div className="transaction-preview">
       <div className="symbol flex align-center">
-        <Image className="symbol-img" src={`/${transaction.symbol}.svg`} alt="" />
+        <img className="symbol-img" src={`/${transaction.symbol}.svg`} alt="" />
         <p className="bolder">{transaction.symbolName}</p>
       </div>
       <div className="symbol flex align-center">
@@ -24,9 +24,9 @@ export default function TransactionPreview({ transaction }: Props) {
           {transaction.action}
         </p>
         {transaction.action === "buy" ? (
-          <Image className="symbol-img start" src={`/buy.png`} alt="" />
+          <img className="symbol-img start" src={`/buy.png`} alt="" />
         ) : (
-          <Image className="symbol-img start" src={`/sell.png`} alt="" />
+          <img className="symbol-img start" src={`/sell.png`} alt="" />
         )}
       </div>
       <p className="date">{fotmattedTimestamp(transaction.date)}</p>
