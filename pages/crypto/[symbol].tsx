@@ -48,6 +48,7 @@ export default function CryptoDetails({
   const [color, setColor] = useState("");
 
   const chartDataCacheKey = `chartData_${symbol}`;
+  
 
   // useEffect(() => {
     

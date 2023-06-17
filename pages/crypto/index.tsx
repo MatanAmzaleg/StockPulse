@@ -29,6 +29,7 @@ const currenciesList = [
 
 
 export default function Home({currencies} : any) {
+console.log(currencies);
 
     return (
         <section className="main-content-sec flex column relative">

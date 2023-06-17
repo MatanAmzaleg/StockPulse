@@ -39,6 +39,7 @@ export default function Sidebar({ currencies }: any) {
   const onLogout = () => {
     logout();
     toast(`Bye`, toastOptions);
+    router.push("/login");
   };
 
   const { totalUpdatedAmount, totalGain, totalUpdatedChange } =

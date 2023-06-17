@@ -19,6 +19,8 @@ export default function useWebSockets(symbols: string[]) {
     };
 
     const handleData = (crypto: Currency) => {
+        // console.log(crypto);
+        
         if (!crypto.S || crypto.s) return;
 
         const delay = 1000 * 2; //2ms
